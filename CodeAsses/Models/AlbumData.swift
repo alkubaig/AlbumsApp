@@ -8,20 +8,29 @@
 
 import Foundation
 
-struct Album: Codable {
-    
-    let artistName: String
-    let id: Int
+struct Genres : Codable {
     let name: String
-    let artworkUrl100: String
-    
-}
-
-struct Feed: Codable {
-    let results: [Album]
+    let url: String
 }
 
 struct AlbumData: Codable {
-    let Feed: [Feed]
+    
+    let artistName: String
+    let name: String
+    let artworkUrl100: String
+    let genres: [Genres]
+    let releaseDate: String
+    let copyright: String
+    let url: String
+
+}
+
+
+struct Res: Codable {
+    let results: [AlbumData]
+}
+
+struct AlbumsData: Codable {
+    let feed: Res
 }
 

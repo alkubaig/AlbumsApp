@@ -11,7 +11,7 @@ class AlbumViewController: UITableViewController {
     
 //    var safeArea: UILayoutGuide!
     let cellId =  "id"
-    let numAlbums = 10
+    let numAlbums = 48
     var albumManager = AlbumManager()
     var albums : [Album] = []
 
@@ -53,17 +53,25 @@ extension AlbumViewController {
  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
   
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? AlbumTableViewCell else {
-            return UITableViewCell()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? AlbumTableViewCell {
+            let i = indexPath.row
+            if indexPath.row <  albums.count{
+                cell.album = albums[indexPath.row]
+                return cell
+            }
+            
         }
         
-        let i = indexPath.row
-        cell.album = albums[i]
-
-        return cell
+        return UITableViewCell()
+        
+       
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "segueToDetails", sender: nil)
+
+        let destCv = DetailsViewController()
+        destCv.album = albums[indexPath.row]
+        navigationController?.pushViewController(destCv, animated: true)
+
     }
 
 }
