@@ -11,7 +11,7 @@
 		5D7188C6240DDA7F00088648 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7188C5240DDA7F00088648 /* SceneDelegate.swift */; };
 		5D7188CD240DDA8000088648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D7188CC240DDA8000088648 /* Assets.xcassets */; };
 		5D7188D0240DDA8000088648 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D7188CE240DDA8000088648 /* LaunchScreen.storyboard */; };
-		5D7188D8240DE3B800088648 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7188D7240DE3B800088648 /* AlbumViewController.swift */; };
+		5D7188D8240DE3B800088648 /* AlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7188D7240DE3B800088648 /* AlbumTableViewController.swift */; };
 		5D7188DB240DEC2800088648 /* AlbumData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7188DA240DEC2800088648 /* AlbumData.swift */; };
 		5D7188DD240DEDC300088648 /* AlbumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7188DC240DEDC300088648 /* AlbumManager.swift */; };
 		5D7188DF240DF02F00088648 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7188DE240DF02F00088648 /* Album.swift */; };
@@ -27,7 +27,7 @@
 		5D7188CC240DDA8000088648 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D7188CF240DDA8000088648 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5D7188D1240DDA8000088648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5D7188D7240DE3B800088648 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
+		5D7188D7240DE3B800088648 /* AlbumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewController.swift; sourceTree = "<group>"; };
 		5D7188DA240DEC2800088648 /* AlbumData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumData.swift; sourceTree = "<group>"; };
 		5D7188DC240DEDC300088648 /* AlbumManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumManager.swift; sourceTree = "<group>"; };
 		5D7188DE240DF02F00088648 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				5D7188E3240E357800088648 /* Extension.swift */,
-				5D7188D7240DE3B800088648 /* AlbumViewController.swift */,
+				5D7188D7240DE3B800088648 /* AlbumTableViewController.swift */,
 				5D7188E1240E273200088648 /* AlbumTableViewCell.swift */,
 				5D7188E5240EC7B700088648 /* DetailsViewController.swift */,
 			);
@@ -172,7 +172,7 @@
 				5D7188C6240DDA7F00088648 /* SceneDelegate.swift in Sources */,
 				5D7188E6240EC7B700088648 /* DetailsViewController.swift in Sources */,
 				5D7188DD240DEDC300088648 /* AlbumManager.swift in Sources */,
-				5D7188D8240DE3B800088648 /* AlbumViewController.swift in Sources */,
+				5D7188D8240DE3B800088648 /* AlbumTableViewController.swift in Sources */,
 				5D7188E2240E273200088648 /* AlbumTableViewCell.swift in Sources */,
 				5D7188DB240DEC2800088648 /* AlbumData.swift in Sources */,
 				5D7188DF240DF02F00088648 /* Album.swift in Sources */,
