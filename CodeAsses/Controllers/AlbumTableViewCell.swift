@@ -39,8 +39,8 @@ class AlbumTableViewCell: UITableViewCell {
                         print("Img do not exist")
             }
 
-            artistName.text = album?.artistName
-            albumName.text = album?.albumName
+            artistName.text = album?.artistName ?? "Loading.."
+            albumName.text = album?.albumName ?? "Loading.."
         }
     }
 

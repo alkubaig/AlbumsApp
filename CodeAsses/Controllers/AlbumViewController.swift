@@ -11,7 +11,7 @@ class AlbumViewController: UITableViewController {
     
 //    var safeArea: UILayoutGuide!
     let cellId =  "id"
-    let numAlbums = 48
+    let numAlbums = 100
     var albumManager = AlbumManager()
     var albums : [Album] = []
 
@@ -25,9 +25,6 @@ class AlbumViewController: UITableViewController {
     }
 
     func setupTableView(){
-        for _ in 0 ..< self.numAlbums {
-            albums.append(Album())
-        }
 
         albumManager.fetchAlbum(numAlbums: numAlbums);
         tableView.register(AlbumTableViewCell.self, forCellReuseIdentifier: cellId)
@@ -54,15 +51,13 @@ extension AlbumViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
   
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? AlbumTableViewCell {
-            let i = indexPath.row
             if indexPath.row <  albums.count{
                 cell.album = albums[indexPath.row]
-                return cell
             }
-            
+            return cell
         }
         
-        return UITableViewCell()
+        return AlbumTableViewCell()
         
        
     }
@@ -84,7 +79,7 @@ extension AlbumViewController: AlbumManagerDelegate {
         DispatchQueue.main.async {
             self.albums = album
 
-            for i in 0 ..< self.numAlbums {
+            for i in 0 ..< album.count {
                 let indexPath = IndexPath(row: i, section: 0)
                 if let cell = self.tableView.cellForRow(at: indexPath) as? AlbumTableViewCell{
                     cell.album = album[i]

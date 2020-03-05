@@ -25,7 +25,6 @@ class DetailsViewController: UIViewController {
             releaseDate.text = album?.releaseDate
             genre.text = album?.genre.joined(separator:"\n")
 
-
         }
     }
     

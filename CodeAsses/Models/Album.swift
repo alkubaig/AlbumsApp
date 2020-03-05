@@ -19,17 +19,6 @@ struct Album {
     let copyright: String
     let url: String
     
-    init(){
-        artistName = "Loading.."
-        albumName = "Loading.."
-        imgUrl   = ""
-        releaseDate   = ""
-        copyright   = ""
-        genre = []
-        url = ""
-        
-    }
-    
     init(artistName: String, albumName: String, imgUrl: String, releaseDate: String, copyright: String, genre : [String], url: String){
         self.artistName = artistName
         self.albumName = albumName
