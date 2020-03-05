@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
                    let my_window = UIWindow(windowScene: windowScene)
-                 let tvc = AlbumViewController()
+                 let tvc = AlbumTableViewController()
 
                    let navigation = UINavigationController(rootViewController: tvc)
                    my_window.rootViewController = navigation

@@ -115,8 +115,6 @@ class DetailsViewController: UIViewController {
         backView.addSubview(releaseDate)
         backView.addSubview(genre)
 
-        
-
         let viewSize = self.view.frame.size
                 
         backView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: viewSize.width, height: viewSize.height, enableInsets: true)

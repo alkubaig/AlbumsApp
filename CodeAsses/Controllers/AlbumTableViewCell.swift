@@ -9,6 +9,21 @@
 import UIKit
 class AlbumTableViewCell: UITableViewCell {
 
+    var album: Album? {
+        didSet {
+            if let p = album?.imgUrl,
+                let url = URL(string: p),
+                let data = try? Data(contentsOf: url){
+                    albumImg.image = UIImage(data: data)
+            }else{
+                        print("Img do not exist")
+            }
+
+            artistName.text = album?.artistName
+            albumName.text = album?.albumName 
+        }
+    }
+    
     private var albumImg : UIImageView = {
         let img = UIImageView()
         img.layer.cornerRadius = img.frame.size.width / 2;
@@ -29,24 +44,9 @@ class AlbumTableViewCell: UITableViewCell {
         return l
     }()
     
-    var album: Album? {
-        didSet {
-            if let p = album?.imgUrl,
-                let url = URL(string: p),
-                let data = try? Data(contentsOf: url){
-                    albumImg.image = UIImage(data: data)
-            }else{
-                        print("Img do not exist")
-            }
-
-            artistName.text = album?.artistName ?? "Loading.."
-            albumName.text = album?.albumName ?? "Loading.."
-        }
-    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
 
         self.contentView.addSubview(albumImg)
         self.contentView.addSubview(artistName)
@@ -62,6 +62,8 @@ class AlbumTableViewCell: UITableViewCell {
 
     required init(coder aDecoder: NSCoder) {
          fatalError("init(coder:) has not been implemented")
+        
+        
     }
 
 }

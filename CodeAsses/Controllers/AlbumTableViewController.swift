@@ -7,9 +7,8 @@
 //
 
 import UIKit
-class AlbumViewController: UITableViewController {
+class AlbumTableViewController: UITableViewController {
     
-//    var safeArea: UILayoutGuide!
     let cellId =  "id"
     let numAlbums = 100
     var albumManager = AlbumManager()
@@ -34,7 +33,7 @@ class AlbumViewController: UITableViewController {
 
 // MARK: AlbumViewExample
 
-extension AlbumViewController {
+extension AlbumTableViewController {
  
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -45,27 +44,33 @@ extension AlbumViewController {
     }
  
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numAlbums
+        return albums.count > 0 ? albums.count : 10
     }
  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
   
-        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? AlbumTableViewCell {
-            if indexPath.row <  albums.count{
-                cell.album = albums[indexPath.row]
-            }
+        let i = indexPath.row
+        if i <  albums.count{
+            if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? AlbumTableViewCell {
+                cell.album = albums[i]
             return cell
+            }
         }
-        
-        return AlbumTableViewCell()
+        let dCell = UITableViewCell()
+        dCell.textLabel?.text = "Loading.."
+        return dCell
         
        
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let destCv = DetailsViewController()
-        destCv.album = albums[indexPath.row]
-        navigationController?.pushViewController(destCv, animated: true)
+        let i = indexPath.row
+        if i <  albums.count{
+            let destCv = DetailsViewController()
+            destCv.album = albums[i]
+            navigationController?.pushViewController(destCv, animated: true)
+
+        }
 
     }
 
@@ -73,20 +78,13 @@ extension AlbumViewController {
 
 // MARK: AlbumViewExample
 
-extension AlbumViewController: AlbumManagerDelegate {
+extension AlbumTableViewController: AlbumManagerDelegate {
     
     func didLoadAlbum(_ albumManager: AlbumManager, album: [Album]) {
         DispatchQueue.main.async {
             self.albums = album
-
-            for i in 0 ..< album.count {
-                let indexPath = IndexPath(row: i, section: 0)
-                if let cell = self.tableView.cellForRow(at: indexPath) as? AlbumTableViewCell{
-                    cell.album = album[i]
-                }
-            }
+            self.tableView.reloadData()
         }
-        
     }
     
     func didFailWithError(error: Error) {
