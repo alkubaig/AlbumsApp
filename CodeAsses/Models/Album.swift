@@ -27,6 +27,5 @@ struct Album {
         self.copyright  = copyright
         self.genre  = genre
         self.url = url
-      }
-    
+    }
 }

@@ -10,7 +10,7 @@ import UIKit
 class AlbumTableViewController: UITableViewController {
     
     let cellId =  "id"
-    let numAlbums = 100
+    let numAlbums = -1
     var albumManager = AlbumManager()
     var albums : [Album] = []
 

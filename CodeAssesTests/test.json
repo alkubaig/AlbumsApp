@@ -1,0 +1,103 @@
+{
+    "feed": {
+        "title": "Coming Soon",
+        "id": "https://rss.itunes.apple.com/api/v1/us/apple-music/coming-soon/all/3/explicit.json",
+        "author": {
+            "name": "iTunes Store",
+            "uri": "http://wwww.apple.com/us/itunes/"
+        },
+        "links": [
+            {
+                "self": "https://rss.itunes.apple.com/api/v1/us/apple-music/coming-soon/all/3/explicit.json"
+            },
+            {
+                "alternate": "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewRoom?fcId=1396220241&app=music"
+            }
+        ],
+        
+        "copyright": "Copyright © 2018 Apple Inc. All rights reserved.",
+        "country": "us",
+        "icon": "http://itunes.apple.com/favicon.ico",
+        "updated": "2020-03-05T01:57:39.000-08:00",
+        "results": [
+            {
+                "artistName": "Lady Gaga",
+                "id": "1500951604",
+                "releaseDate": "2020-04-10",
+                "name": "Chromatica",
+                "kind": "album",
+                "copyright": "℗ 2020 Interscope Records",
+                "artistId": "277293880",
+                "artistUrl": "https://music.apple.com/us/artist/lady-gaga/277293880?app=music",
+                "artworkUrl100": "https://is2-ssl.mzstatic.com/image/thumb/Music114/v4/cb/1d/32/cb1d32f1-9ce1-0fb4-839a-76c3cab243f1/20UMGIM15390.rgb.jpg/200x200bb.png",
+                "genres": [
+                    {
+                        "genreId": "14",
+                        "name": "Pop",
+                        "url": "https://itunes.apple.com/us/genre/id14"
+                    },
+                    {
+                        "genreId": "34",
+                        "name": "Music",
+                        "url": "https://itunes.apple.com/us/genre/id34"
+                    }
+                ],
+                "url": "https://music.apple.com/us/album/chromatica/1500951604?app=music"
+            },
+            {
+                "artistName": "The Weeknd",
+                "id": "1499378108",
+                "releaseDate": "2020-03-20",
+                "name": "After Hours",
+                "kind": "album",
+                "copyright": "℗ 2020 The Weeknd XO, Inc., manufactured and marketed by Republic Records, a division of UMG Recordings, Inc.",
+                "artistId": "479756766",
+                "contentAdvisoryRating": "Explicit",
+                "artistUrl": "https://music.apple.com/us/artist/the-weeknd/479756766?app=music",
+                "artworkUrl100": "https://is2-ssl.mzstatic.com/image/thumb/Music124/v4/06/e5/8c/06e58ce4-a813-8d5b-ef64-03a69064773c/20UMGIM12176.rgb.jpg/200x200bb.png",
+                "genres": [
+                    {
+                        "genreId": "15",
+                        "name": "R&B/Soul",
+                        "url": "https://itunes.apple.com/us/genre/id15"
+                    },
+                    {
+                        "genreId": "34",
+                        "name": "Music",
+                        "url": "https://itunes.apple.com/us/genre/id34"
+                    }
+                ],
+                "url": "https://music.apple.com/us/album/after-hours/1499378108?app=music"
+            },
+            {
+                "artistName": "J Balvin",
+                "id": "1500490683",
+                "releaseDate": "2020-03-19",
+                "name": "Colores",
+                "kind": "album",
+                "copyright": "Universal Music Latino; ℗ 2020 UMG Recordings, Inc.",
+                "artistId": "444520760",
+                "artistUrl": "https://music.apple.com/us/artist/j-balvin/444520760?app=music",
+                "artworkUrl100": "https://is3-ssl.mzstatic.com/image/thumb/Music114/v4/0f/16/dc/0f16dc27-a647-01ca-ff46-2da95e65c1b8/20UMGIM10542.rgb.jpg/200x200bb.png",
+                "genres": [
+                    {
+                        "genreId": "1119",
+                        "name": "Urbano latino",
+                        "url": "https://itunes.apple.com/us/genre/id1119"
+                    },
+                    {
+                        "genreId": "34",
+                        "name": "Music",
+                        "url": "https://itunes.apple.com/us/genre/id34"
+                    },
+                    {
+                        "genreId": "12",
+                        "name": "Latino",
+                        "url": "https://itunes.apple.com/us/genre/id12"
+                    }
+                ],
+                "url": "https://music.apple.com/us/album/colores/1500490683?app=music"
+            }
+        ]
+    }
+}

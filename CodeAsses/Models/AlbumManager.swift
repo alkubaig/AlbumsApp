@@ -20,10 +20,10 @@ struct AlbumManager {
     func fetchAlbum(numAlbums: Int) {
         let urlString = "\(albumURL)&q=\(String(numAlbums))/explicit.json"
         performRequest(with: urlString)
-        
     }
     
     func performRequest(with urlString: String) {
+        
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
