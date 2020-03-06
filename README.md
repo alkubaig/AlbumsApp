@@ -8,4 +8,5 @@ This is a sample iOS application.
 - APIs networking (JSON, POSTMAN)
 - Threading
 - MVC design 
+- Unit testing
 
