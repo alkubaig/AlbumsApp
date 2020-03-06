@@ -52,12 +52,9 @@ class AlbumTableViewCell: UITableViewCell {
         self.contentView.addSubview(artistName)
         self.contentView.addSubview(albumName)
 
-
         albumImg.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 0, width: 90, height: 0, enableInsets: false)
         albumName.anchor(top: topAnchor, left: albumImg.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: frame.size.width - 100, height: 20, enableInsets: false)
         artistName.anchor(top: albumName.bottomAnchor, left: albumImg.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: frame.size.width - 100, height: 20, enableInsets: false)
-        
-
     }
 
     required init(coder aDecoder: NSCoder) {
