@@ -18,7 +18,6 @@ class DetailsViewController: UIViewController {
             }else{
                 print("Img do not exist")
             }
-
             artistName.text = album?.artistName
             albumName.text = album?.albumName
             copyright.text = album?.copyright
