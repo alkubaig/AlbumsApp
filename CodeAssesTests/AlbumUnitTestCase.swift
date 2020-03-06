@@ -15,17 +15,12 @@ class AlbumUnitTestCase: XCTestCase {
     var matchingAlbum: [Album] = []
     let testingNums = [0,10,45,50,70,100]
 
-
     override func setUp() {
         
         super.setUp()
         setUpAlbums()
     }
 
-    override func tearDown() {
-        super.tearDown()
-
-    }
     //test if parseJSON parses json object correctly
     func jsonFromFile(fileName: String, testFunc: (_ result: [Album])->Void){
         
@@ -52,9 +47,8 @@ class AlbumUnitTestCase: XCTestCase {
     //test the function parseJSON with a json object from file with 3 albums
     func unitTest1(result: [Album]){
         
-        if (result.count  < 3){
-               XCTFail("Missing some Albums!")
-        }
+        XCTAssertEqual(result.count, 3, "Missing some Albums!")
+    
         for i in 0..<result.count{
            compareAlbums(a: result[i], b: matchingAlbum[i])
        }
@@ -63,9 +57,8 @@ class AlbumUnitTestCase: XCTestCase {
     //test the function parseJSON with a json object from file with no albums
     func unitTest2(result: [Album]){
         
-      if (result.count  > 0){
-        XCTFail("This should be empty")
-        }
+        XCTAssertEqual(result.count, 0, "This should be empty")
+
     }
     //test fetchAlbum with different numbers
     func unitTest3(){
@@ -87,14 +80,6 @@ class AlbumUnitTestCase: XCTestCase {
         jsonFromFile(fileName: "test2.json", testFunc: unitTest2)
         unitTest3()
         unitTest4()
-
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
 
 }
@@ -115,33 +100,14 @@ extension AlbumUnitTestCase{
     
     func compareAlbums(a: Album, b: Album){
         
-        if (a.artistName != b.artistName){
-            XCTFail("artistName not encoded correctly!")
-        }
-        
-        if (a.albumName != b.albumName){
-            XCTFail("albumName not encoded correctly!")
-        }
-        
-        if (a.url != b.url){
-            XCTFail("url not encoded correctly!")
-        }
-        
-        if (a.imgUrl != b.imgUrl){
-            XCTFail("imgUrl not encoded correctly!")
-        }
-    
-        if (a.genre != b.genre){
-            XCTFail("genre not encoded correctly!")
-        }
-        
-        if (a.releaseDate != b.releaseDate){
-            XCTFail("releaseDate not encoded correctly!")
-        }
-        
-        if (a.copyright != b.copyright){
-            XCTFail("copyright not encoded correctly!")
-        }
+        XCTAssertEqual(a.artistName, b.artistName, "artistName not encoded correctly!")
+        XCTAssertEqual(a.albumName, b.albumName, "albumName not encoded correctly!")
+        XCTAssertEqual(a.url, b.url, "url not encoded correctly!")
+        XCTAssertEqual(a.imgUrl, b.imgUrl, "imgUrl not encoded correctly!")
+        XCTAssertEqual(a.genre, b.genre, "genre not encoded correctly!")
+        XCTAssertEqual(a.releaseDate, b.releaseDate, "releaseDate not encoded correctly!")
+        XCTAssertEqual(a.copyright, b.copyright, "copyright not encoded correctly!")
+
     }
     
     
