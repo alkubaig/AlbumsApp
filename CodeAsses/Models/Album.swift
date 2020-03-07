@@ -14,18 +14,8 @@ struct Album {
     let artistName: String
     let albumName: String
     let imgUrl: String
-    let genre: [String]
     let releaseDate: String
     let copyright: String
+    let genre: [String]
     let url: String
-    
-    init(artistName: String, albumName: String, imgUrl: String, releaseDate: String, copyright: String, genre : [String], url: String){
-        self.artistName = artistName
-        self.albumName = albumName
-        self.imgUrl  = imgUrl
-        self.releaseDate  = releaseDate
-        self.copyright  = copyright
-        self.genre  = genre
-        self.url = url
-    }
 }
