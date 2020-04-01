@@ -9,16 +9,16 @@
 import Foundation
 
 protocol AlbumManagerDelegate {
-    func didLoadAlbum(_ albumManager: AlbumManager, album: [Album])
+    func didLoadAlbum(_ albumManager: AlbumManager, albums: [Album])
     func didFailWithError(error: Error)
 }
 
 struct AlbumManager {
-    let albumURL = "https://rss.itunes.apple.com/api/v1/us/apple-music/coming-soon/all/"
+
     var delegate: AlbumManagerDelegate?
     
     func fetchAlbum(numAlbums: Int) {
-        let urlString = "\(albumURL)&q=\(String(numAlbums))/explicit.json"
+        let urlString = "\(Constants.albumURL)&q=\(String(numAlbums))/explicit.json"
         performRequest(with: urlString)
     }
     
@@ -27,13 +27,13 @@ struct AlbumManager {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
-                if error != nil {
-                    self.delegate?.didFailWithError(error: error!)
+                if let error = error {
+                    self.delegate?.didFailWithError(error: error)
                     return
                 }
                 if let safeData = data {
                     if let album = self.parseJSON(safeData) {
-                        self.delegate?.didLoadAlbum(self, album: album)
+                        self.delegate?.didLoadAlbum(self, albums: album)
                     }
                 }
             }

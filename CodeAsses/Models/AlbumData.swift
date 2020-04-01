@@ -8,13 +8,13 @@
 
 import Foundation
 
+// Codable which is to use for parsing Json Objects of Albums.
+
 struct Genres : Codable {
     let name: String
-    let url: String
 }
 
 struct AlbumData: Codable {
-    
     let artistName: String
     let name: String
     let artworkUrl100: String
@@ -22,9 +22,7 @@ struct AlbumData: Codable {
     let releaseDate: String
     let copyright: String
     let url: String
-
 }
-
 
 struct Res: Codable {
     let results: [AlbumData]

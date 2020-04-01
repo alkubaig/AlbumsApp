@@ -8,9 +8,7 @@
 
 import UIKit
 
-
 struct Album {
-    
     let artistName: String
     let albumName: String
     let imgUrl: String

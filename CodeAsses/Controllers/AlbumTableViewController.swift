@@ -9,84 +9,63 @@
 import UIKit
 class AlbumTableViewController: UITableViewController {
     
-    let cellId =  "id"
-    let numAlbums = 100
-    var albumManager = AlbumManager()
-    var albums : [Album] = []
-
+    private var albumManager = AlbumManager()
+    private var albumsListViewModel = [AlbumViewModel]()
+    private var dataSource: TableViewDataSorce<AlbumTableViewCell, AlbumViewModel>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         albumManager.delegate = self
         view.backgroundColor = .white
-
         setupTableView()
     }
 
     func setupTableView(){
-
-        albumManager.fetchAlbum(numAlbums: numAlbums);
-        tableView.register(AlbumTableViewCell.self, forCellReuseIdentifier: cellId)
+        
+        //use genetic class for table dataSorce
+        self.dataSource = TableViewDataSorce(cellId:Constants.cellId , models: albumsListViewModel, configCell: {cell, vm in
+            cell.albumViewModel = vm
+        })
+        self.tableView.dataSource = self.dataSource
+        
+        //fetch all albums
+        albumManager.fetchAlbum(numAlbums: Constants.numAlbums)
+        
+        // register cell
+        tableView.register(AlbumTableViewCell.self, forCellReuseIdentifier: Constants.cellId)
     }
-
 }
 
-// MARK: AlbumViewExample
+// MARK: Table functions
 
 extension AlbumTableViewController {
- 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
+    //
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0;
     }
- 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return albums.count > 0 ? albums.count : 10
-    }
- 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-  
-        let i = indexPath.row
-        if i <  albums.count{
-            if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? AlbumTableViewCell {
-                cell.album = albums[i]
-            return cell
-            }
-        }
-        let dCell = UITableViewCell()
-        dCell.textLabel?.text = "Loading.."
-        return dCell
-        
-       
-    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let i = indexPath.row
-        if i <  albums.count{
-            let destCv = DetailsViewController()
-            destCv.album = albums[i]
-            navigationController?.pushViewController(destCv, animated: true)
-
-        }
-
+        let destCv = DetailsViewController()
+        destCv.albumModel = albumsListViewModel[indexPath.row]
+        navigationController?.pushViewController(destCv, animated: true)
     }
 
 }
 
-// MARK: AlbumViewExample
+// MARK: Delegate functions for updating table after HTTP 
 
 extension AlbumTableViewController: AlbumManagerDelegate {
-    
-    func didLoadAlbum(_ albumManager: AlbumManager, album: [Album]) {
+    func didLoadAlbum(_ albumManager: AlbumManager, albums: [Album]) {
         DispatchQueue.main.async {
-            self.albums = album
+            
+            self.albumsListViewModel = albums.map({return AlbumViewModel(album: $0)})
+            self.dataSource?.updateModel(newModel: self.albumsListViewModel)
             self.tableView.reloadData()
+            
         }
     }
-    
     func didFailWithError(error: Error) {
         print(error)
     }

@@ -1,14 +1,14 @@
 //
-//  CodeAssesTests.swift
+//  AlbumViewModelTests.swift
 //  CodeAssesTests
 //
-//  Created by Ghadeer Alkubaish on 3/5/20.
+//  Created by Ghadeer Alkubaish on 4/1/20.
 //  Copyright © 2020 Ghadeer Alkubaish. All rights reserved.
 //
-import Foundation
+
 import XCTest
 
-class CodeAssesTests: XCTestCase {
+class AlbumViewModelTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
