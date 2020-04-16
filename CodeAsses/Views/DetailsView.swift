@@ -11,75 +11,41 @@ import UIKit
 
 class DetailsView: UIView {
 
-    var albumModel : AlbumViewModel? {
+    var albumModel : AlbumDetailsViewModel?{
         didSet {
            
-            if let safeData = albumModel?.imgData {
-                albumImg.image = UIImage(data: safeData)
+            if let url = albumModel?.imgUrl{
+                //get the image from the cache
+                albumImg.loadImgeURL(url: url)
             }
-            
             artistName.text = albumModel?.artistName
             albumName.text = albumModel?.albumName
             copyright.text = albumModel?.copyright
             releaseDate.text = albumModel?.releaseDate
             genre.text = albumModel?.genre
+            //set up layout after the albumModel is set to get correct frame
+            viewLayout()
         }
     }
     
-    var albumImg: UIImageView = {
+    private let dConstraints = Constants.DetailsConstraints.self
+    
+    //scroll view for big text
+    private var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
+    //content view
+    private var view: UIView = {
+         let view = UIView()
+         return view
+     }()
+    
+    private var albumImg: UIImageView = {
         let img = UIImageView()
         return img
     }()
-
-    var artistName: UILabel = {
-        let l = UILabel()
-        l.font = UIFont.systemFont(ofSize: 18)
-        l.textAlignment = .center
-        l.numberOfLines = 0
-        l.lineBreakMode = .byWordWrapping
-        l.textColor = .darkGray
-        return l
-    }()
-
-    var albumName: UILabel = {
-        let l = UILabel()
-        l.font = UIFont.systemFont(ofSize: 28)
-        l.textAlignment = .center
-        l.numberOfLines = 0
-        l.lineBreakMode = .byWordWrapping
-        return l
-    }()
-
-    var releaseDate: UILabel = {
-          let l = UILabel()
-          l.font = UIFont.systemFont(ofSize: 14)
-          l.textAlignment = .center
-          l.numberOfLines = 1
-          l.textColor = .gray
-          return l
-      }()
-
-    var copyright: UILabel = {
-        let l = UILabel()
-        l.font = UIFont.systemFont(ofSize: 12)
-        l.textAlignment = .center
-        l.numberOfLines = 0
-        l.lineBreakMode = .byWordWrapping
-        l.textColor = .gray
-        return l
-    }()
-
-    var genre: UILabel = {
-          let l = UILabel()
-          l.font = UIFont.italicSystemFont(ofSize: 16)
-        
-          l.textAlignment = .center
-          l.numberOfLines = 0
-          l.lineBreakMode = .byWordWrapping
-          l.textColor = .darkGray
-          return l
-      }()
-
 
     var showButton : UIButton = {
         let bt = UIButton()
@@ -87,9 +53,42 @@ class DetailsView: UIView {
         bt.setTitle("View Album!", for: UIControl.State.normal)
         bt.layer.cornerRadius = bt.frame.size.width / 2;
         bt.clipsToBounds = true;
-        
           return bt
       }()
+    
+    //**** labels have similar setup except for size and color
+    private var artistName: UILabel = {
+        let l = UILabel()
+        l.customSetUp(color: .darkGray, fontSize: Constants.DetailsFonts.artistNameFont)
+        return l
+    }()
+
+    private var albumName: UILabel = {
+        let l = UILabel()
+        l.customSetUp(fontSize: Constants.DetailsFonts.albumNameFont)
+        return l
+    }()
+
+    private var releaseDate: UILabel = {
+        let l = UILabel()
+        l.customSetUp(color: .gray, fontSize: Constants.DetailsFonts.releaseDateFont)
+        return l
+      }()
+
+    private var copyright: UILabel = {
+        let l = UILabel()
+        l.customSetUp(color: .gray,
+                      fontSize: Constants.DetailsFonts.copyrighteFont)
+        return l
+    }()
+
+    private var genre: UILabel = {
+          let l = UILabel()
+          l.customSetUp(color: .darkGray, fontSize: Constants.DetailsFonts.genreFont)
+          return l
+      }()
+    //end labels ****//
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -104,32 +103,54 @@ class DetailsView: UIView {
     func initView(){
         
         self.backgroundColor = .white
+
+        self.addSubview(scrollView)
+        scrollView.addSubview(view)
+
+        view.addSubview(albumImg)
+        view.addSubview(albumName)
+        view.addSubview(artistName)
+        view.addSubview(copyright)
+        view.addSubview(releaseDate)
+        view.addSubview(genre)
         
-        self.addSubview(albumImg)
-        self.addSubview(albumName)
-        self.addSubview(artistName)
         self.addSubview(showButton)
-        self.addSubview(copyright)
-        self.addSubview(releaseDate)
-        self.addSubview(genre)
-        viewLayout()
     }
 
-    func viewLayout(){
+    private func viewLayout(){
         let viewSize = self.frame.size
-        albumImg.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, paddingTop: 90, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: viewSize.width , enableInsets: true)
+                
+        scrollView.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, enableInsets: true)
+        
+        view.anchor(top: scrollView.topAnchor, left: nil, bottom: scrollView.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: self.frame.width, height: 0 , enableInsets: true)
 
-        albumName.anchor(top: albumImg.bottomAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, paddingTop: 20, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0 , enableInsets: true)
+        albumImg.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop:0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: viewSize.width , enableInsets: true)
 
-        releaseDate.anchor(top: albumName.bottomAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, paddingTop: 20, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0 , enableInsets: true)
+        //set constraints for labels
+        labelsLayout()
 
-        artistName.anchor(top: releaseDate.bottomAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, paddingTop: 20, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0 , enableInsets: true)
-
-        genre.anchor(top: artistName.bottomAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, paddingTop: 20, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0 , enableInsets: true)
-
-        showButton.anchor(top: nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: 20, paddingRight: 20, width: 0, height: 0 , enableInsets: true)
-
-        copyright.anchor(top: nil, left: self.leftAnchor, bottom: showButton.topAnchor, right: self.rightAnchor, paddingTop: 0, paddingLeft: 10, paddingBottom: 20, paddingRight: 10, width: 0, height: 0 , enableInsets: true)
+        showButton.anchor(top: nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: dConstraints.inBetweenLabelPadding, paddingLeft: dConstraints.leftRightButtonPadding, paddingBottom: dConstraints.topBottomButtonPadding, paddingRight: dConstraints.leftRightButtonPadding, enableInsets: true)
+        
+    }
+    
+    //same constraints for all labels except the last label which ties to the bottom of view
+    private func labelsLayout(){
+        
+        let viewsConst : [UIView] = [albumImg,albumName,releaseDate,artistName,genre,copyright]
+        
+        for i in 1..<viewsConst.count{
+            let bottomConst = i == (viewsConst.count - 1) ? (view.bottomAnchor,2 * dConstraints.topBottomLabelPadding) : (nil,0)
+            viewsConst[i].anchor(top: viewsConst[i-1].bottomAnchor,
+                                 left: view.leftAnchor,
+                                 bottom: bottomConst.0,
+                                 right: view.rightAnchor,
+                                 paddingTop: dConstraints.inBetweenLabelPadding,
+                                 paddingLeft: dConstraints.leftRightLabelPadding,
+                                 paddingBottom: bottomConst.1,
+                                 paddingRight: dConstraints.leftRightLabelPadding,
+                                 enableInsets: true)
+        }
     }
 }
+
 

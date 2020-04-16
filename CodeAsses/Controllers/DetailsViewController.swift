@@ -9,13 +9,23 @@
 import UIKit
 class DetailsViewController: UIViewController {
 
-    private var detailsView : DetailsView?
+    var albumModel : AlbumDetailsViewModel?
 
-    var albumModel : AlbumViewModel?
-    
+    private var detailsView : DetailsView?{
+        
+        didSet{
+            if let detailsView = detailsView{
+                self.view.addSubview(detailsView)
+//                detailsView.topbarHeight = self.topbarHeight
+                detailsView.albumModel = self.albumModel
+                detailsView.showButton.addTarget(self, action: #selector(viewAlbum), for: UIControl.Event.touchUpInside)
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
+        detailsView = DetailsView(frame: self.view.frame)
     }
     
     @objc func viewAlbum(sender: UIButton) {
@@ -28,12 +38,16 @@ class DetailsViewController: UIViewController {
         }
     }
 
-    func configureView(){
-        detailsView = DetailsView(frame: self.view.frame)
-        if let detailsView = detailsView{
-            self.view.addSubview(detailsView)
-            detailsView.albumModel = self.albumModel
-            detailsView.showButton.addTarget(self, action: #selector(viewAlbum), for: UIControl.Event.touchUpInside)
-        }
+}
+
+extension UIViewController {
+
+    /**
+     *  Height of status bar + navigation bar (if navigation bar exist)
+     */
+
+    var topbarHeight: CGFloat {
+        return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
+            (self.navigationController?.navigationBar.frame.height ?? 0.0)
     }
 }

@@ -9,13 +9,12 @@
 import UIKit
 class AlbumTableViewCell: UITableViewCell {
 
-    var albumViewModel: AlbumViewModel? {
+    var albumViewModel: AlbumCellViewModel? {
         didSet {
-        
-            if let safeData = albumViewModel?.imgData {
-                albumImg.image = UIImage(data: safeData)
+    
+            if let url = albumViewModel?.imgUrl{
+                albumImg.loadImgeURL(url:  url)
             }
-            
             artistName.text = albumViewModel?.artistName
             albumName.text = albumViewModel?.albumName
         }
@@ -29,15 +28,16 @@ class AlbumTableViewCell: UITableViewCell {
     }()
     private var artistName: UILabel = {
         let l = UILabel()
+        l.font = UIFont.systemFont(ofSize: Constants.CellFonts.artistNameFont)
         l.numberOfLines = 0
         l.textColor = .darkGray
-        l.font = UIFont.systemFont(ofSize: 12)
         return l
     }()
     
     private var albumName : UILabel = {
         let l = UILabel()
-        l.lineBreakMode = .byTruncatingMiddle
+        l.font = UIFont.systemFont(ofSize: Constants.CellFonts.albumNameFont)
+        l.numberOfLines = 0
         return l
     }()
     
@@ -53,29 +53,16 @@ class AlbumTableViewCell: UITableViewCell {
 
     required init(coder aDecoder: NSCoder) {
          fatalError("init(coder:) has not been implemented")
-        
-        
     }
+    
     func viewLayout(){
+                
+        let cConstraints = Constants.CellConstraints.self
         
-        albumImg.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 0, width: 90, height: 0, enableInsets: false)
-        albumName.anchor(top: topAnchor, left: albumImg.rightAnchor, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: frame.size.width - 100, height: 20, enableInsets: false)
-        artistName.anchor(top: albumName.bottomAnchor, left: albumImg.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: frame.size.width - 100, height: 20, enableInsets: false)
+        albumImg.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: cConstraints.topImgPadding, paddingLeft: cConstraints.leftImgPadding, paddingBottom: 0, paddingRight: 0, width: cConstraints.imgWidth, height: cConstraints.imgHeight, enableInsets: false)
+        
+        albumName.anchor(top: topAnchor, left: albumImg.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: cConstraints.topBottomLabelPadding, paddingLeft: cConstraints.leftRightLabelPadding, paddingBottom: 0, paddingRight: cConstraints.leftRightLabelPadding, enableInsets: false)
+        
+        artistName.anchor(top: albumName.bottomAnchor, left: albumImg.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: cConstraints.inBetweenLabelPadding, paddingLeft: cConstraints.leftRightLabelPadding, paddingBottom: 0, paddingRight: cConstraints.leftRightLabelPadding, enableInsets: false)
     }
 }
-
-
-//    var album: Album? {
-//        didSet {
-//            if let p = album?.imgUrl,
-//                let url = URL(string: p),
-//                let data = try? Data(contentsOf: url){
-//                    albumImg.image = UIImage(data: data)
-//            }else{
-//                        print("Img do not exist")
-//            }
-//
-//            artistName.text = album?.artistName
-//            albumName.text = album?.albumName
-//        }
-//    }
