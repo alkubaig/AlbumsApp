@@ -57,7 +57,7 @@ struct Constants{
         
         private init(){}
             
-        static let topBottomLabelPadding : CGFloat = 20
+        static let topBottomLabelPadding : CGFloat = 10
         static let inBetweenLabelPadding : CGFloat = 20
         static let leftRightLabelPadding : CGFloat = 10
         

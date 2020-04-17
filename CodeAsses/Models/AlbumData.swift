@@ -17,7 +17,7 @@ struct Genres : Codable {
 struct AlbumData: Codable {
     let artistName: String
     let name: String
-    let artworkUrl100: String
+    let artworkUrl100: String 
     let genres: [Genres]
     let releaseDate: String
     let copyright: String

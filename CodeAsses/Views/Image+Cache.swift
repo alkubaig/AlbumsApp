@@ -13,18 +13,18 @@ let imgCache = NSCache<NSString,UIImage>()
 extension UIImageView{
     
     //check if image is in cache, otherwise, load and store in cache.
-    func loadImgeURL(url: String){
+    func getImg(url: String){
         
         if let chachedImg = imgCache.object(forKey:NSString(string: url)){
             self.image = chachedImg
         }
         else {
-            loadImgeURL_(url: url)
+            loadImgeURL(url: url)
         }
     }
     
     //load and store in cache.
-    func loadImgeURL_(url: String){
+    private func loadImgeURL(url: String){
         
         if let img_url = URL(string: url){
             

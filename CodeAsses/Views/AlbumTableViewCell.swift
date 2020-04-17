@@ -13,7 +13,7 @@ class AlbumTableViewCell: UITableViewCell {
         didSet {
     
             if let url = albumViewModel?.imgUrl{
-                albumImg.loadImgeURL(url:  url)
+                albumImg.getImg(url:  url)
             }
             artistName.text = albumViewModel?.artistName
             albumName.text = albumViewModel?.albumName
@@ -31,12 +31,14 @@ class AlbumTableViewCell: UITableViewCell {
         l.font = UIFont.systemFont(ofSize: Constants.CellFonts.artistNameFont)
         l.numberOfLines = 0
         l.textColor = .darkGray
+        l.lineBreakMode = .byWordWrapping
         return l
     }()
     
     private var albumName : UILabel = {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: Constants.CellFonts.albumNameFont)
+        l.lineBreakMode = .byWordWrapping
         l.numberOfLines = 0
         return l
     }()
@@ -58,11 +60,18 @@ class AlbumTableViewCell: UITableViewCell {
     func viewLayout(){
                 
         let cConstraints = Constants.CellConstraints.self
+
+        albumImg.anchor(top: topAnchor, paddingTop: cConstraints.topImgPadding, enableInsets: false)
+        albumImg.anchor(left: leftAnchor, paddingLeft: cConstraints.leftImgPadding)
+        albumImg.anchor(width: cConstraints.imgWidth, height: cConstraints.imgHeight)
+
         
-        albumImg.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: cConstraints.topImgPadding, paddingLeft: cConstraints.leftImgPadding, paddingBottom: 0, paddingRight: 0, width: cConstraints.imgWidth, height: cConstraints.imgHeight, enableInsets: false)
+        albumName.anchor(top: topAnchor, paddingTop: cConstraints.topBottomLabelPadding, enableInsets: false)
+        albumName.anchor(left: albumImg.rightAnchor, right: rightAnchor, paddingLeft: cConstraints.leftRightLabelPadding, paddingRight: cConstraints.leftRightLabelPadding)
+
         
-        albumName.anchor(top: topAnchor, left: albumImg.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: cConstraints.topBottomLabelPadding, paddingLeft: cConstraints.leftRightLabelPadding, paddingBottom: 0, paddingRight: cConstraints.leftRightLabelPadding, enableInsets: false)
-        
-        artistName.anchor(top: albumName.bottomAnchor, left: albumImg.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: cConstraints.inBetweenLabelPadding, paddingLeft: cConstraints.leftRightLabelPadding, paddingBottom: 0, paddingRight: cConstraints.leftRightLabelPadding, enableInsets: false)
+        artistName.anchor(top: albumName.bottomAnchor, paddingTop: cConstraints.inBetweenLabelPadding, enableInsets: false)
+        artistName.anchor(left: albumImg.rightAnchor, right: rightAnchor, paddingLeft: cConstraints.leftRightLabelPadding, paddingRight: cConstraints.leftRightLabelPadding)
+
     }
 }

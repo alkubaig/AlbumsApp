@@ -43,7 +43,6 @@ extension AlbumTableViewController {
         tableView.delaysContentTouches = false
         // register cell
         tableView.register(AlbumTableViewCell.self, forCellReuseIdentifier: Constants.cellId)
-        
     }
 }
 

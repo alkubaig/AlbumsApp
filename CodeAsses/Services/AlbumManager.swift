@@ -48,11 +48,11 @@ struct AlbumManager {
             let res = decodedData.feed.results
             var albums: [Album] = []
             for i in 0 ..< res.count {
-//                let artistName = res[i].artistName + res[i].artistName + res[i].artistName
-//                let albumName = res[i].name + res[i].name + res[i].name
-                
-                let artistName = res[i].artistName 
-                let albumName = res[i].name
+                let artistName = res[i].artistName + res[i].artistName + res[i].artistName
+                let albumName = res[i].name + res[i].name + res[i].name
+//
+//                let artistName = res[i].artistName
+//                let albumName = res[i].name
                 
                 let imgUrl = res[i].artworkUrl100
                 let url = res[i].url

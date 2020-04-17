@@ -16,7 +16,7 @@ class DetailsView: UIView {
            
             if let url = albumModel?.imgUrl{
                 //get the image from the cache
-                albumImg.loadImgeURL(url: url)
+                albumImg.getImg(url: url)
             }
             artistName.text = albumModel?.artistName
             albumName.text = albumModel?.albumName
@@ -56,6 +56,15 @@ class DetailsView: UIView {
           return bt
       }()
     
+    //Stack View
+    var stackView : UIStackView = {
+        let stackView   = UIStackView()
+        stackView.axis  = NSLayoutConstraint.Axis.vertical
+        stackView.distribution  = UIStackView.Distribution.equalSpacing
+        stackView.spacing   = Constants.DetailsConstraints.inBetweenLabelPadding
+        return stackView
+    }()
+
     //**** labels have similar setup except for size and color
     private var artistName: UILabel = {
         let l = UILabel()
@@ -106,51 +115,37 @@ class DetailsView: UIView {
 
         self.addSubview(scrollView)
         scrollView.addSubview(view)
-
-        view.addSubview(albumImg)
-        view.addSubview(albumName)
-        view.addSubview(artistName)
-        view.addSubview(copyright)
-        view.addSubview(releaseDate)
-        view.addSubview(genre)
+        
+        view.addSubview(stackView)
+        
+        stackView.addArrangedSubview(albumImg)
+        stackView.addArrangedSubview(albumName)
+        stackView.addArrangedSubview(artistName)
+        stackView.addArrangedSubview(releaseDate)
+        stackView.addArrangedSubview(genre)
+        stackView.addArrangedSubview(copyright)
         
         self.addSubview(showButton)
     }
 
     private func viewLayout(){
-        let viewSize = self.frame.size
-                
-        scrollView.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, enableInsets: true)
+        let viewSize = self.frame.size                
+
+        showButton.anchor(bottom: bottomAnchor, paddingBottom: dConstraints.topBottomButtonPadding, enableInsets: true)
+        showButton.anchor(left: leftAnchor, right: rightAnchor, paddingLeft: dConstraints.leftRightButtonPadding, paddingRight: dConstraints.leftRightButtonPadding)
         
-        view.anchor(top: scrollView.topAnchor, left: nil, bottom: scrollView.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: self.frame.width, height: 0 , enableInsets: true)
+        scrollView.anchor(top: topAnchor, left: leftAnchor, bottom: showButton.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, enableInsets: true)
 
-        albumImg.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop:0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: viewSize.width , enableInsets: true)
-
-        //set constraints for labels
-        labelsLayout()
-
-        showButton.anchor(top: nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: dConstraints.inBetweenLabelPadding, paddingLeft: dConstraints.leftRightButtonPadding, paddingBottom: dConstraints.topBottomButtonPadding, paddingRight: dConstraints.leftRightButtonPadding, enableInsets: true)
+        albumImg.anchor(height: viewSize.width)
         
+        view.anchor(top: scrollView.topAnchor, bottom: scrollView.bottomAnchor, paddingTop: 0, paddingBottom: 0, enableInsets: true)
+        view.anchor(width: viewSize.width)
+    
+        stackView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: dConstraints.topBottomLabelPadding, paddingLeft: dConstraints.leftRightLabelPadding, paddingBottom: 2 * dConstraints.topBottomLabelPadding, paddingRight: dConstraints.leftRightLabelPadding, enableInsets: true)
+        
+            
     }
     
-    //same constraints for all labels except the last label which ties to the bottom of view
-    private func labelsLayout(){
-        
-        let viewsConst : [UIView] = [albumImg,albumName,releaseDate,artistName,genre,copyright]
-        
-        for i in 1..<viewsConst.count{
-            let bottomConst = i == (viewsConst.count - 1) ? (view.bottomAnchor,2 * dConstraints.topBottomLabelPadding) : (nil,0)
-            viewsConst[i].anchor(top: viewsConst[i-1].bottomAnchor,
-                                 left: view.leftAnchor,
-                                 bottom: bottomConst.0,
-                                 right: view.rightAnchor,
-                                 paddingTop: dConstraints.inBetweenLabelPadding,
-                                 paddingLeft: dConstraints.leftRightLabelPadding,
-                                 paddingBottom: bottomConst.1,
-                                 paddingRight: dConstraints.leftRightLabelPadding,
-                                 enableInsets: true)
-        }
-    }
 }
 
 
