@@ -31,25 +31,35 @@ class AlbumTableViewCell: UITableViewCell {
         l.font = UIFont.systemFont(ofSize: Constants.CellFonts.artistNameFont)
         l.numberOfLines = 0
         l.textColor = .darkGray
-        l.lineBreakMode = .byWordWrapping
         return l
     }()
     
     private var albumName : UILabel = {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: Constants.CellFonts.albumNameFont)
-        l.lineBreakMode = .byWordWrapping
         l.numberOfLines = 0
         return l
     }()
+    
+    //Stack View
+    var stackView : UIStackView = {
+        let stackView   = UIStackView()
+        stackView.axis  = NSLayoutConstraint.Axis.vertical
+        stackView.distribution  = UIStackView.Distribution.equalSpacing
+        stackView.spacing   = Constants.CellConstraints.inBetweenLabelPadding
+        stackView.backgroundColor = .blue
+        return stackView
+    }()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         self.contentView.addSubview(albumImg)
-        self.contentView.addSubview(artistName)
-        self.contentView.addSubview(albumName)
-
+        self.contentView.addSubview(stackView)
+        stackView.addArrangedSubview(artistName)
+        stackView.addArrangedSubview(albumName)
+        
         viewLayout()
     }
 
@@ -66,12 +76,8 @@ class AlbumTableViewCell: UITableViewCell {
         albumImg.anchor(width: cConstraints.imgWidth, height: cConstraints.imgHeight)
 
         
-        albumName.anchor(top: topAnchor, paddingTop: cConstraints.topBottomLabelPadding, enableInsets: false)
-        albumName.anchor(left: albumImg.rightAnchor, right: rightAnchor, paddingLeft: cConstraints.leftRightLabelPadding, paddingRight: cConstraints.leftRightLabelPadding)
-
+        stackView.anchor(top: topAnchor, paddingTop: cConstraints.topBottomLabelPadding,enableInsets: false)
+        stackView.anchor(left: albumImg.rightAnchor, right: rightAnchor, paddingLeft: cConstraints.leftRightLabelPadding, paddingRight: cConstraints.leftRightLabelPadding)
         
-        artistName.anchor(top: albumName.bottomAnchor, paddingTop: cConstraints.inBetweenLabelPadding, enableInsets: false)
-        artistName.anchor(left: albumImg.rightAnchor, right: rightAnchor, paddingLeft: cConstraints.leftRightLabelPadding, paddingRight: cConstraints.leftRightLabelPadding)
-
     }
 }
