@@ -138,13 +138,6 @@
 			path = DataSorces;
 			sourceTree = "<group>";
 		};
-		5D552FDC24539C1B00D67B17 /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Delegates;
-			sourceTree = "<group>";
-		};
 		5DACB9932411BC5700AA7AA2 = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +161,6 @@
 		5DACB99E2411BC5700AA7AA2 /* CodeAsses */ = {
 			isa = PBXGroup;
 			children = (
-				5D552FDC24539C1B00D67B17 /* Delegates */,
 				5D01AA1324345BAA0082749D /* DataSorces */,
 				5DBDD5D9241AF8BC006B4B24 /* Services */,
 				5DBDD5D4241AF812006B4B24 /* ViewModel */,
