@@ -8,9 +8,8 @@
 
 import UIKit
 
-protocol AlbumContainerHeight {
-    func height(width: CGFloat)-> CGFloat
-}
+
+// MARK: - protocol for Album properties.
 
 protocol AlbumDetails {
     
@@ -41,9 +40,24 @@ extension AlbumEssentials {
     }
 }
 
+// MARK: - protocol for Album container height.
+
+protocol AlbumContainerHeight {
+    func actualHeight(width: CGFloat)-> CGFloat
+    func minHeight()-> CGFloat
+    func height(width: CGFloat)-> CGFloat
+}
+
 //generic functions to estimate height
 
 extension AlbumContainerHeight{
+    
+    func height(width: CGFloat) -> CGFloat {
+        
+        let minHeight = self.minHeight()
+        let height = self.actualHeight(width: width)
+        return max(minHeight, height)
+    }
     
     func paddingsHeight(top: CGFloat, inBetween: CGFloat, labelsCount: Int)->CGFloat{
         

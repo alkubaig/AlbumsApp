@@ -45,37 +45,12 @@ struct AlbumManager {
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(AlbumsData.self, from: albumData)
-            let res = decodedData.feed.results
-            var albums: [Album] = []
-            for i in 0 ..< res.count {
-                let artistName = res[i].artistName + res[i].artistName + res[i].artistName
-                let albumName = res[i].name + res[i].name + res[i].name
-//
-//                let artistName = res[i].artistName
-//                let albumName = res[i].name
-                
-                let imgUrl = res[i].artworkUrl100
-                let url = res[i].url
-                var genre: [String] = []
-                let copyright = res[i].copyright
-                let releaseDate = res[i].releaseDate
-
-                for j in 0 ..< res[i].genres.count{
-                    genre.append(res[i].genres[j].name)
-                }
-              
-                let album = Album(artistName: artistName, albumName: albumName, imgUrl: imgUrl, releaseDate: releaseDate, copyright: copyright, genre: genre, url: url)
-                albums.append(album)
-            }
-            
-            return albums
+            return decodedData.albumsData
             
         } catch {
             delegate?.didFailWithError(error: error)
             return nil
         }
     }
-    
-    
     
 }

@@ -22,32 +22,32 @@ struct AlbumDetailsViewModel : AlbumEssentials, AlbumDetails{
         return self.album.url
     }
     var genre: String{
-        return self.album.genre.joined(separator:"\n")
+        return self.album.genres.map({$0.name}).joined(separator:"\n")
     }
 }
-
-extension AlbumDetailsViewModel: AlbumContainerHeight{
-
-    func height(width: CGFloat)-> CGFloat{
-       
-         let dConstraints = Constants.DetailsConstraints.self
-         let fontConsts = Constants.DetailsFonts.self
-
-         let approxWidth = width - 2 * dConstraints.leftRightLabelPadding
-
-         var labels = [(String,CGFloat)]()
-          labels.append((self.artistName,fontConsts.artistNameFont))
-          labels.append((self.albumName,fontConsts.albumNameFont))
-          labels.append((self.releaseDate,fontConsts.releaseDateFont))
-          labels.append((self.genre,fontConsts.genreFont))
-          labels.append((self.copyright,fontConsts.copyrighteFont))
-
-         let totalPaddingsHeight = paddingsHeight(top: dConstraints.topBottomLabelPadding, inBetween: dConstraints.inBetweenLabelPadding, labelsCount: labels.count)
-
-         let totalTextHeight = labelsHeight(approxWidth: approxWidth, labels: labels)
-
-          let height = width + totalTextHeight + totalPaddingsHeight
-
-         return height
-    }
-}
+//
+//extension AlbumDetailsViewModel: AlbumContainerHeight{
+//
+//    func height(width: CGFloat)-> CGFloat{
+//       
+//         let dConstraints = Constants.DetailsConstraints.self
+//         let fontConsts = Constants.DetailsFonts.self
+//
+//         let approxWidth = width - 2 * dConstraints.leftRightLabelPadding
+//
+//         var labels = [(String,CGFloat)]()
+//          labels.append((self.artistName,fontConsts.artistNameFont))
+//          labels.append((self.albumName,fontConsts.albumNameFont))
+//          labels.append((self.releaseDate,fontConsts.releaseDateFont))
+//          labels.append((self.genre,fontConsts.genreFont))
+//          labels.append((self.copyright,fontConsts.copyrighteFont))
+//
+//         let totalPaddingsHeight = paddingsHeight(top: dConstraints.topBottomLabelPadding, inBetween: dConstraints.inBetweenLabelPadding, labelsCount: labels.count)
+//
+//         let totalTextHeight = labelsHeight(approxWidth: approxWidth, labels: labels)
+//
+//          let height = width + totalTextHeight + totalPaddingsHeight
+//
+//         return height
+//    }
+//}

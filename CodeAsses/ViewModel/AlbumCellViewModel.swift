@@ -15,7 +15,13 @@ struct AlbumCellViewModel: AlbumEssentials {
 
 extension AlbumCellViewModel: AlbumContainerHeight{
 
-    func height(width: CGFloat)-> CGFloat{
+    func minHeight() -> CGFloat {
+        let cConstraints = Constants.CellConstraints.self
+        let minHeight = (cConstraints.imgHeight + 2 * cConstraints.topImgPadding)
+        return minHeight
+    }
+
+    func actualHeight(width: CGFloat)-> CGFloat{
        
        let cConstraints = Constants.CellConstraints.self
        let fontConsts = Constants.CellFonts.self

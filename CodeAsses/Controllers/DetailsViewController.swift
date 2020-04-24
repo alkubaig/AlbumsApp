@@ -9,7 +9,7 @@
 import UIKit
 class DetailsViewController: UIViewController {
 
-    var albumModel : AlbumDetailsViewModel?
+    let albumModel : AlbumDetailsViewModel
 
     private var detailsView : DetailsView?{
         
@@ -22,6 +22,14 @@ class DetailsViewController: UIViewController {
         }
     }
 
+    //dependency injuction - intilizer
+    init(albumModel: AlbumDetailsViewModel) {
+        self.albumModel = albumModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init?(coder:) can not be implemented")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +38,8 @@ class DetailsViewController: UIViewController {
     
     @objc func viewAlbum(sender: UIButton) {
         
-         if let url = albumModel?.url, let valid_url = URL(string: url),
+        let url = albumModel.url
+        if let valid_url = URL(string: url),
             UIApplication.shared.canOpenURL(valid_url) {
                 UIApplication.shared.open(valid_url)
          }else{

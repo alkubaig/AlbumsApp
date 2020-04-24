@@ -9,6 +9,7 @@
 import UIKit
 class AlbumTableViewCell: UITableViewCell {
 
+    //dependency injuction - property
     var albumViewModel: AlbumCellViewModel? {
         didSet {
     

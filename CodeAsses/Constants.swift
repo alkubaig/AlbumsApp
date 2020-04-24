@@ -23,7 +23,6 @@ struct Constants{
 
         static let artistNameFont : CGFloat = 12
         static let albumNameFont : CGFloat = 15
-        
     }
     
     struct DetailsFonts {
@@ -35,7 +34,6 @@ struct Constants{
         static let releaseDateFont : CGFloat = 14
         static let copyrighteFont : CGFloat = 12
         static let genreFont : CGFloat = 16
-         
      }
     
     struct CellConstraints {
@@ -63,7 +61,6 @@ struct Constants{
         
         static let topBottomButtonPadding : CGFloat = 20
         static let leftRightButtonPadding : CGFloat = 20
-        
     }
 }
 

@@ -142,8 +142,6 @@ class DetailsView: UIView {
         view.anchor(width: viewSize.width)
     
         stackView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: dConstraints.topBottomLabelPadding, paddingLeft: dConstraints.leftRightLabelPadding, paddingBottom: 2 * dConstraints.topBottomLabelPadding, paddingRight: dConstraints.leftRightLabelPadding, enableInsets: true)
-        
-            
     }
     
 }

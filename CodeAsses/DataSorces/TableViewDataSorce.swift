@@ -11,16 +11,16 @@ import UIKit
 class TableViewDataSorce<CellType,ViewModelType>: NSObject, UITableViewDataSource where CellType : UITableViewCell{
     
     let cellId : String
-    var models : [ViewModelType]
+    var models = [ViewModelType]()
     let configCell : (CellType, ViewModelType) -> ()
     
-    init(cellId: String, models: [ViewModelType], configCell: @escaping(CellType, ViewModelType)->()) {
+    init(cellId: String, configCell: @escaping(CellType, ViewModelType)->()) {
         
         self.cellId = cellId
-        self.models = models
         self.configCell = configCell
     }
     
+    //dependency injuction - property
     func updateModel(newModel: [ViewModelType]){
         models = newModel
     }

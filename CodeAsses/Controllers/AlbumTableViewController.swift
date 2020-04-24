@@ -10,9 +10,10 @@ import UIKit
 
 class AlbumTableViewController: UITableViewController {
     
-    private var albumManager = AlbumManager()
-    private var albumsListViewModel = [AlbumCellViewModel]()
-    private var dataSource: TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel>?
+    private var albumManager: AlbumManager
+    private var albumsListViewModel: [AlbumCellViewModel]
+    private var dataSource: TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel>
+    
     private let updateObserver = Notification.Name(rawValue: Constants.observerKey)
     
     override func viewDidLoad() {
@@ -27,6 +28,20 @@ class AlbumTableViewController: UITableViewController {
         dataSouceSetup()
         addRefreshController()
 
+    }
+    //dependency injuction - intilizer
+    init(albumManager: AlbumManager,
+         albumsListViewModel: [AlbumCellViewModel],
+         dataSource: TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel>) {
+        
+        self.albumManager = albumManager
+        self.albumsListViewModel = albumsListViewModel
+        self.dataSource = dataSource
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init?(coder:) can not be implemented")
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -62,12 +77,7 @@ extension AlbumTableViewController {
 
 extension AlbumTableViewController {
     
-    //use genetic class for table dataSorce
     func dataSouceSetup (){
-        
-        self.dataSource = TableViewDataSorce(cellId:Constants.cellId , models: albumsListViewModel, configCell: {cell, vm in
-                   cell.albumViewModel = vm
-               })
         self.tableView.dataSource = self.dataSource
     }
 }
@@ -97,23 +107,22 @@ extension AlbumTableViewController {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        let cConstraints = Constants.CellConstraints.self
-        let minHeight = (cConstraints.imgHeight + 2 * cConstraints.topImgPadding)
         let height = albumsListViewModel[indexPath.row].height(width: view.frame.width)
-        return max(minHeight, height)
+        return height
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let destCv = DetailsViewController()
-        destCv.albumModel = AlbumDetailsViewModel(album: self.albumsListViewModel[indexPath.row].album)
+        //dependency injuction - intializer
+        let albumModel = AlbumDetailsViewModel(album: self.albumsListViewModel[indexPath.row].album)
+        let destCv = DetailsViewController(albumModel: albumModel)
         navigationController?.pushViewController(destCv, animated: true)
     }
 
 }
 
 // MARK: - Delegate methods for updating table after HTTP
-// use notofications center to update UI and data after the albums have been uploaded
+// use notofications center to update UI and data after the albums have been uploaded (observer)
 
 extension AlbumTableViewController: AlbumManagerDelegate {
     func didLoadAlbum(albums: [Album]) {
@@ -130,6 +139,7 @@ extension AlbumTableViewController: AlbumManagerDelegate {
 }
 
 // MARK: - notofication center setup and notification methods
+// observer design pattern
 
 extension AlbumTableViewController {
     
@@ -145,7 +155,7 @@ extension AlbumTableViewController {
     }
     
     @objc func updateDataSource(){
-        self.dataSource?.updateModel(newModel: self.albumsListViewModel)
+        self.dataSource.updateModel(newModel: self.albumsListViewModel)
     }
     
     @objc func endRefresher(){
