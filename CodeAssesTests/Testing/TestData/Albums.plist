@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>artistName</key>
+		<string>Lady Gaga</string>
+		<key>name</key>
+		<string>Chromatica</string>
+		<key>artworkUrl100</key>
+		<string>https://is2-ssl.mzstatic.com/image/thumb/Music114/v4/cb/1d/32/cb1d32f1-9ce1-0fb4-839a-76c3cab243f1/20UMGIM15390.rgb.jpg/200x200bb.png</string>
+		<key>releaseDate</key>
+		<string>2020-04-10</string>
+		<key>copyright</key>
+		<string>℗ 2020 Interscope Records</string>
+		<key>url</key>
+		<string>https://music.apple.com/us/album/chromatica/1500951604?app=music</string>
+		<key>genres</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>Pop</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Music</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>artistName</key>
+		<string>The Weeknd</string>
+		<key>name</key>
+		<string>After Hours</string>
+		<key>artworkUrl100</key>
+		<string>https://is2-ssl.mzstatic.com/image/thumb/Music124/v4/06/e5/8c/06e58ce4-a813-8d5b-ef64-03a69064773c/20UMGIM12176.rgb.jpg/200x200bb.png</string>
+		<key>releaseDate</key>
+		<string>2020-03-20</string>
+		<key>copyright</key>
+		<string>℗ 2020 The Weeknd XO, Inc., manufactured and marketed by Republic Records, a division of UMG Recordings, Inc.</string>
+		<key>url</key>
+		<string>https://music.apple.com/us/album/after-hours/1499378108?app=music</string>
+		<key>genres</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>R&amp;B/Soul</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Music</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>artistName</key>
+		<string>J Balvin</string>
+		<key>name</key>
+		<string>Colores</string>
+		<key>artworkUrl100</key>
+		<string>https://is3-ssl.mzstatic.com/image/thumb/Music114/v4/0f/16/dc/0f16dc27-a647-01ca-ff46-2da95e65c1b8/20UMGIM10542.rgb.jpg/200x200bb.png</string>
+		<key>releaseDate</key>
+		<string>2020-03-19</string>
+		<key>copyright</key>
+		<string>Universal Music Latino; ℗ 2020 UMG Recordings, Inc.</string>
+		<key>url</key>
+		<string>https://music.apple.com/us/album/colores/1500490683?app=music</string>
+		<key>genres</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>Urbano latino</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Music</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Latino</string>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>

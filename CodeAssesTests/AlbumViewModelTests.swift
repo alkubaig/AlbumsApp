@@ -2,32 +2,44 @@
 //  AlbumViewModelTests.swift
 //  CodeAssesTests
 //
-//  Created by Ghadeer Alkubaish on 4/1/20.
+//  Created by Ghadeer Alkubaish on 3/5/20.
 //  Copyright © 2020 Ghadeer Alkubaish. All rights reserved.
 //
 
 import XCTest
 
 class AlbumViewModelTests: XCTestCase {
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testAlbumViewModel(){
+        
+        var res: Album?
+        
+        TestingFiles().getContentFromFile("Album","plist"){data in
+        
+            do {
+               let decoder = PropertyListDecoder()
+               res = try decoder.decode(Album.self, from: data)
+               
+           }catch{
+               fatalError("decoder fail")
+           }
         }
-    }
 
+        guard let album = res else{
+            fatalError("no album")
+        }
+        
+        let albumMViewModel = AlbumDetailsViewModel(album: album)
+        
+        XCTAssertEqual(album.artistName, albumMViewModel.artistName, "artistName not set!")
+        XCTAssertEqual(album.albumName, albumMViewModel.albumName, "albumName not set!")
+        XCTAssertEqual(album.url, albumMViewModel.url, "url not set!")
+        XCTAssertEqual(album.imgUrl, albumMViewModel.imgUrl, "imgUrl not set!")
+        XCTAssertEqual(album.releaseDate, albumMViewModel.releaseDate, "releaseDate not set!")
+        XCTAssertEqual(album.copyright, albumMViewModel.copyright, "copyright not set!")
+        
+        let genres = album.genres.map({$0.name}).joined(separator:"\n")
+        (XCTAssertEqual(genres, albumMViewModel.genre, "genre not set!"))
+        
+    }
 }

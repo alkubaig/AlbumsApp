@@ -68,33 +68,46 @@ class DetailsView: UIView {
     //**** labels have similar setup except for size and color
     private var artistName: UILabel = {
         let l = UILabel()
-        l.customSetUp(color: .darkGray, fontSize: Constants.DetailsFonts.artistNameFont)
+        l.textColor = .darkGray
+        l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.artistNameFont)
+        l.textAlignment = .center
+        l.numberOfLines = 0
         return l
     }()
 
     private var albumName: UILabel = {
         let l = UILabel()
-        l.customSetUp(fontSize: Constants.DetailsFonts.albumNameFont)
+        l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.albumNameFont)
+        l.textAlignment = .center
+        l.numberOfLines = 0
         return l
     }()
 
     private var releaseDate: UILabel = {
         let l = UILabel()
-        l.customSetUp(color: .gray, fontSize: Constants.DetailsFonts.releaseDateFont)
+        l.textColor = .gray
+        l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.releaseDateFont)
+        l.textAlignment = .center
+        l.numberOfLines = 0
         return l
       }()
 
     private var copyright: UILabel = {
         let l = UILabel()
-        l.customSetUp(color: .gray,
-                      fontSize: Constants.DetailsFonts.copyrighteFont)
+        l.textColor = .gray
+        l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.copyrighteFont)
+        l.textAlignment = .center
+        l.numberOfLines = 0
         return l
     }()
 
     private var genre: UILabel = {
-          let l = UILabel()
-          l.customSetUp(color: .darkGray, fontSize: Constants.DetailsFonts.genreFont)
-          return l
+        let l = UILabel()
+        l.textColor = .darkGray
+        l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.genreFont)
+        l.textAlignment = .center
+        l.numberOfLines = 0
+        return l
       }()
     //end labels ****//
 

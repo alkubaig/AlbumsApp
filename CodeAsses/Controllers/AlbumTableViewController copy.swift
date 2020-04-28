@@ -26,8 +26,9 @@ class AlbumTableViewController: UITableViewController {
         notificationsSetup()
         tableViewSetup()
         dataSouceSetup()
+//        addRefreshController()
+
     }
-    
     //dependency injuction - intilizer
     init(albumManager: AlbumManagerProtocol,
          albumsListViewModel: [AlbumCellViewModel],
@@ -57,10 +58,6 @@ extension AlbumTableViewController {
         tableView.delaysContentTouches = false
         // register cell
         tableView.register(AlbumTableViewCell.self, forCellReuseIdentifier: Constants.cellId)
-        
-        self.tableView.estimatedRowHeight = 100
-        self.tableView.rowHeight = 100
-
     }
 }
 
@@ -85,13 +82,34 @@ extension AlbumTableViewController {
     }
 }
 
+
+// MARK: - Refresh control setup and methods
+
+//extension AlbumTableViewController {
+//
+//    func addRefreshController(){
+//        refreshControl = UIRefreshControl()
+//        tableView.tableHeaderView = UIView(frame: .zero)
+//        if let refreshControl = refreshControl{
+//            tableView.addSubview(refreshControl)
+//        }
+//        refreshControl?.addTarget(self, action: #selector(refreshdData), for: .valueChanged)
+//    }
+//
+//    @objc func refreshdData(){
+//        tableView.
+//        albumManager.fetchAlbum(numAlbums: Constants.numAlbums)
+//    }
+//}
+
 // MARK: - Table delegate methods
 
 extension AlbumTableViewController {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let defaultHeight = UITableView.automaticDimension
-        return max(defaultHeight, 100)
+
+        let height = albumsListViewModel[indexPath.row].height(width: view.frame.width)
+        return height
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -130,6 +148,7 @@ extension AlbumTableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateAlbumCount), name: updateObserver, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateDataSource), name: updateObserver, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateTableData), name: updateObserver, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(endRefresher), name: updateObserver, object: nil)
     }
     
     @objc func updateAlbumCount(){
@@ -139,7 +158,10 @@ extension AlbumTableViewController {
     @objc func updateDataSource(){
         self.dataSource.updateModel(newModel: self.albumsListViewModel)
     }
-
+    
+//    @objc func endRefresher(){
+//        self.refreshControl?.endRefreshing()
+//    }
         
     @objc func updateTableData(){
         print("relaoded")

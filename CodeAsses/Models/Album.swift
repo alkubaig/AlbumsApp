@@ -47,10 +47,11 @@ struct Album {
     let artistName: String
     let albumName: String
     let imgUrl: String
-    let genres: [Genres]
     let releaseDate: String
     let copyright: String
     let url: String
+    let genres: [Genres]
+
     
     enum AlbumInfoKeys: String, CodingKey {
         case imgUrl = "artworkUrl100"

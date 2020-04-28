@@ -21,13 +21,13 @@ class AlbumTableViewCell: UITableViewCell {
         }
     }
     
-    private var albumImg : UIImageView = {
+    var albumImg : UIImageView = {
         let img = UIImageView()
         img.layer.cornerRadius = img.frame.size.width / 2;
         img.clipsToBounds = true;
         return img
     }()
-    private var artistName: UILabel = {
+    var artistName: UILabel = {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: Constants.CellFonts.artistNameFont)
         l.numberOfLines = 0
@@ -35,7 +35,7 @@ class AlbumTableViewCell: UITableViewCell {
         return l
     }()
     
-    private var albumName : UILabel = {
+    var albumName : UILabel = {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: Constants.CellFonts.albumNameFont)
         l.numberOfLines = 0
@@ -71,13 +71,14 @@ class AlbumTableViewCell: UITableViewCell {
     func viewLayout(){
                 
         let cConstraints = Constants.CellConstraints.self
+        let marginGuide = contentView.layoutMarginsGuide
 
         albumImg.anchor(top: topAnchor, paddingTop: cConstraints.topImgPadding, enableInsets: false)
         albumImg.anchor(left: leftAnchor, paddingLeft: cConstraints.leftImgPadding)
         albumImg.anchor(width: cConstraints.imgWidth, height: cConstraints.imgHeight)
 
         
-        stackView.anchor(top: topAnchor, paddingTop: cConstraints.topBottomLabelPadding,enableInsets: false)
+        stackView.anchor(top: marginGuide.topAnchor, bottom: marginGuide.bottomAnchor, paddingTop: cConstraints.topBottomLabelPadding, paddingBottom: cConstraints.topBottomLabelPadding, enableInsets: false)
         stackView.anchor(left: albumImg.rightAnchor, right: rightAnchor, paddingLeft: cConstraints.leftRightLabelPadding, paddingRight: cConstraints.leftRightLabelPadding)
         
     }

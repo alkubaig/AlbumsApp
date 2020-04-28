@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>artistName</key>
+	<string>Lady Gaga</string>
+	<key>name</key>
+	<string>Chromatica</string>
+	<key>artworkUrl100</key>
+	<string>https://is2-ssl.mzstatic.com/image/thumb/Music114/v4/cb/1d/32/cb1d32f1-9ce1-0fb4-839a-76c3cab243f1/20UMGIM15390.rgb.jpg/200x200bb.png</string>
+	<key>releaseDate</key>
+	<string>2020-04-10</string>
+	<key>copyright</key>
+	<string>℗ 2020 Interscope Records</string>
+	<key>url</key>
+	<string>https://music.apple.com/us/album/chromatica/1500951604?app=music</string>
+	<key>genres</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>Pop</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Music</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -46,7 +46,7 @@ struct Constants{
         static let topImgPadding : CGFloat = 5
         static let leftImgPadding : CGFloat = 5
         
-        static let topBottomLabelPadding : CGFloat = 20
+        static let topBottomLabelPadding : CGFloat = 10
         static let inBetweenLabelPadding : CGFloat = 5
         static let leftRightLabelPadding : CGFloat = 15
     }

@@ -13,11 +13,19 @@ protocol AlbumManagerDelegate {
     func didFailWithError(error: Error)
 }
 
-struct AlbumManager {
-
-    var delegate: AlbumManagerDelegate?
+protocol AlbumManagerProtocol{
     
-    func fetchAlbum(numAlbums: Int) {
+    var delegate: AlbumManagerDelegate? { get set }
+    func fetchAlbum(numAlbums: Int)
+}
+
+
+struct AlbumManager: AlbumManagerProtocol {
+    
+    var delegate: AlbumManagerDelegate?
+        
+    func fetchAlbum(numAlbums: Int){
+        
         let urlString = "\(Constants.albumURL)&q=\(String(numAlbums))/explicit.json"
         performRequest(with: urlString)
     }
@@ -27,6 +35,7 @@ struct AlbumManager {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
+
                 if let error = error {
                     self.delegate?.didFailWithError(error: error)
                     return
