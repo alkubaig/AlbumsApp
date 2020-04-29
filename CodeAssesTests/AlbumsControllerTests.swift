@@ -18,7 +18,7 @@ class AlbumsControllerTests: XCTestCase {
         //1
          let albumManagerMock = AlbumManagerMock()
          //2
-        let albums = TestingFiles().getMatchingAlbum()
+        let albums = TestingFiles.getMatchingAlbums()
         albumsListViewModel = albums.map({ AlbumCellViewModel(album: $0)})
          //3 use genetic class for table dataSorce
         let dataSource : TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel> = TableViewDataSorce(cellId:Constants.cellId, models: albumsListViewModel, configCell: {cell, vm in

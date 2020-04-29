@@ -8,13 +8,16 @@
 
 import XCTest
 
-//test TableViewDataSorce
+/****************************************
+** TableViewDataSorce testing
+****************************************/
+
 class TableDataSourceTests: XCTestCase {
         
     //test with an array of 3 AlbumCellViewModel albums and AlbumCellViewModel
     func testUnitTest1(){
         
-        let albums = TestingFiles().getMatchingAlbum()
+        let albums = TestingFiles.getMatchingAlbums()
         let albumsListViewModel = albums.map({ AlbumCellViewModel(album: $0)})
         let configFunc = {(cell: AlbumTableViewCell, vm: AlbumCellViewModel) in cell.albumViewModel = vm}
 
@@ -28,7 +31,8 @@ class TableDataSourceTests: XCTestCase {
      //test with an empty array of models
      func testUnitTest2(){
         
-        testDataSource([], {_, _ in }) { (cell,_) in
+        testDataSource([], {_, _ in })
+        { (cell,_) in
             XCTFail("should not have any cells")
         }
      }
@@ -40,9 +44,8 @@ class TableDataSourceTests: XCTestCase {
         let word = "Hello"
         let models = Array(repeating: word, count: count)
                     
-        testDataSource(models, {cell, model in
-           cell.textLabel?.text =  model
-        }) { (cell,_) in
+        testDataSource(models, {cell, model in cell.textLabel?.text = model})
+        {(cell,_) in
             XCTAssertEqual(word, cell.textLabel?.text)
         }
     }
@@ -58,17 +61,21 @@ extension TableDataSourceTests {
     
     func testDataSource<CellType: UITableViewCell,MVType>(_ models: [MVType], _ configCell: @escaping(CellType, MVType)->(), _ testCell: ((CellType, MVType) -> Void)){
            
+           //create dataSource
            let dataSource : TableViewDataSorce<CellType, MVType> = TableViewDataSorce(cellId:Constants.cellId, models: models, configCell: configCell)
                   
+           //setup table
            let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
            tableView.dataSource = dataSource
            tableView.register(CellType.self, forCellReuseIdentifier: Constants.cellId)
            tableView.reloadData()
                     
+           // test sections and number of rows
            XCTAssertEqual(tableView.numberOfSections, 1)
            XCTAssertEqual(tableView.numberOfRows(inSection: 0), models.count)
            tableView.reloadData()
                     
+          //test cells
            for i in 0..<models.count{
                let indexPath = IndexPath(row: i, section: 0)
                if let cell = tableView.cellForRow(at: indexPath) as? CellType{

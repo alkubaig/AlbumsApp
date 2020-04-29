@@ -42,11 +42,8 @@ class TableViewDataSorce<CellType,ViewModelType>: NSObject, UITableViewDataSourc
     // we pass the corresponding cell and model view to configCell to configure the cell 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("data source2")
-
        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? CellType {
         
-        print("data source")
         let vm = models[indexPath.row]
         configCell(cell,vm)
         return cell

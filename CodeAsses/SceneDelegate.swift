@@ -24,10 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             //2
             let albumsListViewModel = [AlbumCellViewModel]()
             //3 use genetic class for table dataSorce
-            let dataSource : TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel> = TableViewDataSorce(cellId:Constants.cellId, models: albumsListViewModel, configCell: {cell, vm in
+            let dataSource : TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel> = TableViewDataSorce(cellId:Constants.cellId, models: albumsListViewModel){
+                cell, vm in
                 //dependency injuction - property
-                   cell.albumViewModel = vm
-               })
+                cell.albumViewModel = vm
+               }
             
             // dependency (3) injuction - intilizer
             let tvc = AlbumTableViewController(albumManager: albumManager,

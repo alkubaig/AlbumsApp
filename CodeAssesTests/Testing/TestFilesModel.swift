@@ -8,15 +8,23 @@
 
 import Foundation
 
-struct TestingFiles{
-    
-    func getContentFromFile(_ name: String, _ type: String?, complition: (_ data: Data)->Void){
+/****************************************
+** static methods for testing with files
+****************************************/
 
-       var found = false
-        for i in 0..<Bundle.allBundles.count{
-            
-            found = true
-            if let path = Bundle.allBundles[i].path(forResource: name, ofType: type) {
+struct TestingFiles{
+
+    //make this a singleton of static methods for testing
+    private init(){}
+    static func getContentFromFile(_ name: String, _ type: String?, complition: (_ data: Data)->Void){
+
+//       var found = false
+//        for i in 0..<Bundle.allBundles.count{
+//
+//            found = true
+//            if let path = Bundle.allBundles[i].path(forResource: name, ofType: type) {
+        if let path = Bundle.main.path(forResource: name, ofType: type) {
+
                 let url = URL(fileURLWithPath: path)
                 do {
                     
@@ -27,8 +35,9 @@ struct TestingFiles{
                     fatalError("no data")
                 }
             }
-        }
-        if (!found){
+//        }
+//        if (!found){
+        else{
             fatalError("File dose not exist")
         }
     }
@@ -36,20 +45,29 @@ struct TestingFiles{
 }
 
 extension TestingFiles {
+    
+    // generic funciton to decode the content of a plist
+    static func decodePropertyList<T: Decodable>(type: T.Type, data:Data, complition: (T)->Void){
+        do {
+          let decoder = PropertyListDecoder()
+            
+            let res =  try decoder.decode(T.self, from: data)
+            complition(res)
+            
+        }catch{
+          fatalError("decoder fail")
+        }
+    }
+    
     // get example albums from plist
-    func getMatchingAlbum()->[Album]{
+    static func getMatchingAlbums()->[Album]{
             
         var albums = [Album]()
 
-        TestingFiles().getContentFromFile("Albums","plist"){data in
-        
-            do {
-               let decoder = PropertyListDecoder()
-               albums = try decoder.decode([Album].self, from: data)
-               
-           }catch{
-               fatalError("decoder fail")
-           }
+        getContentFromFile("Albums","plist"){ data in
+            decodePropertyList(type: [Album].self, data: data){
+                res in albums = res
+            }
         }
         return albums
     }

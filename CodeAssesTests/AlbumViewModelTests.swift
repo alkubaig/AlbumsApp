@@ -8,38 +8,38 @@
 
 import XCTest
 
+/****************************************
+** AlbumViewModel testing
+****************************************/
+
 class AlbumViewModelTests: XCTestCase {
     
+    //test that album view model processes albums correctly using testing albums 
     func testAlbumViewModel(){
-        
-        var res: Album?
-        
-        TestingFiles().getContentFromFile("Album","plist"){data in
-        
-            do {
-               let decoder = PropertyListDecoder()
-               res = try decoder.decode(Album.self, from: data)
-               
-           }catch{
-               fatalError("decoder fail")
-           }
+                        
+        // get testing albums from "Albums.plist"
+        let matchingAlbum = TestingFiles.getMatchingAlbums()
+                       
+        for i in 0..<matchingAlbum.count{
+            let album = matchingAlbum[i]
+            let albumViewModel = AlbumDetailsViewModel(album: album)
+            testViewModel(album: album, albumViewModel: albumViewModel)
         }
-
-        guard let album = res else{
-            fatalError("no album")
-        }
-        
-        let albumMViewModel = AlbumDetailsViewModel(album: album)
-        
-        XCTAssertEqual(album.artistName, albumMViewModel.artistName, "artistName not set!")
-        XCTAssertEqual(album.albumName, albumMViewModel.albumName, "albumName not set!")
-        XCTAssertEqual(album.url, albumMViewModel.url, "url not set!")
-        XCTAssertEqual(album.imgUrl, albumMViewModel.imgUrl, "imgUrl not set!")
-        XCTAssertEqual(album.releaseDate, albumMViewModel.releaseDate, "releaseDate not set!")
-        XCTAssertEqual(album.copyright, albumMViewModel.copyright, "copyright not set!")
-        
-        let genres = album.genres.map({$0.name}).joined(separator:"\n")
-        (XCTAssertEqual(genres, albumMViewModel.genre, "genre not set!"))
-        
     }
+}
+extension AlbumViewModelTests{
+    
+    func testViewModel(album: Album, albumViewModel: AlbumDetailsViewModel){
+        
+        XCTAssertEqual(album.artistName, albumViewModel.artistName, "artistName not set!")
+        XCTAssertEqual(album.albumName, albumViewModel.albumName, "albumName not set!")
+        XCTAssertEqual(album.url, albumViewModel.url, "url not set!")
+        XCTAssertEqual(album.imgUrl, albumViewModel.imgUrl, "imgUrl not set!")
+        XCTAssertEqual(album.releaseDate, albumViewModel.releaseDate, "releaseDate not set!")
+        XCTAssertEqual(album.copyright, albumViewModel.copyright, "copyright not set!")
+
+        let genres = album.genres.map({$0.name}).joined(separator:"\n")
+        (XCTAssertEqual(genres, albumViewModel.genre, "genre not set!"))
+    }
+    
 }

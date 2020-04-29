@@ -30,9 +30,6 @@
 		5D553078245776A100D67B17 /* ApiNoAlbums.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D55306F245776A100D67B17 /* ApiNoAlbums.json */; };
 		5D553079245776A100D67B17 /* ApiNoAlbums.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D55306F245776A100D67B17 /* ApiNoAlbums.json */; };
 		5D55307A245776A100D67B17 /* ApiNoAlbums.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D55306F245776A100D67B17 /* ApiNoAlbums.json */; };
-		5D55307B245776A100D67B17 /* Album.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D553070245776A100D67B17 /* Album.plist */; };
-		5D55307C245776A100D67B17 /* Album.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D553070245776A100D67B17 /* Album.plist */; };
-		5D55307D245776A100D67B17 /* Album.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D553070245776A100D67B17 /* Album.plist */; };
 		5D55307E245776A100D67B17 /* TestFilesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D553071245776A100D67B17 /* TestFilesModel.swift */; };
 		5D55307F245776A100D67B17 /* TestFilesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D553071245776A100D67B17 /* TestFilesModel.swift */; };
 		5D55308A24577AF100D67B17 /* AlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DACB9D92411BD2400AA7AA2 /* AlbumTableViewController.swift */; };
@@ -42,7 +39,6 @@
 		5D55309A2457B0A600D67B17 /* AlbumManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530992457B0A600D67B17 /* AlbumManagerMock.swift */; };
 		5D5530A02458116100D67B17 /* AlbumViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D55309F2458116100D67B17 /* AlbumViewModelTests.swift */; };
 		5D5530A22458A51A00D67B17 /* TableDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530A12458A51A00D67B17 /* TableDataSourceTests.swift */; };
-		5D5530A42458B7A500D67B17 /* CellViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530A32458B7A500D67B17 /* CellViewModelMock.swift */; };
 		5DACB9A02411BC5700AA7AA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DACB99F2411BC5700AA7AA2 /* AppDelegate.swift */; };
 		5DACB9A22411BC5700AA7AA2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DACB9A12411BC5700AA7AA2 /* SceneDelegate.swift */; };
 		5DACB9A92411BC5800AA7AA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DACB9A82411BC5800AA7AA2 /* Assets.xcassets */; };
@@ -96,13 +92,11 @@
 		5D55306D245776A100D67B17 /* ApiAlbums.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ApiAlbums.json; sourceTree = "<group>"; };
 		5D55306E245776A100D67B17 /* Albums.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Albums.plist; sourceTree = "<group>"; };
 		5D55306F245776A100D67B17 /* ApiNoAlbums.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ApiNoAlbums.json; sourceTree = "<group>"; };
-		5D553070245776A100D67B17 /* Album.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Album.plist; sourceTree = "<group>"; };
 		5D553071245776A100D67B17 /* TestFilesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFilesModel.swift; sourceTree = "<group>"; };
 		5D5530962457AF3F00D67B17 /* AlbumsControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsControllerTests.swift; sourceTree = "<group>"; };
 		5D5530992457B0A600D67B17 /* AlbumManagerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlbumManagerMock.swift; path = CodeAssesUITests/MockObjects/AlbumManagerMock.swift; sourceTree = SOURCE_ROOT; };
 		5D55309F2458116100D67B17 /* AlbumViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewModelTests.swift; sourceTree = "<group>"; };
 		5D5530A12458A51A00D67B17 /* TableDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataSourceTests.swift; sourceTree = "<group>"; };
-		5D5530A32458B7A500D67B17 /* CellViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModelMock.swift; sourceTree = "<group>"; };
 		5DACB99C2411BC5700AA7AA2 /* CodeAsses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeAsses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DACB99F2411BC5700AA7AA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DACB9A12411BC5700AA7AA2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,7 +155,6 @@
 			children = (
 				5D5530992457B0A600D67B17 /* AlbumManagerMock.swift */,
 				5D552FFF2456550F00D67B17 /* AlbumManagerReceiverMock.swift */,
-				5D5530A32458B7A500D67B17 /* CellViewModelMock.swift */,
 			);
 			path = MockObjects;
 			sourceTree = "<group>";
@@ -179,9 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				5D55306D245776A100D67B17 /* ApiAlbums.json */,
-				5D55306E245776A100D67B17 /* Albums.plist */,
 				5D55306F245776A100D67B17 /* ApiNoAlbums.json */,
-				5D553070245776A100D67B17 /* Album.plist */,
+				5D55306E245776A100D67B17 /* Albums.plist */,
 			);
 			path = TestData;
 			sourceTree = "<group>";
@@ -233,8 +225,8 @@
 				5D552FFE245654F900D67B17 /* MockObjects */,
 				5D55309F2458116100D67B17 /* AlbumViewModelTests.swift */,
 				5D552FEB2453A1E200D67B17 /* AlbumManagerTests.swift */,
-				5D5530962457AF3F00D67B17 /* AlbumsControllerTests.swift */,
 				5D5530A12458A51A00D67B17 /* TableDataSourceTests.swift */,
+				5D5530962457AF3F00D67B17 /* AlbumsControllerTests.swift */,
 			);
 			path = CodeAssesTests;
 			sourceTree = "<group>";
@@ -398,7 +390,6 @@
 			files = (
 				5D072C002411C0FD00F043A3 /* LaunchScreen.storyboard in Resources */,
 				5D553078245776A100D67B17 /* ApiNoAlbums.json in Resources */,
-				5D55307B245776A100D67B17 /* Album.plist in Resources */,
 				5D553072245776A100D67B17 /* ApiAlbums.json in Resources */,
 				5D553075245776A100D67B17 /* Albums.plist in Resources */,
 				5DACB9A92411BC5800AA7AA2 /* Assets.xcassets in Resources */,
@@ -411,7 +402,6 @@
 			files = (
 				5D553076245776A100D67B17 /* Albums.plist in Resources */,
 				5D553079245776A100D67B17 /* ApiNoAlbums.json in Resources */,
-				5D55307C245776A100D67B17 /* Album.plist in Resources */,
 				5D553073245776A100D67B17 /* ApiAlbums.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,7 +412,6 @@
 			files = (
 				5D553077245776A100D67B17 /* Albums.plist in Resources */,
 				5D55307A245776A100D67B17 /* ApiNoAlbums.json in Resources */,
-				5D55307D245776A100D67B17 /* Album.plist in Resources */,
 				5D553074245776A100D67B17 /* ApiAlbums.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,7 +450,6 @@
 				5D552FE12453A13900D67B17 /* AlbumViewModels.swift in Sources */,
 				5D5530972457AF3F00D67B17 /* AlbumsControllerTests.swift in Sources */,
 				5D552FE42453A13900D67B17 /* Constants.swift in Sources */,
-				5D5530A42458B7A500D67B17 /* CellViewModelMock.swift in Sources */,
 				5DACB9F32411BD2400AA7AA2 /* AlbumManager.swift in Sources */,
 				5DACB9E42411BD2400AA7AA2 /* AlbumTableViewController.swift in Sources */,
 				5D5530002456550F00D67B17 /* AlbumManagerReceiverMock.swift in Sources */,
