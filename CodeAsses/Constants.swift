@@ -16,6 +16,8 @@ struct Constants{
     static let numAlbums = 100
     static let albumURL = "https://rss.itunes.apple.com/api/v1/us/apple-music/coming-soon/all/"
     static let observerKey = "observeAlbumsUpdate"
+    // url constructed with num of albums
+    static let fullAlbumURL = "\(albumURL)&q=\(String(numAlbums))/explicit.json"
     
     struct CellFonts {
         

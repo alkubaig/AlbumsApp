@@ -57,7 +57,7 @@ class AlbumsControllerTests: XCTestCase {
             }
         }
     
-        tvc?.tableView.scrollsToTop
+//        tvc?.tableView.scrollsToTop
     
     }
 

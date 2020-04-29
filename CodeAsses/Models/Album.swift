@@ -8,10 +8,9 @@
 
 import Foundation
 
-// Codable which is to use for parsing Json Objects of Albums.
 
 
-// MARK: - Albums resuls custom codable 
+// MARK: - api resuls with custom decodable
 
 struct AlbumsData {
    
@@ -26,17 +25,17 @@ struct AlbumsData {
 }
 
 extension AlbumsData: Decodable {
-init(from decoder: Decoder) throws {
-    let values = try decoder.container(keyedBy: CodingKeys.self)
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
 
-    let additionalInfo = try values.nestedContainer(keyedBy: ResultsCodingKeys.self, forKey: .resultsCodingKeys)
-    albumsData = try additionalInfo.decode([Album].self, forKey: .albumInfoKeys)
+        let additionalInfo = try values.nestedContainer(keyedBy: ResultsCodingKeys.self, forKey: .resultsCodingKeys)
+        albumsData = try additionalInfo.decode([Album].self, forKey: .albumInfoKeys)
     }
+    
 }
 
-
-
-// MARK: - Album model custom codable
+// MARK: - Album model with custom decodable
 
 struct Genres : Codable {
     let name: String

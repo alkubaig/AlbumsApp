@@ -19,7 +19,7 @@ class AlbumViewModelTests: XCTestCase {
                         
         // get testing albums from "Albums.plist"
         let matchingAlbum = TestingFiles.getMatchingAlbums()
-                       
+        if matchingAlbum.count == 0 {fatalError()}
         for i in 0..<matchingAlbum.count{
             let album = matchingAlbum[i]
             let albumViewModel = AlbumDetailsViewModel(album: album)
@@ -39,7 +39,7 @@ extension AlbumViewModelTests{
         XCTAssertEqual(album.copyright, albumViewModel.copyright, "copyright not set!")
 
         let genres = album.genres.map({$0.name}).joined(separator:"\n")
-        (XCTAssertEqual(genres, albumViewModel.genre, "genre not set!"))
+        (XCTAssertEqual(genres, albumViewModel.genres, "genre not set!"))
     }
     
 }

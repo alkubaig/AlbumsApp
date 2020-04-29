@@ -12,6 +12,13 @@ import Foundation
 ** static methods for testing with files
 ****************************************/
 
+struct TestFileNames {
+    private init(){}
+    static let apiAlbums = "ApiAlbums.json"
+    static let apiNoAlbums = "ApiNoAlbums.json"
+    static let plistAlbums = "Albums.plist"
+}
+
 struct TestingFiles{
 
     //make this a singleton of static methods for testing
@@ -40,12 +47,12 @@ struct TestingFiles{
 extension TestingFiles {
     
     // generic funciton to decode the content of a plist
-    static func decodePropertyList<T: Decodable>(type: T.Type, data:Data, complition: (T)->Void){
+    static func decodePropertyList<T: Decodable>(type: T.Type, data:Data, completion: (T)->Void){
         do {
           let decoder = PropertyListDecoder()
             
             let res =  try decoder.decode(T.self, from: data)
-            complition(res)
+            completion(res)
             
         }catch{
           fatalError("decoder fail")
@@ -57,7 +64,7 @@ extension TestingFiles {
             
         var albums = [Album]()
 
-        getContentFromFile("Albums","plist"){ data in
+        getContentFromFile(TestFileNames.plistAlbums,nil){ data in
             decodePropertyList(type: [Album].self, data: data){
                 res in albums = res
             }

@@ -7,13 +7,20 @@
 //
 
 import UIKit
+
+/****************************************
+**  a custom class for album cell
+****************************************/
+
 class AlbumTableViewCell: UITableViewCell {
 
     //dependency injuction - property
     var albumViewModel: AlbumCellViewModel? {
+        // when the view model is set, UI elements are set
         didSet {
     
             if let url = albumViewModel?.imgUrl{
+                //getImg by loading if new, otherwise by caching
                 albumImg.getImg(url:  url)
             }
             artistName.text = albumViewModel?.artistName
@@ -42,7 +49,7 @@ class AlbumTableViewCell: UITableViewCell {
         return l
     }()
     
-    //Stack View
+    //Stack View for labels
     var stackView : UIStackView = {
         let stackView   = UIStackView()
         stackView.axis  = NSLayoutConstraint.Axis.vertical
@@ -51,7 +58,6 @@ class AlbumTableViewCell: UITableViewCell {
         stackView.backgroundColor = .blue
         return stackView
     }()
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

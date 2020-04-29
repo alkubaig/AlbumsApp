@@ -19,7 +19,7 @@ class AlbumManagerTests: XCTestCase {
 //MARK: -  test set 1
 
 /****************************************
-** test if parseJSON parses api result correctly
+ ** test if parseJSON parses api result correctly
 ****************************************/
 
 extension AlbumManagerTests{
@@ -86,13 +86,77 @@ extension AlbumManagerTests{
 //MARK: -  test set 2
 
 /****************************************
-** test if performRequest performs the correct response using a mock delegate object
+ ** test if performRequest performs the correct response
+ ** using a mock delegate object
+****************************************/
+
+enum NetworkErr: Error {
+    case noData
+    case statusCode(Int)
+}
+
+extension AlbumManagerTests{
+    // (2.1) test with a valid response
+    func testUnitTest2_1(){
+        
+        //testing delegate method 1
+        let expectedBehaviorForDidLoadAlbum : (([Album]) -> Void) = { album in
+            XCTAssertGreaterThanOrEqual(album.count,0)
+         }
+        
+        //testing delegate method 2
+        let expectedBehaviorFordidFailWithError : ((Error) -> Void) = { _ in
+            XCTFail("This api should not fail")
+        }
+        //mock object with a testing closure for each delegate method
+        let albumManagerReceiverMock =
+            AlbumManagerReceiverMock(expectedBehaviorForDidLoadAlbum,
+                                     expectedBehaviorFordidFailWithError)
+        
+        albumMng.delegate = albumManagerReceiverMock
+        
+        TestingFiles.getContentFromFile(TestFileNames.apiAlbums, nil) { (data) in
+            albumMng.performRequest_(data: data, error: nil)
+        }
+
+        TestingFiles.getContentFromFile(TestFileNames.apiNoAlbums, nil) { (data) in
+            albumMng.performRequest_(data: data, error: nil)
+        }
+    }
+    
+    // (3.2) test with an invalid response
+    func testUnitTest2_2(){
+
+       //testing delegate method 1
+       let expectedBehaviorForDidLoadAlbum : (([Album]) -> Void) = { _ in
+           XCTFail("This api should fail")
+        }
+       
+       //mock object with a testing closure for each delegate method
+       let albumManagerReceiverMock =
+        AlbumManagerReceiverMock(expectedBehaviorForDidLoadAlbum ,{_ in})
+       albumMng.delegate = albumManagerReceiverMock
+
+        TestingFiles.getContentFromFile(TestFileNames.apiNoAlbums, nil) { (data) in
+            albumMng.performRequest_(data: data, error: NetworkErr.noData)
+            }
+       }
+}
+
+
+//MARK: -  test set 3
+
+/****************************************
+ ** test if performRequest performs the correct response
+ ** using a mock delegate object
+ ** Set 2 is a better way to test this functionality to avoid doing http calls in testing, but
+ ** I left it for demonstration
 ****************************************/
 
 extension AlbumManagerTests{
 
-    // (2.1) test with a valid url
-    func testUnitTest2_1(){
+    // (3.1) test with a valid url
+    func testUnitTest3_1(){
         
         //use expectation to wait for api call to finish before testing
         let albumsExpectation = expectation(description: "AlbumAPI trying to retrieve new albums")
@@ -109,7 +173,9 @@ extension AlbumManagerTests{
             albumsExpectation.fulfill()
         }
         //mock object with a testing closure for each delegate method
-        let albumManagerReceiverMock = AlbumManagerReceiverMock(expectedBehaviorForDidLoadAlbum ,expectedBehaviorFordidFailWithError)
+        let albumManagerReceiverMock =
+            AlbumManagerReceiverMock(expectedBehaviorForDidLoadAlbum,
+                                     expectedBehaviorFordidFailWithError)
         albumMng.delegate = albumManagerReceiverMock
 
         //make api call
@@ -119,8 +185,8 @@ extension AlbumManagerTests{
       }
     
     
-    // (2.2) test with an invalid url
-     func testUnitTest2_2(){
+    // (3.2) test with an invalid url
+     func testUnitTest3_2(){
         
         let albumsExpectation = expectation(description: "AlbumAPI trying to retrieve new albums")
 
@@ -136,14 +202,16 @@ extension AlbumManagerTests{
         }
         
         //mock object with a testing closure for each delegate method
-        let albumManagerReceiverMock = AlbumManagerReceiverMock(expectedBehaviorForDidLoadAlbum ,expectedBehaviorFordidFailWithError)
+        let albumManagerReceiverMock =
+            AlbumManagerReceiverMock(expectedBehaviorForDidLoadAlbum,
+                expectedBehaviorFordidFailWithError)
+        
         albumMng.delegate = albumManagerReceiverMock
 
         //make api call
         albumMng.performRequest(with: "PLAPLA")
 
         waitForExpectations(timeout: 1.0)
-        
     }
     
 }

@@ -16,7 +16,7 @@ class DetailsViewController: UIViewController {
         didSet{
             if let detailsView = detailsView{
                 self.view.addSubview(detailsView)
-                detailsView.albumModel = self.albumModel
+                detailsView.albumViewModel = self.albumModel
                 detailsView.showButton.addTarget(self, action: #selector(viewAlbum), for: UIControl.Event.touchUpInside)
             }
         }

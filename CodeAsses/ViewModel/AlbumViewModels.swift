@@ -10,14 +10,16 @@ import UIKit
 
 // MARK: - protocol for Album properties.
 
+//extra album properties needed for album detailed page
 protocol AlbumDetails {
     
     var releaseDate: String {get}
     var copyright: String {get}
     var url: String {get}
-    var genre: String {get}
+    var genres: String {get}
 }
 
+//album properties needed for album cells
 protocol AlbumEssentials {
     
     var album: Album {set get}
@@ -25,6 +27,8 @@ protocol AlbumEssentials {
     var albumName: String {get}
     var imgUrl: String {get}
 }
+
+// MARK: - default methods for AlbumEssentials protocol
 
 extension AlbumEssentials {
     
@@ -42,10 +46,14 @@ extension AlbumEssentials {
     }
 }
 
+// MARK: - view model for album cells
+
 struct AlbumCellViewModel: AlbumEssentials {
     
     var album : Album
 }
+
+// MARK: - view model for album detailed page
 
 struct AlbumDetailsViewModel : AlbumEssentials, AlbumDetails{
     
@@ -60,7 +68,7 @@ struct AlbumDetailsViewModel : AlbumEssentials, AlbumDetails{
     var url: String{
         return self.album.url
     }
-    var genre: String{
+    var genres: String{
         return self.album.genres.map({$0.name}).joined(separator:"\n")
     }
 }

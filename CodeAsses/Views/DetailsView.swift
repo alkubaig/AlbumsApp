@@ -9,20 +9,25 @@
 import Foundation
 import UIKit
 
+/****************************************
+** a custom class for album details view
+****************************************/
+
 class DetailsView: UIView {
 
-    var albumModel : AlbumDetailsViewModel?{
+    //dependency injuction - property
+    var albumViewModel : AlbumDetailsViewModel?{
         didSet {
-           
-            if let url = albumModel?.imgUrl{
+            // when the view model is set, UI elements are set
+            if let url = albumViewModel?.imgUrl{
                 //get the image from the cache
                 albumImg.getImg(url: url)
             }
-            artistName.text = albumModel?.artistName
-            albumName.text = albumModel?.albumName
-            copyright.text = albumModel?.copyright
-            releaseDate.text = albumModel?.releaseDate
-            genre.text = albumModel?.genre
+            artistName.text = albumViewModel?.artistName
+            albumName.text = albumViewModel?.albumName
+            copyright.text = albumViewModel?.copyright
+            releaseDate.text = albumViewModel?.releaseDate
+            genre.text = albumViewModel?.genres
             //set up layout after the albumModel is set to get correct frame
             viewLayout()
         }
@@ -36,16 +41,11 @@ class DetailsView: UIView {
         return scrollView
     }()
     
-    //content view
+    //scroll view's content view
     private var view: UIView = {
          let view = UIView()
          return view
      }()
-    
-    private var albumImg: UIImageView = {
-        let img = UIImageView()
-        return img
-    }()
 
     var showButton : UIButton = {
         let bt = UIButton()
@@ -56,7 +56,8 @@ class DetailsView: UIView {
           return bt
       }()
     
-    //Stack View
+    //Stack View and its content
+    
     var stackView : UIStackView = {
         let stackView   = UIStackView()
         stackView.axis  = NSLayoutConstraint.Axis.vertical
@@ -65,8 +66,14 @@ class DetailsView: UIView {
         return stackView
     }()
 
-    //**** labels have similar setup except for size and color
-    private var artistName: UILabel = {
+    
+    var albumImg: UIImageView = {
+        let img = UIImageView()
+        return img
+    }()
+    
+    //**** labels 
+    var artistName: UILabel = {
         let l = UILabel()
         l.textColor = .darkGray
         l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.artistNameFont)
@@ -75,7 +82,7 @@ class DetailsView: UIView {
         return l
     }()
 
-    private var albumName: UILabel = {
+    var albumName: UILabel = {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.albumNameFont)
         l.textAlignment = .center
@@ -83,7 +90,7 @@ class DetailsView: UIView {
         return l
     }()
 
-    private var releaseDate: UILabel = {
+    var releaseDate: UILabel = {
         let l = UILabel()
         l.textColor = .gray
         l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.releaseDateFont)
@@ -92,7 +99,7 @@ class DetailsView: UIView {
         return l
       }()
 
-    private var copyright: UILabel = {
+    var copyright: UILabel = {
         let l = UILabel()
         l.textColor = .gray
         l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.copyrighteFont)
@@ -101,7 +108,7 @@ class DetailsView: UIView {
         return l
     }()
 
-    private var genre: UILabel = {
+    var genre: UILabel = {
         let l = UILabel()
         l.textColor = .darkGray
         l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.genreFont)
@@ -131,6 +138,7 @@ class DetailsView: UIView {
         
         view.addSubview(stackView)
         
+        //stack view content views
         stackView.addArrangedSubview(albumImg)
         stackView.addArrangedSubview(albumName)
         stackView.addArrangedSubview(artistName)
@@ -138,6 +146,7 @@ class DetailsView: UIView {
         stackView.addArrangedSubview(genre)
         stackView.addArrangedSubview(copyright)
         
+        //button is fixed in place
         self.addSubview(showButton)
     }
 

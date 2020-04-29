@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 cell.albumViewModel = vm
                }
             
-            // dependency (3) injuction - intilizer
+            // dependency injuction (3) - intilizer
             let tvc = AlbumTableViewController(albumManager: albumManager,
                                                albumsListViewModel:  albumsListViewModel,
                                                dataSource: dataSource)

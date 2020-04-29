@@ -30,6 +30,28 @@ class AlbumsTableCellTests: XCTestCase {
             //test cells 
             XCTAssertEqual(cell.albumName.text, vm.albumName)
             XCTAssertEqual(cell.artistName.text, vm.artistName)
+            
+            if let img = UIImage(named: "album\(i).png", in: Bundle(for: type(of: self)), compatibleWith: nil){
+                if let cellImg = cell.albumImg.image {
+                    
+                    print(cellImg)
+                }else{
+                    fatalError("cellImg\(i)")
+
+                }
+
+            }else{
+                fatalError("album\(i).png")
+
+            }
+
+            
+//            if let img = UIImage(contentsOfFile: "album\(i).png"){
+//                print(img)
+//            }else{
+//                fatalError("album\(i).png")
+//            }
+            
         }
     }
 }
