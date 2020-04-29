@@ -18,25 +18,18 @@ struct TestingFiles{
     private init(){}
     static func getContentFromFile(_ name: String, _ type: String?, complition: (_ data: Data)->Void){
 
-//       var found = false
-//        for i in 0..<Bundle.allBundles.count{
-//
-//            found = true
-//            if let path = Bundle.allBundles[i].path(forResource: name, ofType: type) {
         if let path = Bundle.main.path(forResource: name, ofType: type) {
 
-                let url = URL(fileURLWithPath: path)
-                do {
-                    
-                    let data = try Data(contentsOf: url)
-                    complition(data)
+            let url = URL(fileURLWithPath: path)
+            do {
+                
+                let data = try Data(contentsOf: url)
+                complition(data)
 
-                }catch{
-                    fatalError("no data")
-                }
+            }catch{
+                fatalError("no data")
             }
-//        }
-//        if (!found){
+        }
         else{
             fatalError("File dose not exist")
         }
