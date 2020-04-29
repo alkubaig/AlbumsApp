@@ -45,7 +45,7 @@ struct Album {
 
     let artistName: String
     let albumName: String
-    let imgUrl: String
+    var imgUrl: String
     let releaseDate: String
     let copyright: String
     let url: String

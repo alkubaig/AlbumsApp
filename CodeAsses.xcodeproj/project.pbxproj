@@ -42,6 +42,7 @@
 		5D5530AF245954DB00D67B17 /* album1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5530AC245954DB00D67B17 /* album1.png */; };
 		5D5530B0245954DB00D67B17 /* album0.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5530AD245954DB00D67B17 /* album0.png */; };
 		5D5530B1245954DB00D67B17 /* album2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5530AE245954DB00D67B17 /* album2.png */; };
+		5D5530B5245A42B700D67B17 /* ImgeLoadCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530B4245A42B700D67B17 /* ImgeLoadCacheTests.swift */; };
 		5DACB9A02411BC5700AA7AA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DACB99F2411BC5700AA7AA2 /* AppDelegate.swift */; };
 		5DACB9A22411BC5700AA7AA2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DACB9A12411BC5700AA7AA2 /* SceneDelegate.swift */; };
 		5DACB9A92411BC5800AA7AA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DACB9A82411BC5800AA7AA2 /* Assets.xcassets */; };
@@ -105,6 +106,7 @@
 		5D5530AC245954DB00D67B17 /* album1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = album1.png; sourceTree = "<group>"; };
 		5D5530AD245954DB00D67B17 /* album0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = album0.png; sourceTree = "<group>"; };
 		5D5530AE245954DB00D67B17 /* album2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = album2.png; sourceTree = "<group>"; };
+		5D5530B4245A42B700D67B17 /* ImgeLoadCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgeLoadCacheTests.swift; sourceTree = "<group>"; };
 		5DACB99C2411BC5700AA7AA2 /* CodeAsses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeAsses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DACB99F2411BC5700AA7AA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DACB9A12411BC5700AA7AA2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,12 +152,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5D01AA1324345BAA0082749D /* DataSorces */ = {
+		5D01AA1324345BAA0082749D /* DataSorcesDelegate */ = {
 			isa = PBXGroup;
 			children = (
 				5D01AA1724345C190082749D /* TableViewDataSorce.swift */,
 			);
-			path = DataSorces;
+			path = DataSorcesDelegate;
 			sourceTree = "<group>";
 		};
 		5D552FFE245654F900D67B17 /* MockObjects */ = {
@@ -193,6 +195,7 @@
 				5D552FEB2453A1E200D67B17 /* AlbumManagerTests.swift */,
 				5D55309F2458116100D67B17 /* AlbumViewModelTests.swift */,
 				5D5530A12458A51A00D67B17 /* TableDataSourceTests.swift */,
+				5D5530B4245A42B700D67B17 /* ImgeLoadCacheTests.swift */,
 			);
 			path = TestViewModels;
 			sourceTree = "<group>";
@@ -231,7 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				5DACB9DC2411BD2400AA7AA2 /* Models */,
-				5D01AA1324345BAA0082749D /* DataSorces */,
+				5D01AA1324345BAA0082749D /* DataSorcesDelegate */,
 				5DBDD5D9241AF8BC006B4B24 /* Services */,
 				5DBDD5D4241AF812006B4B24 /* ViewModel */,
 				5DBDD5CF2418514A006B4B24 /* Views */,
@@ -291,7 +294,6 @@
 			children = (
 				5DACB9D82411BD2400AA7AA2 /* AlbumTableViewCell.swift */,
 				5DBDD5D024185271006B4B24 /* DetailsView.swift */,
-				5D552FCD2446502800D67B17 /* Image+Cache.swift */,
 				5DACB9DA2411BD2400AA7AA2 /* View+Constraint.swift */,
 			);
 			path = Views;
@@ -301,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				5D552FD3244831ED00D67B17 /* AlbumViewModels.swift */,
+				5D552FCD2446502800D67B17 /* Image+Cache.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				5D5530A624590D6200D67B17 /* AlbumsTableCellTests.swift in Sources */,
 				5DACB9E12411BD2400AA7AA2 /* AlbumTableViewCell.swift in Sources */,
 				5DBDD5D224185271006B4B24 /* DetailsView.swift in Sources */,
+				5D5530B5245A42B700D67B17 /* ImgeLoadCacheTests.swift in Sources */,
 				5D5530A82459113000D67B17 /* AlbumsDetailsViewTests.swift in Sources */,
 				5D552FD02446C45800D67B17 /* Image+Cache.swift in Sources */,
 				5DACB9E72411BD2400AA7AA2 /* View+Constraint.swift in Sources */,
