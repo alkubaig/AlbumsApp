@@ -317,7 +317,6 @@
 			isa = PBXGroup;
 			children = (
 				5D552FD3244831ED00D67B17 /* AlbumViewModels.swift */,
-				5D552FCD2446502800D67B17 /* ImgRetriever.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -326,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				5DACB9DF2411BD2400AA7AA2 /* AlbumManager.swift */,
+				5D552FCD2446502800D67B17 /* ImgRetriever.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
