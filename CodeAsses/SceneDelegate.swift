@@ -29,11 +29,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 //dependency injuction - property
                 cell.albumViewModel = vm
                }
-            
-            // dependency injuction (3) - intilizer
+            //4 use the delegate method for calcualting cell height
+            let tableDelegate = AlbumTableViewDelegate(albumCellViewModels: albumsListViewModel)
+            // dependency injuction (4) - intilizer
             let tvc = AlbumTableViewController(albumManager: albumManager,
                                                albumsListViewModel:  albumsListViewModel,
-                                               dataSource: dataSource)
+                                               dataSource: dataSource,
+                                               tableDelegate: tableDelegate)
             
             let navigation = UINavigationController(rootViewController: tvc)
             my_window.rootViewController = navigation

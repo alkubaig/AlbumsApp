@@ -21,15 +21,18 @@ class AlbumsControllerTests: XCTestCase {
         let albums = TestingFiles.getMatchingAlbums()
         albumsListViewModel = albums.map({ AlbumCellViewModel(album: $0)})
          //3 use genetic class for table dataSorce
-        let dataSource : TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel> = TableViewDataSorce(cellId:Constants.cellId, models: albumsListViewModel, configCell: {cell, vm in
+        let dataSource : TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel> = TableViewDataSorce(cellId:Constants.cellId, models: albumsListViewModel)
+            {cell, vm in
              //dependency injuction - property
                 cell.albumViewModel = vm
-            })
-
-         // dependency (3) injuction - intilizer
-         tvc = AlbumTableViewController(albumManager: albumManagerMock,
+            }
+        //4 use the delegate method for calcualting cell height
+         let tableDelegate = AlbumTableViewDelegate(albumCellViewModels: albumsListViewModel)
+         // dependency injuction (4) - intilizer
+         let tvc = AlbumTableViewController(albumManager: albumManagerMock,
                                             albumsListViewModel:  albumsListViewModel,
-                                            dataSource: dataSource)
+                                            dataSource: dataSource,
+                                            tableDelegate: tableDelegate)
     }
 
     func testExample() {

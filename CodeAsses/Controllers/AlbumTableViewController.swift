@@ -13,7 +13,8 @@ class AlbumTableViewController: UITableViewController {
     private var albumManager: AlbumManagerProtocol
     private var albumsListViewModel: [AlbumCellViewModel]
     private var dataSource: TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel>
-    
+    private var tableDelegate: AlbumTableViewDelegate
+
     private let updateObserver = Notification.Name(rawValue: Constants.observerKey)
     
     override func viewDidLoad() {
@@ -25,17 +26,19 @@ class AlbumTableViewController: UITableViewController {
         albumManegerSetup()
         notificationsSetup()
         tableViewSetup()
-        dataSouceSetup()
+        dataSouceDelegateSetup()
     }
     
     //dependency injuction - intilizer
     init(albumManager: AlbumManagerProtocol,
          albumsListViewModel: [AlbumCellViewModel],
-         dataSource: TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel>) {
+         dataSource: TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel>,
+         tableDelegate: AlbumTableViewDelegate) {
         
         self.albumManager = albumManager
         self.albumsListViewModel = albumsListViewModel
         self.dataSource = dataSource
+        self.tableDelegate = tableDelegate
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -80,20 +83,23 @@ extension AlbumTableViewController {
 
 extension AlbumTableViewController {
     
-    func dataSouceSetup (){
+    func dataSouceDelegateSetup (){
         self.tableView.dataSource = self.dataSource
+        self.tableView.delegate = self
+
     }
 }
 
 // MARK: - Table delegate methods
 
 extension AlbumTableViewController {
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let defaultHeight = UITableView.automaticDimension
-        return max(defaultHeight, 100)
-    }
     
+// FIXME: - this method is way slower in scrolling
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let defaultHeight = UITableView.automaticDimension
+//        return max(defaultHeight, 100)
+//    }
+//    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         //dependency injuction - intializer

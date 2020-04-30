@@ -84,6 +84,7 @@ class AlbumTableViewCell: UITableViewCell {
         albumImg.anchor(left: leftAnchor, paddingLeft: cConstraints.leftImgPadding)
         albumImg.anchor(width: cConstraints.imgWidth, height: cConstraints.imgHeight)
 
+        //need this if we work with auto height
 //        stackView.anchor(top: marginGuide.topAnchor, bottom: marginGuide.bottomAnchor, paddingTop: cConstraints.topBottomLabelPadding, paddingBottom: cConstraints.topBottomLabelPadding, enableInsets: false)
         
         stackView.anchor(top: marginGuide.topAnchor, paddingTop: cConstraints.topBottomLabelPadding, enableInsets: false)

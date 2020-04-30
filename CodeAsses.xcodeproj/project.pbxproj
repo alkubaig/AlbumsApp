@@ -43,6 +43,12 @@
 		5D5530B0245954DB00D67B17 /* album0.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5530AD245954DB00D67B17 /* album0.png */; };
 		5D5530B1245954DB00D67B17 /* album2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5530AE245954DB00D67B17 /* album2.png */; };
 		5D5530B5245A42B700D67B17 /* ImgeLoadCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530B4245A42B700D67B17 /* ImgeLoadCacheTests.swift */; };
+		5D5530C4245A4FBF00D67B17 /* AlbumTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530C3245A4FBF00D67B17 /* AlbumTableViewDelegate.swift */; };
+		5D5530C5245A4FBF00D67B17 /* AlbumTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530C3245A4FBF00D67B17 /* AlbumTableViewDelegate.swift */; };
+		5D5530C6245A4FBF00D67B17 /* AlbumTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530C3245A4FBF00D67B17 /* AlbumTableViewDelegate.swift */; };
+		5D5530C8245A502400D67B17 /* String+EstimateHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530C7245A502400D67B17 /* String+EstimateHeight.swift */; };
+		5D5530C9245A502400D67B17 /* String+EstimateHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530C7245A502400D67B17 /* String+EstimateHeight.swift */; };
+		5D5530CA245A502400D67B17 /* String+EstimateHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530C7245A502400D67B17 /* String+EstimateHeight.swift */; };
 		5DACB9A02411BC5700AA7AA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DACB99F2411BC5700AA7AA2 /* AppDelegate.swift */; };
 		5DACB9A22411BC5700AA7AA2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DACB9A12411BC5700AA7AA2 /* SceneDelegate.swift */; };
 		5DACB9A92411BC5800AA7AA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DACB9A82411BC5800AA7AA2 /* Assets.xcassets */; };
@@ -107,6 +113,8 @@
 		5D5530AD245954DB00D67B17 /* album0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = album0.png; sourceTree = "<group>"; };
 		5D5530AE245954DB00D67B17 /* album2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = album2.png; sourceTree = "<group>"; };
 		5D5530B4245A42B700D67B17 /* ImgeLoadCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgeLoadCacheTests.swift; sourceTree = "<group>"; };
+		5D5530C3245A4FBF00D67B17 /* AlbumTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewDelegate.swift; sourceTree = "<group>"; };
+		5D5530C7245A502400D67B17 /* String+EstimateHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+EstimateHeight.swift"; sourceTree = "<group>"; };
 		5DACB99C2411BC5700AA7AA2 /* CodeAsses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeAsses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DACB99F2411BC5700AA7AA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DACB9A12411BC5700AA7AA2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				5D01AA1724345C190082749D /* TableViewDataSorce.swift */,
+				5D5530C3245A4FBF00D67B17 /* AlbumTableViewDelegate.swift */,
 			);
 			path = DataSorcesDelegate;
 			sourceTree = "<group>";
@@ -304,6 +313,7 @@
 			children = (
 				5D552FD3244831ED00D67B17 /* AlbumViewModels.swift */,
 				5D552FCD2446502800D67B17 /* Image+Cache.swift */,
+				5D5530C7245A502400D67B17 /* String+EstimateHeight.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -458,12 +468,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D5530C8245A502400D67B17 /* String+EstimateHeight.swift in Sources */,
 				5D55308A24577AF100D67B17 /* AlbumTableViewController.swift in Sources */,
 				5D01AA1824345C190082749D /* TableViewDataSorce.swift in Sources */,
 				5DACB9E62411BD2400AA7AA2 /* View+Constraint.swift in Sources */,
 				5DBDD5D124185271006B4B24 /* DetailsView.swift in Sources */,
 				5DACB9A02411BC5700AA7AA2 /* AppDelegate.swift in Sources */,
 				5DACB9A22411BC5700AA7AA2 /* SceneDelegate.swift in Sources */,
+				5D5530C4245A4FBF00D67B17 /* AlbumTableViewDelegate.swift in Sources */,
 				5DACB9EC2411BD2400AA7AA2 /* Album.swift in Sources */,
 				5DACB9E02411BD2400AA7AA2 /* AlbumTableViewCell.swift in Sources */,
 				5DACB9E92411BD2400AA7AA2 /* DetailsViewController.swift in Sources */,
@@ -487,9 +499,11 @@
 				5DACB9F32411BD2400AA7AA2 /* AlbumManager.swift in Sources */,
 				5DACB9E42411BD2400AA7AA2 /* AlbumTableViewController.swift in Sources */,
 				5D5530002456550F00D67B17 /* AlbumManagerReceiverMock.swift in Sources */,
+				5D5530C9245A502400D67B17 /* String+EstimateHeight.swift in Sources */,
 				5D55309A2457B0A600D67B17 /* AlbumManagerMock.swift in Sources */,
 				5D55307F245776A100D67B17 /* TestFilesModel.swift in Sources */,
 				5D5530A22458A51A00D67B17 /* TableDataSourceTests.swift in Sources */,
+				5D5530C5245A4FBF00D67B17 /* AlbumTableViewDelegate.swift in Sources */,
 				5D5530A624590D6200D67B17 /* AlbumsTableCellTests.swift in Sources */,
 				5DACB9E12411BD2400AA7AA2 /* AlbumTableViewCell.swift in Sources */,
 				5DBDD5D224185271006B4B24 /* DetailsView.swift in Sources */,
@@ -511,7 +525,9 @@
 				5D552FEA2453A18900D67B17 /* Constants.swift in Sources */,
 				5DACB9C22411BC5800AA7AA2 /* CodeAssesUITests.swift in Sources */,
 				5D552FCF2446C45800D67B17 /* Image+Cache.swift in Sources */,
+				5D5530C6245A4FBF00D67B17 /* AlbumTableViewDelegate.swift in Sources */,
 				5DACB9F42411BD2400AA7AA2 /* AlbumManager.swift in Sources */,
+				5D5530CA245A502400D67B17 /* String+EstimateHeight.swift in Sources */,
 				5DBDD5D324185271006B4B24 /* DetailsView.swift in Sources */,
 				5DACB9E52411BD2400AA7AA2 /* AlbumTableViewController.swift in Sources */,
 				5DACB9E22411BD2400AA7AA2 /* AlbumTableViewCell.swift in Sources */,
