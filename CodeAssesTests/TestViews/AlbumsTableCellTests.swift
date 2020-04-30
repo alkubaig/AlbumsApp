@@ -17,7 +17,7 @@ class AlbumsTableCellTests: XCTestCase {
     func testCells(){
 
         //get testing albums
-        let albums = TestingFiles.getMatchingAlbums()
+        let albums = TestingFiles.getTestingAlbums()
         // generte view models of albums
         let albumsListViewModel = albums.map({ AlbumCellViewModel(album: $0)})
 

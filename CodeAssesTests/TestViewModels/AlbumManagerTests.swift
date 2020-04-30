@@ -28,7 +28,7 @@ extension AlbumManagerTests{
     func testUnitTest1_1(){
         
         // get testing albums from "Albums.plist"
-        let matchingAlbum = TestingFiles.getMatchingAlbums()
+        let matchingAlbum = TestingFiles.getTestingAlbums()
 
         parseJsonFileWithParseJSON(fileName: "ApiAlbums.json"){ result in
             

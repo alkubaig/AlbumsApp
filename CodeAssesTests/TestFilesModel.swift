@@ -67,7 +67,7 @@ extension TestingFiles {
     }
     
     // get example albums from plist
-    static func getMatchingAlbums()->[Album]{
+    static func getTestingAlbums()->[Album]{
             
         var albums = [Album]()
 
