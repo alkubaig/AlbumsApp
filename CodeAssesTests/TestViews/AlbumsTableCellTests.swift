@@ -18,30 +18,33 @@ class AlbumsTableCellTests: XCTestCase {
 
         //get testing albums
         let albums = TestingFiles.getTestingAlbums()
+        //get testing imges
+        let imgs = TestingFiles.getTestImgesFromBundle()
         // generte view models of albums
         let albumsListViewModel = albums.map({ AlbumCellViewModel(album: $0)})
 
         for i in 0..<albums.count{
 
-            let cell = AlbumTableViewCell()
             let vm = albumsListViewModel[i]
+            //place img in chche
+            imgCache.setObject(imgs[i], forKey: NSString(string: vm.imgUrl))
+                      
+            let cell = AlbumTableViewCell()
+            //injuct viewModel
             cell.albumViewModel = vm
 
             //test cells
             XCTAssertEqual(cell.albumName.text, vm.albumName)
             XCTAssertEqual(cell.artistName.text, vm.artistName)
             
-//            //place img in chche
-//            imgCache.setObject(img, forKey: NSString(string: url))
-//         
-//           //retreive img with no wait time
-//           imgFromRetreiver.getImg(url: url)
-//           
-//           //should be able to retreive img without a wait
-//           guard let imgRetreived = imgFromRetreiver.image else {
-//               XCTFail("img should be stored in cache")
-//               return
-//           }
+            //test img
+            if let imgRetreived = cell.albumImg.image {
+                //img retreived should be the same as the img we placed in cache
+                XCTAssertEqual(imgs[i].pngData(), imgRetreived.pngData())
+            }else{
+                XCTFail("should have img")
+            }
+            
         }
     }
     

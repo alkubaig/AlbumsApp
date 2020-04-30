@@ -19,14 +19,19 @@ class AlbumsDetailsViewTests: XCTestCase {
         
         //get testing albums
         let albums = TestingFiles.getTestingAlbums()
+        //get testing imges
+        let imgs = TestingFiles.getTestImgesFromBundle()
         
         // generte view models of albums
         let albumsListViewModel = albums.map({ AlbumDetailsViewModel(album: $0)})
         
         for i in 0..<albums.count{
             
-            let dView = DetailsView()
             let vm = albumsListViewModel[i]
+            //put image in cache
+            imgCache.setObject(imgs[i], forKey: NSString(string: vm.imgUrl))
+            
+            let dView = DetailsView()
             dView.albumViewModel = vm
             
             //test test view
@@ -35,6 +40,15 @@ class AlbumsDetailsViewTests: XCTestCase {
             XCTAssertEqual(dView.copyright.text, vm.copyright)
             XCTAssertEqual(dView.releaseDate.text, vm.releaseDate)
             XCTAssertEqual(dView.genre.text, vm.genres)
+            
+            //test img
+            if let imgRetreived = dView.albumImg.image {
+               //img retreived should be the same as the img we placed in cache
+               XCTAssertEqual(imgs[i].pngData(), imgRetreived.pngData())
+            }else{
+               XCTFail("should have img")
+            }
+            
         }
     }
 }
