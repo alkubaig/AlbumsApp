@@ -26,6 +26,7 @@ class TableDataSourceTests: XCTestCase {
         { (cell: AlbumTableViewCell, vm: AlbumCellViewModel) in
             XCTAssertEqual(cell.albumName.text, vm.albumName)
             XCTAssertEqual(cell.artistName.text, vm.artistName)
+            //testing imges in a seperate class
         }
     }
     
