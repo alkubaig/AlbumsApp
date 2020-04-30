@@ -14,9 +14,16 @@ import Foundation
 
 struct TestFileNames {
     private init(){}
-    static let apiAlbums = "ApiAlbums.json"
-    static let apiNoAlbums = "ApiNoAlbums.json"
-    static let plistAlbums = "Albums.plist"
+    static let apiAlbumsFileName = "ApiAlbums.json"
+    static let apiNoAlbumsFileName = "ApiNoAlbums.json"
+    static let plistAlbumsFileName = "Albums.plist"
+    static func imgAlbumFileName (_ i: Int)->String {
+        return "album\(i).png"
+    }
+    static let testingAlbumsCount = 3
+    static let testingImgsCount = 3
+
+
 }
 
 struct TestingFiles{
@@ -64,7 +71,7 @@ extension TestingFiles {
             
         var albums = [Album]()
 
-        getContentFromFile(TestFileNames.plistAlbums,nil){ data in
+        getContentFromFile(TestFileNames.plistAlbumsFileName,nil){ data in
             decodePropertyList(type: [Album].self, data: data){
                 res in albums = res
             }

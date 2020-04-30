@@ -115,11 +115,11 @@ extension AlbumManagerTests{
         
         albumMng.delegate = albumManagerReceiverMock
         
-        TestingFiles.getContentFromFile(TestFileNames.apiAlbums, nil) { (data) in
+        TestingFiles.getContentFromFile(TestFileNames.apiAlbumsFileName, nil) { (data) in
             albumMng.performRequest_(data: data, error: nil)
         }
 
-        TestingFiles.getContentFromFile(TestFileNames.apiNoAlbums, nil) { (data) in
+        TestingFiles.getContentFromFile(TestFileNames.apiNoAlbumsFileName, nil) { (data) in
             albumMng.performRequest_(data: data, error: nil)
         }
     }
@@ -137,7 +137,7 @@ extension AlbumManagerTests{
         AlbumManagerReceiverMock(expectedBehaviorForDidLoadAlbum ,{_ in})
        albumMng.delegate = albumManagerReceiverMock
 
-        TestingFiles.getContentFromFile(TestFileNames.apiNoAlbums, nil) { (data) in
+        TestingFiles.getContentFromFile(TestFileNames.apiNoAlbumsFileName, nil) { (data) in
             albumMng.performRequest_(data: data, error: NetworkErr.noData)
             }
        }
@@ -215,3 +215,4 @@ extension AlbumManagerTests{
     }
     
 }
+

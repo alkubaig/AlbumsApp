@@ -67,8 +67,8 @@ class DetailsView: UIView {
     }()
 
     
-    var albumImg: UIImageView = {
-        let img = UIImageView()
+    var albumImg: ImgRetriever = {
+        let img = ImgRetriever()
         return img
     }()
     

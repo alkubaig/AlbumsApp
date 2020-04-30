@@ -14,6 +14,8 @@ import UIKit
 
 class AlbumTableViewCell: UITableViewCell {
 
+    var imgReteriveProtocol: ImgReteriveProtocol?
+    
     //dependency injuction - property
     var albumViewModel: AlbumCellViewModel? {
         // when the view model is set, UI elements are set
@@ -22,6 +24,7 @@ class AlbumTableViewCell: UITableViewCell {
             if let url = albumViewModel?.imgUrl{
                 
                 //getImg by loading if new, otherwise by caching
+                albumImg.imgReteriveProtocol = imgReteriveProtocol
                 albumImg.getImg(url:  url)
             }
             artistName.text = albumViewModel?.artistName
@@ -29,8 +32,8 @@ class AlbumTableViewCell: UITableViewCell {
         }
     }
     
-    var albumImg : UIImageView = {
-        let img = UIImageView()
+    var albumImg : ImgRetriever = {
+        let img = ImgRetriever()
         img.layer.cornerRadius = img.frame.size.width / 2;
         img.clipsToBounds = true;
         return img
