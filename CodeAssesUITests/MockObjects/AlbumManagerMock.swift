@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum NetworkErr: Error {
+    case noData
+    case statusCode(Int)
+}
+
 struct AlbumManagerMock: AlbumManagerProtocol {
     
     var delegate: AlbumManagerDelegate?

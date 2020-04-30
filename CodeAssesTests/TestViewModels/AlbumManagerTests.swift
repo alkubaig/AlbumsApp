@@ -25,14 +25,16 @@ class AlbumManagerTests: XCTestCase {
 extension AlbumManagerTests{
     
     // "ApiAlbums.json" simulates an example api json response with 3 albumns
-    func testUnitTest1_1(){
+    func testParseJSON_ApiAlbumsArray(){
         
         // get testing albums from "Albums.plist"
         let matchingAlbum = TestingFiles.getTestingAlbums()
 
-        parseJsonFileWithParseJSON(fileName: "ApiAlbums.json"){ result in
+        //get valid api response from json file with valid albums
+        // pass it to parseJSON
+        parseJsonFileWithParseJSON(fileName: TestFileNames.apiAlbumsFileName){ result in
             
-            XCTAssertEqual(result.count, 3, "Missing some Albums!")
+            XCTAssertEqual(result.count, TestFileNames.testingAlbumsCount, "Missing some Albums!")
             
             for i in 0..<result.count{
                 //comapre results from parseJSON with result from "Albums.plist"
@@ -42,29 +44,32 @@ extension AlbumManagerTests{
     }
     
     // "ApiNoAlbums.json" file simulates an example api json response with no albums
-    func testUnitTest1_2(){
+    func testParseJSON_ApiEmptyAlbumsArray(){
         
-        parseJsonFileWithParseJSON(fileName: "ApiNoAlbums.json"){ result in
+        //get valid api response from json file with no albums
+        // pass it to parseJSON
+        parseJsonFileWithParseJSON(fileName: TestFileNames.apiNoAlbumsFileName){ result in
 
             XCTAssertEqual(result.count, 0, "This should be empty")
         }
     }
-    
 }
 
-// methods for testing set 1
+//MARK: - methods for testing set 1
+
 extension AlbumManagerTests{
     
-    // get api result from json file and parse it through maneger method
+    // get api result from json file and parse it through maneger method parseJSON
       func parseJsonFileWithParseJSON(fileName: String, testFunc: (_ result: [Album])->Void){
           
           TestingFiles.getContentFromFile(fileName,nil){data in
                
-               if let result = albumMng.parseJSON(data){
-                  testFunc(result)
-              }else{
-                  XCTFail("parseJSON could not parse data!")
-              }
+            //completion block calls parseJSON
+            if let result = albumMng.parseJSON(data){
+              testFunc(result)
+            }else{
+              XCTFail("parseJSON could not parse data!")
+            }
           }
       }
     
@@ -90,44 +95,38 @@ extension AlbumManagerTests{
  ** using a mock delegate object
 ****************************************/
 
-enum NetworkErr: Error {
-    case noData
-    case statusCode(Int)
-}
-
 extension AlbumManagerTests{
     // (2.1) test with a valid response
-    func testUnitTest2_1(){
-        
-        //testing delegate method 1
-        let expectedBehaviorForDidLoadAlbum : (([Album]) -> Void) = { album in
-            XCTAssertGreaterThanOrEqual(album.count,0)
-         }
-        
-        //testing delegate method 2
+    func testPerformRequestValid(){
+                
+        //if FailWithError was called, it is an error
         let expectedBehaviorFordidFailWithError : ((Error) -> Void) = { _ in
             XCTFail("This api should not fail")
         }
         //mock object with a testing closure for each delegate method
         let albumManagerReceiverMock =
-            AlbumManagerReceiverMock(expectedBehaviorForDidLoadAlbum,
+            AlbumManagerReceiverMock({ _ in},
                                      expectedBehaviorFordidFailWithError)
         
         albumMng.delegate = albumManagerReceiverMock
         
+        //get valid api response from json file with valid albums
+        // pass it to performRequest_
         TestingFiles.getContentFromFile(TestFileNames.apiAlbumsFileName, nil) { (data) in
             albumMng.performRequest_(data: data, error: nil)
         }
 
+        //get valid api response from json file with no albums
+        // pass it to performRequest_
         TestingFiles.getContentFromFile(TestFileNames.apiNoAlbumsFileName, nil) { (data) in
             albumMng.performRequest_(data: data, error: nil)
         }
     }
     
-    // (3.2) test with an invalid response
-    func testUnitTest2_2(){
+    // (2.2) test with an invalid response
+    func testPerformRequestInvalid(){
 
-       //testing delegate method 1
+       //if DidLoadAlbum was called, it is an error
        let expectedBehaviorForDidLoadAlbum : (([Album]) -> Void) = { _ in
            XCTFail("This api should fail")
         }
@@ -135,12 +134,15 @@ extension AlbumManagerTests{
        //mock object with a testing closure for each delegate method
        let albumManagerReceiverMock =
         AlbumManagerReceiverMock(expectedBehaviorForDidLoadAlbum ,{_ in})
-       albumMng.delegate = albumManagerReceiverMock
+        albumMng.delegate = albumManagerReceiverMock
 
-        TestingFiles.getContentFromFile(TestFileNames.apiNoAlbumsFileName, nil) { (data) in
+        //get valid api response from json file
+        // pass it to performRequest_ with an error
+        TestingFiles.getContentFromFile(TestFileNames.apiNoAlbumsFileName, nil)
+        { (data) in
             albumMng.performRequest_(data: data, error: NetworkErr.noData)
-            }
-       }
+        }
+    }
 }
 
 
@@ -149,25 +151,25 @@ extension AlbumManagerTests{
 /****************************************
  ** test if performRequest performs the correct response
  ** using a mock delegate object
- ** Set 2 is a better way to test this functionality to avoid doing http calls in testing, but
- ** I left it for demonstration
+ ** Set 2 is a better way to test this functionality to avoid doing http calls in testing,
+ ** but I left it for demonstration
 ****************************************/
 
 extension AlbumManagerTests{
 
     // (3.1) test with a valid url
-    func testUnitTest3_1(){
+    func testPerformRequestValidUrl(){
         
         //use expectation to wait for api call to finish before testing
         let albumsExpectation = expectation(description: "AlbumAPI trying to retrieve new albums")
 
-        //testing delegate method 1
+        //if no albums, this is an error
         let expectedBehaviorForDidLoadAlbum : (([Album]) -> Void) = { album in
-            XCTAssertGreaterThanOrEqual(album.count,0)
+            XCTAssertGreaterThan(album.count,0)
             albumsExpectation.fulfill()
          }
         
-        //testing delegate method 2
+        //if idFailWithError is called, this is an error
         let expectedBehaviorFordidFailWithError : ((Error) -> Void) = { _ in
             XCTFail("This api should not fail")
             albumsExpectation.fulfill()
@@ -186,11 +188,12 @@ extension AlbumManagerTests{
     
     
     // (3.2) test with an invalid url
-     func testUnitTest3_2(){
+     func testPerformRequestInvalidUrl(){
         
+        //use expectation to wait for api call to finish before testing
         let albumsExpectation = expectation(description: "AlbumAPI trying to retrieve new albums")
 
-        //testing delegate method 1
+        //if DidLoadAlbum is called, this is an error
         let expectedBehaviorForDidLoadAlbum : (([Album]) -> Void) = { album in
             XCTFail("This api should fail")
             albumsExpectation.fulfill()
