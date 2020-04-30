@@ -7,6 +7,7 @@
 //
 import UIKit
 
+//method to estimate the height of a text
 extension String{
     func estimateTextHeight(fontSize: CGFloat, approxWidth: CGFloat)-> CGFloat{
         

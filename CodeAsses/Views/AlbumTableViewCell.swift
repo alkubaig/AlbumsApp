@@ -13,8 +13,6 @@ import UIKit
 ****************************************/
 
 class AlbumTableViewCell: UITableViewCell {
-
-    var imgReteriveProtocol: ImgReteriveProtocol?
     
     //dependency injuction - property
     var albumViewModel: AlbumCellViewModel? {
@@ -22,9 +20,7 @@ class AlbumTableViewCell: UITableViewCell {
         didSet {
     
             if let url = albumViewModel?.imgUrl{
-                
                 //getImg by loading if new, otherwise by caching
-                albumImg.imgReteriveProtocol = imgReteriveProtocol
                 albumImg.getImg(url:  url)
             }
             artistName.text = albumViewModel?.artistName
@@ -88,7 +84,7 @@ class AlbumTableViewCell: UITableViewCell {
         albumImg.anchor(width: cConstraints.imgWidth, height: cConstraints.imgHeight)
 
         //need this if we work with auto height
-//        stackView.anchor(top: marginGuide.topAnchor, bottom: marginGuide.bottomAnchor, paddingTop: cConstraints.topBottomLabelPadding, paddingBottom: cConstraints.topBottomLabelPadding, enableInsets: false)
+        //stackView.anchor(top: marginGuide.topAnchor, bottom: marginGuide.bottomAnchor, paddingTop: cConstraints.topBottomLabelPadding, paddingBottom: cConstraints.topBottomLabelPadding, enableInsets: false)
         
         stackView.anchor(top: marginGuide.topAnchor, paddingTop: cConstraints.topBottomLabelPadding, enableInsets: false)
         

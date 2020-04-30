@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /****************************************
-** a custom class for album details view
+ ** a custom class for album details view
 ****************************************/
 
 class DetailsView: UIView {
@@ -118,7 +118,6 @@ class DetailsView: UIView {
       }()
     //end labels ****//
 
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         initView()

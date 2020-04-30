@@ -19,7 +19,7 @@ class AlbumManagerTests: XCTestCase {
 //MARK: -  test set 1
 
 /****************************************
- ** test if parseJSON parses api result correctly
+ ** test if parseJSON parses api result correctly (test custom decoder)
 ****************************************/
 
 extension AlbumManagerTests{

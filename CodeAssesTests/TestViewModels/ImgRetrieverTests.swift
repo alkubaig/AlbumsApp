@@ -26,20 +26,7 @@ class ImgRetrieverTests: XCTestCase {
 extension ImgRetrieverTests{
     
 //setup up testing data for testValidImgRetriever
-   func setupTestImgesFromBundle(){
-    for i in 0..<TestFileNames.testingImgsCount{
-            //get img file name
-            let imgName = TestFileNames.imgAlbumFileName(i)
 
-            //get img from project
-            guard let img = UIImage(named: imgName, in: Bundle(for: type(of: self)), compatibleWith: nil) else {
-
-                fatalError("no images to write")
-            }
-            imgs.append(img)
-        }
-    }
-      
     func setupTestImgesInLocalPaths(){
         for i in 0..<imgs.count{
                        
@@ -79,8 +66,8 @@ extension ImgRetrieverTests{
    func testValidImgRetriever(){
 
        //setup up the testing data
-       setupTestImgesFromBundle()
-       setupTestImgesInLocalPaths()
+        imgs = TestingFiles.getTestImgesFromBundle()
+        setupTestImgesInLocalPaths()
 
         for i in 0..<imgs.count{
 
@@ -156,8 +143,8 @@ extension ImgRetrieverTests{
 
     func testImgRetrieverCache(){
         
-        setupTestImgesFromBundle()
-        
+        imgs = TestingFiles.getTestImgesFromBundle()
+
         for i in 0..<imgs.count{
 
             //get img -- from project bundle

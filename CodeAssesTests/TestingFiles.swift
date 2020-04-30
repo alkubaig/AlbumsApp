@@ -6,7 +6,7 @@
 //  Copyright © 2020 Ghadeer Alkubaish. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /****************************************
 ** static methods for testing with files
@@ -48,7 +48,6 @@ struct TestingFiles{
             fatalError("File dose not exist")
         }
     }
-    
 }
 
 extension TestingFiles {
@@ -78,4 +77,28 @@ extension TestingFiles {
         }
         return albums
     }
+}
+
+extension TestingFiles{
+    
+    static func getTestImgesFromBundle()->[UIImage]{
+        
+        var images = [UIImage]()
+
+         for i in 0..<TestFileNames.testingImgsCount{
+             //get img file name
+             let imgName = TestFileNames.imgAlbumFileName(i)
+
+             //get img from project
+             guard let img = UIImage(named: imgName) else {
+
+                 fatalError("no image \(imgName)")
+             }
+             images.append(img)
+         }
+        return images
+
+     }
+    
+    
 }

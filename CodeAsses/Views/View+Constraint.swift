@@ -4,7 +4,13 @@
 //
 //https://medium.com/@kemalekren/swift-create-custom-tableview-cell-with-programmatically-in-ios-835d3880513d
 
+
+/****************************************
+ ** methods to make setting constraints more convenient
+****************************************/
+
 import UIKit
+
 extension UIView {
  
     //MARK: - all constraints
