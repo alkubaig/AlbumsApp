@@ -13,7 +13,7 @@ class AlbumTableViewController: UITableViewController {
     private var albumManager: AlbumManagerProtocol
     private var albumsListViewModel: [AlbumCellViewModel]
     private var dataSource: TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel>
-    private var tableDelegate: AlbumTableViewDelegate
+//    private var tableDelegate: AlbumTableViewDelegate
 
     private let updateObserver = Notification.Name(rawValue: Constants.observerKey)
     
@@ -26,19 +26,17 @@ class AlbumTableViewController: UITableViewController {
         albumManegerSetup()
         notificationsSetup()
         tableViewSetup()
-        dataSouceDelegateSetup()
+        dataSouceSetup()
     }
     
     //dependency injuction - intilizer
     init(albumManager: AlbumManagerProtocol,
          albumsListViewModel: [AlbumCellViewModel],
-         dataSource: TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel>,
-         tableDelegate: AlbumTableViewDelegate) {
+         dataSource: TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel>) {
         
         self.albumManager = albumManager
         self.albumsListViewModel = albumsListViewModel
         self.dataSource = dataSource
-        self.tableDelegate = tableDelegate
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -62,8 +60,8 @@ extension AlbumTableViewController {
         tableView.register(AlbumTableViewCell.self, forCellReuseIdentifier: Constants.cellId)
         
         self.tableView.estimatedRowHeight = 100
-        self.tableView.rowHeight = 100
-
+        self.tableView.rowHeight = UITableView.automaticDimension
+        
     }
 }
 
@@ -83,10 +81,8 @@ extension AlbumTableViewController {
 
 extension AlbumTableViewController {
     
-    func dataSouceDelegateSetup (){
+    func dataSouceSetup (){
         self.tableView.dataSource = self.dataSource
-        self.tableView.delegate = self
-
     }
 }
 
@@ -94,12 +90,11 @@ extension AlbumTableViewController {
 
 extension AlbumTableViewController {
     
-// FIXME: - this method is way slower in scrolling
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let defaultHeight = UITableView.automaticDimension
-//        return max(defaultHeight, 100)
-//    }
-//    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+        return UITableView.automaticDimension
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         //dependency injuction - intializer
@@ -114,13 +109,14 @@ extension AlbumTableViewController {
 // use notofications center to update UI and data after the albums have been uploaded (observer)
 
 extension AlbumTableViewController: AlbumManagerDelegate {
-    func didLoadAlbum(albums: [Album]) {
+    func didLoadAlbum(albums: [Album], completion: @escaping (()->Void)) {
         DispatchQueue.main.async {
                         
             self.albumsListViewModel = albums.map({return AlbumCellViewModel(album: $0)})
             NotificationCenter.default.post(name: self.updateObserver, object: nil)
-            
+            completion()
         }
+
     }
     func didFailWithError(error: Error) {
         print(error)
@@ -146,7 +142,6 @@ extension AlbumTableViewController {
         self.dataSource.updateModel(newModel: self.albumsListViewModel)
     }
 
-        
     @objc func updateTableData(){
         print("relaoded")
         self.tableView.reloadData()

@@ -22,7 +22,7 @@ let imgCache = NSCache<NSString,UIImage>()
 // MARK:- protocol with complition block for testing
 protocol ImgReteriveProtocol{
 
-    var complition: (()->Void) { get set }
+    var completion: (()->Void) { get set }
 }
 
 // MARK:- custom UIImageView with a protocol used to injuct a testing block
@@ -58,7 +58,7 @@ extension ImgRetriever{
     func loadImgeURL(url: String){
         guard let img_url = URL(string: url) else{
             // run completion block from protocol
-            self.imgReteriveProtocol?.complition()
+            self.imgReteriveProtocol?.completion()
             return
         }
         //use threads to load image to avoid blocking UI
@@ -68,7 +68,7 @@ extension ImgRetriever{
                 let imgData = try Data(contentsOf: img_url)
                 guard let imgToCache = UIImage(data: imgData) else{
                     print("no img")
-                    self?.imgReteriveProtocol?.complition()
+                    self?.imgReteriveProtocol?.completion()
                     return
                 }
                 //update image in main thread
@@ -76,12 +76,12 @@ extension ImgRetriever{
                     imgCache.setObject(imgToCache, forKey: NSString(string: url))
                     self?.image = imgToCache
                     // run completion block from protocol
-                    self?.imgReteriveProtocol?.complition()
+                    self?.imgReteriveProtocol?.completion()
                 }
 
             } catch{
                 print("can not load img")
-                self?.imgReteriveProtocol?.complition()
+                self?.imgReteriveProtocol?.completion()
             }
         }
     }

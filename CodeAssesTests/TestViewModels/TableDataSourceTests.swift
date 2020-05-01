@@ -64,10 +64,11 @@ extension TableDataSourceTests {
     func testDataSource<CellType: UITableViewCell,MVType>(_ models: [MVType], _ configCell: @escaping(CellType, MVType)->(), _ testCell: ((CellType, MVType) -> Void)){
            
        //create dataSource
-       let dataSource : TableViewDataSorce<CellType, MVType> = TableViewDataSorce(cellId:Constants.cellId, models: models, configCell: configCell)
+       let dataSource : TableViewDataSorce<CellType, MVType> = TableViewDataSorce(cellId:Constants.cellId, configCell: configCell)
               
        //setup table
        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        dataSource.updateModel(newModel: models)
        tableView.dataSource = dataSource
        tableView.register(CellType.self, forCellReuseIdentifier: Constants.cellId)
        tableView.reloadData()

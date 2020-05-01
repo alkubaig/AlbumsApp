@@ -9,6 +9,8 @@
 import UIKit
 
 class AlbumManagerReceiverMock: AlbumManagerDelegate {
+
+    
     
     let expectedBehaviorForDidLoadAlbum: (([Album]) -> Void)
     let expectedBehaviorFordidFailWithError: ((Error) -> Void)
@@ -18,9 +20,10 @@ class AlbumManagerReceiverMock: AlbumManagerDelegate {
         self.expectedBehaviorForDidLoadAlbum = expectedBehaviorForDidLoadAlbum
         self.expectedBehaviorFordidFailWithError = expectedBehaviorFordidFailWithError
     }
-    func didLoadAlbum(albums: [Album]) {
+    func didLoadAlbum(albums: [Album], completion: @escaping (() -> Void)) {
         expectedBehaviorForDidLoadAlbum(albums)
-     }
+        completion()
+    }
      
      func didFailWithError(error: Error) {
         expectedBehaviorFordidFailWithError(error)

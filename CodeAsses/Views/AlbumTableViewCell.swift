@@ -64,6 +64,9 @@ class AlbumTableViewCell: UITableViewCell {
 
         self.contentView.addSubview(albumImg)
         self.contentView.addSubview(stackView)
+//        self.contentView.addSubview(artistName)
+//        self.contentView.addSubview(albumName)
+
         stackView.addArrangedSubview(artistName)
         stackView.addArrangedSubview(albumName)
         
@@ -79,16 +82,17 @@ class AlbumTableViewCell: UITableViewCell {
         let cConstraints = Constants.CellConstraints.self
         let marginGuide = contentView.layoutMarginsGuide
 
-        albumImg.anchor(top: topAnchor, paddingTop: cConstraints.topImgPadding, enableInsets: false)
-        albumImg.anchor(left: leftAnchor, paddingLeft: cConstraints.leftImgPadding)
+        
+        albumImg.anchor(top: self.topAnchor, paddingTop: cConstraints.topImgPadding, enableInsets: false)
+        albumImg.anchor(left: self.leftAnchor, paddingLeft: cConstraints.leftImgPadding)
         albumImg.anchor(width: cConstraints.imgWidth, height: cConstraints.imgHeight)
 
-        //need this if we work with auto height
-        //stackView.anchor(top: marginGuide.topAnchor, bottom: marginGuide.bottomAnchor, paddingTop: cConstraints.topBottomLabelPadding, paddingBottom: cConstraints.topBottomLabelPadding, enableInsets: false)
+        stackView.anchor(left: albumImg.rightAnchor, right: self.rightAnchor, paddingLeft: cConstraints.leftRightLabelPadding, paddingRight: cConstraints.leftRightLabelPadding)
         
-        stackView.anchor(top: marginGuide.topAnchor, paddingTop: cConstraints.topBottomLabelPadding, enableInsets: false)
-        
-        stackView.anchor(left: albumImg.rightAnchor, right: rightAnchor, paddingLeft: cConstraints.leftRightLabelPadding, paddingRight: cConstraints.leftRightLabelPadding)
+        stackView.anchor(top: marginGuide.topAnchor, paddingTop: 0, enableInsets: false)
+    
+        stackView.anchor(bottom: marginGuide.bottomAnchor, paddingBottom: 0, enableInsets: false)
+
         
     }
 }

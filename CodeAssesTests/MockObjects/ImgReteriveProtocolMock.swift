@@ -9,11 +9,12 @@
 import Foundation
 
 struct ImgReteriveProtocolMock: ImgReteriveProtocol {
-    var complition: (() -> Void)
+    
+    var completion: (() -> Void)
     
     init(_ complition: @escaping (()->Void)){
      
-        self.complition = complition
+        self.completion = complition
     }
     
 }

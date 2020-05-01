@@ -23,8 +23,8 @@ struct Constants{
         
         private init(){}
 
-        static let artistNameFont : CGFloat = 12
-        static let albumNameFont : CGFloat = 15
+        static let artistNameFont : CGFloat = 16
+        static let albumNameFont : CGFloat = 18
     }
     
     struct DetailsFonts {
@@ -42,14 +42,14 @@ struct Constants{
         
         private init(){}
 
-        static let imgHeight : CGFloat = 90
-        static let imgWidth : CGFloat = 90
+        static let imgHeight : CGFloat = 70
+        static let imgWidth : CGFloat = 70
         
         static let topImgPadding : CGFloat = 5
         static let leftImgPadding : CGFloat = 5
         
-        static let topBottomLabelPadding : CGFloat = 10
-        static let inBetweenLabelPadding : CGFloat = 5
+        static let topBottomLabelPadding : CGFloat = 15
+        static let inBetweenLabelPadding : CGFloat = 15
         static let leftRightLabelPadding : CGFloat = 15
     }
     

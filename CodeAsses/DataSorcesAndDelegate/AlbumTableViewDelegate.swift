@@ -9,10 +9,15 @@ import UIKit
 
 class AlbumTableViewDelegate: NSObject, UITableViewDelegate {
     
-    let albumCellViewModels : [AlbumCellViewModel]
+    var albumCellViewModels : [AlbumCellViewModel]
     
     init(albumCellViewModels: [AlbumCellViewModel]) {
         self.albumCellViewModels = albumCellViewModels
+    }
+    
+    // dependency injuction - property
+    func updateModel(newModel: [AlbumCellViewModel]){
+        self.albumCellViewModels = newModel
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

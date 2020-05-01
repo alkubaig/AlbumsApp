@@ -51,4 +51,7 @@ class AlbumsDetailsViewTests: XCTestCase {
             
         }
     }
+    override class func tearDown() {
+        imgCache.removeAllObjects()
+    }
 }

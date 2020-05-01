@@ -20,10 +20,9 @@ class TableViewDataSorce<CellType,ViewModelType>: NSObject, UITableViewDataSourc
     let configCell : (CellType, ViewModelType) -> ()
     
     // dependecy injection - intializer
-    init(cellId: String, models: [ViewModelType], configCell: @escaping(CellType, ViewModelType)->()) {
+    init(cellId: String, configCell: @escaping(CellType, ViewModelType)->()) {
         self.cellId = cellId
         self.configCell = configCell
-        self.models = models
     }
     
     // dependency injuction - property

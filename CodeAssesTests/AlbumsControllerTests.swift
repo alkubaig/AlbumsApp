@@ -10,58 +10,68 @@ import XCTest
 
 class AlbumsControllerTests: XCTestCase {
 
-    var tvc : AlbumTableViewController?
-    var albumsListViewModel = [AlbumCellViewModel]()
-    
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        //1
-         let albumManagerMock = AlbumManagerMock()
-         //2
-        let albums = TestingFiles.getTestingAlbums()
-        albumsListViewModel = albums.map({ AlbumCellViewModel(album: $0)})
-         //3 use genetic class for table dataSorce
-        let dataSource : TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel> = TableViewDataSorce(cellId:Constants.cellId, models: albumsListViewModel)
-            {cell, vm in
-             //dependency injuction - property
-                cell.albumViewModel = vm
-            }
-        //4 use the delegate method for calcualting cell height
-         let tableDelegate = AlbumTableViewDelegate(albumCellViewModels: albumsListViewModel)
-         // dependency injuction (4) - intilizer
-         let tvc = AlbumTableViewController(albumManager: albumManagerMock,
-                                            albumsListViewModel:  albumsListViewModel,
-                                            dataSource: dataSource,
-                                            tableDelegate: tableDelegate)
-    }
-
     func testExample() {
         
-        if let tvc = self.tvc {
-            
-            let count = tvc.tableView.numberOfRows(inSection: 0)
+        let albumLoadExpectation = expectation(description: "Trying to retrieve albums")
+        //get testing albums
+        let albums = TestingFiles.getTestingAlbums()
+        //get testing imges
+        let imgs = TestingFiles.getTestImgesFromBundle()
 
-            XCTAssertEqual(count, 3, "data did not load")
-            
-            for i in 0..<count{
-            
-//                let albumsExpectation = expectation(description: "AlbumAPI trying to retrieve new albums")
-
-               let indexPath = IndexPath(row: i, section: 0)
-               if let cell = tvc.tableView.cellForRow(at: indexPath) as? AlbumTableViewCell{
-                   
-                    XCTAssertEqual(cell.albumName.text, albumsListViewModel[i].albumName)
-                    XCTAssertEqual(cell.artistName.text, albumsListViewModel[i].artistName)
-
-//                albumsExpectation.fulfill()
-//                waitForExpectations(timeout: 1.0)
-
-               }
-            }
+        //1
+        let albumsListViewModel = [AlbumCellViewModel]()
+       //2
+        let albumManagerMock = AlbumManagerMock(albums: albums)
+        {
+            albumLoadExpectation.fulfill()
         }
+       //3 use genetic class for table dataSorce
+        let dataSource : TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel> = TableViewDataSorce(cellId:Constants.cellId)
+          {cell, vm in
+           //dependency injuction - property
+              cell.albumViewModel = vm
+          }
+        
+        //put images in cache
+        for i in 0..<albums.count{
+            imgCache.setObject(imgs[i], forKey: NSString(string: albums[i].imgUrl))
+        }
+        
+        // dependency injuction (4) - intilizer
+        let tvc = AlbumTableViewController(albumManager: albumManagerMock,
+                                            albumsListViewModel: albumsListViewModel,
+                                            dataSource: dataSource)
+        let _ = tvc.tableView
     
-//        tvc?.tableView.scrollsToTop
-    
+        waitForExpectations(timeout: 1.0)
+        let count = tvc.tableView.numberOfRows(inSection: 0)
+        XCTAssertEqual(count, albums.count, "data did not load")
+        
+        for i in 0..<count{
+
+           let indexPath = IndexPath(row: i, section: 0)
+           if let cell = tvc.tableView.cellForRow(at: indexPath) as? AlbumTableViewCell{
+               
+                let albumViewModel = AlbumCellViewModel(album: albums[i])
+            
+                XCTAssertEqual(cell.albumName.text, albumViewModel.albumName)
+                XCTAssertEqual(cell.artistName.text, albumViewModel.artistName)
+            
+                //test img
+                if let imgRetreived = cell.albumImg.image {
+                   //img retreived should be the same as the img we placed in cache
+                   XCTAssertEqual(imgs[i].pngData(), imgRetreived.pngData())
+                }else{
+                   XCTFail("should have img")
+                }
+           }
+        }
+        
     }
+    
+    override class func tearDown() {
+        imgCache.removeAllObjects()
+    }
+
 
 }

@@ -24,18 +24,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             //2
             let albumsListViewModel = [AlbumCellViewModel]()
             //3 use genetic class for table dataSorce
-            let dataSource : TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel> = TableViewDataSorce(cellId:Constants.cellId, models: albumsListViewModel){
+            let dataSource : TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel> = TableViewDataSorce(cellId:Constants.cellId){
                 cell, vm in
                 //dependency injuction - property
                 cell.albumViewModel = vm
                }
-            //4 use the delegate method for calcualting cell height
-            let tableDelegate = AlbumTableViewDelegate(albumCellViewModels: albumsListViewModel)
-            // dependency injuction (4) - intilizer
+            // dependency injuction (3) - intilizer
             let tvc = AlbumTableViewController(albumManager: albumManager,
                                                albumsListViewModel:  albumsListViewModel,
-                                               dataSource: dataSource,
-                                               tableDelegate: tableDelegate)
+                                               dataSource: dataSource)
             
             let navigation = UINavigationController(rootViewController: tvc)
             my_window.rootViewController = navigation
