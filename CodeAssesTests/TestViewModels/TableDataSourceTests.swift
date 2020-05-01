@@ -64,14 +64,14 @@ extension TableDataSourceTests {
     func testDataSource<CellType: UITableViewCell,MVType>(_ models: [MVType], _ configCell: @escaping(CellType, MVType)->(), _ testCell: ((CellType, MVType) -> Void)){
            
        //create dataSource
-       let dataSource : TableViewDataSorce<CellType, MVType> = TableViewDataSorce(cellId:Constants.cellId, configCell: configCell)
+       let dataSourceDelegate:TableViewDatasourceDelegate<CellType, MVType> = TableViewDatasourceDelegate(cellId:Constants.cellId, configCell: configCell)
               
        //setup table
-       let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        dataSource.updateModel(newModel: models)
-       tableView.dataSource = dataSource
-       tableView.register(CellType.self, forCellReuseIdentifier: Constants.cellId)
-       tableView.reloadData()
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        dataSourceDelegate.updateModel(newModel: models)
+        tableView.dataSource = dataSourceDelegate
+        tableView.register(CellType.self, forCellReuseIdentifier: Constants.cellId)
+        tableView.reloadData()
                 
        // test sections and number of rows
        XCTAssertEqual(tableView.numberOfSections, 1)

@@ -17,7 +17,7 @@ class AlbumsControllerTests: XCTestCase {
         let albums = TestingFiles.getTestingAlbums()
         //get testing imges
         let imgs = TestingFiles.getTestImgesFromBundle()
-
+        
         //1
         let albumsListViewModel = [AlbumCellViewModel]()
        //2
@@ -26,7 +26,7 @@ class AlbumsControllerTests: XCTestCase {
             albumLoadExpectation.fulfill()
         }
        //3 use genetic class for table dataSorce
-        let dataSource : TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel> = TableViewDataSorce(cellId:Constants.cellId)
+        let dataSourceDelegate : TableViewDatasourceDelegate<AlbumTableViewCell, AlbumCellViewModel> = TableViewDatasourceDelegate(cellId:Constants.cellId)
           {cell, vm in
            //dependency injuction - property
               cell.albumViewModel = vm
@@ -40,13 +40,14 @@ class AlbumsControllerTests: XCTestCase {
         // dependency injuction (4) - intilizer
         let tvc = AlbumTableViewController(albumManager: albumManagerMock,
                                             albumsListViewModel: albumsListViewModel,
-                                            dataSource: dataSource)
+                                            dataSource: dataSourceDelegate)
         let _ = tvc.tableView
     
         waitForExpectations(timeout: 1.0)
         let count = tvc.tableView.numberOfRows(inSection: 0)
         XCTAssertEqual(count, albums.count, "data did not load")
         
+        //test cells
         for i in 0..<count{
 
            let indexPath = IndexPath(row: i, section: 0)
@@ -67,8 +68,10 @@ class AlbumsControllerTests: XCTestCase {
            }
         }
         
+        
     }
     
+    // empty cache
     override class func tearDown() {
         imgCache.removeAllObjects()
     }

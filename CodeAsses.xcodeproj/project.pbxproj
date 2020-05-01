@@ -8,16 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		5D01AA12243311230082749D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D01AA11243311230082749D /* Constants.swift */; };
-		5D01AA1824345C190082749D /* TableViewDataSorce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D01AA1724345C190082749D /* TableViewDataSorce.swift */; };
+		5D01AA1824345C190082749D /* TableViewDatasourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D01AA1724345C190082749D /* TableViewDatasourceDelegate.swift */; };
 		5D072C002411C0FD00F043A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DACB9AA2411BC5800AA7AA2 /* LaunchScreen.storyboard */; };
 		5D552FCE2446502800D67B17 /* ImgRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D552FCD2446502800D67B17 /* ImgRetriever.swift */; };
 		5D552FCF2446C45800D67B17 /* ImgRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D552FCD2446502800D67B17 /* ImgRetriever.swift */; };
 		5D552FD02446C45800D67B17 /* ImgRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D552FCD2446502800D67B17 /* ImgRetriever.swift */; };
 		5D552FD4244831ED00D67B17 /* AlbumViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D552FD3244831ED00D67B17 /* AlbumViewModels.swift */; };
-		5D552FDF2453A13900D67B17 /* TableViewDataSorce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D01AA1724345C190082749D /* TableViewDataSorce.swift */; };
+		5D552FDF2453A13900D67B17 /* TableViewDatasourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D01AA1724345C190082749D /* TableViewDatasourceDelegate.swift */; };
 		5D552FE12453A13900D67B17 /* AlbumViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D552FD3244831ED00D67B17 /* AlbumViewModels.swift */; };
 		5D552FE42453A13900D67B17 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D01AA11243311230082749D /* Constants.swift */; };
-		5D552FE52453A18900D67B17 /* TableViewDataSorce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D01AA1724345C190082749D /* TableViewDataSorce.swift */; };
+		5D552FE52453A18900D67B17 /* TableViewDatasourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D01AA1724345C190082749D /* TableViewDatasourceDelegate.swift */; };
 		5D552FE72453A18900D67B17 /* AlbumViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D552FD3244831ED00D67B17 /* AlbumViewModels.swift */; };
 		5D552FEA2453A18900D67B17 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D01AA11243311230082749D /* Constants.swift */; };
 		5D5530002456550F00D67B17 /* AlbumManagerReceiverMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D552FFF2456550F00D67B17 /* AlbumManagerReceiverMock.swift */; };
@@ -93,7 +93,7 @@
 
 /* Begin PBXFileReference section */
 		5D01AA11243311230082749D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		5D01AA1724345C190082749D /* TableViewDataSorce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDataSorce.swift; sourceTree = "<group>"; };
+		5D01AA1724345C190082749D /* TableViewDatasourceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDatasourceDelegate.swift; sourceTree = "<group>"; };
 		5D552FCD2446502800D67B17 /* ImgRetriever.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgRetriever.swift; sourceTree = "<group>"; };
 		5D552FD3244831ED00D67B17 /* AlbumViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModels.swift; sourceTree = "<group>"; };
 		5D552FEB2453A1E200D67B17 /* AlbumManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumManagerTests.swift; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		5D01AA1324345BAA0082749D /* DataSorcesAndDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				5D01AA1724345C190082749D /* TableViewDataSorce.swift */,
+				5D01AA1724345C190082749D /* TableViewDatasourceDelegate.swift */,
 			);
 			path = DataSorcesAndDelegate;
 			sourceTree = "<group>";
@@ -469,7 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D55308A24577AF100D67B17 /* AlbumTableViewController.swift in Sources */,
-				5D01AA1824345C190082749D /* TableViewDataSorce.swift in Sources */,
+				5D01AA1824345C190082749D /* TableViewDatasourceDelegate.swift in Sources */,
 				5DACB9E62411BD2400AA7AA2 /* View+Constraint.swift in Sources */,
 				5DBDD5D124185271006B4B24 /* DetailsView.swift in Sources */,
 				5DACB9A02411BC5700AA7AA2 /* AppDelegate.swift in Sources */,
@@ -489,7 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D55308C24577B4A00D67B17 /* AlbumManagerTests.swift in Sources */,
-				5D552FDF2453A13900D67B17 /* TableViewDataSorce.swift in Sources */,
+				5D552FDF2453A13900D67B17 /* TableViewDatasourceDelegate.swift in Sources */,
 				5D5530A02458116100D67B17 /* AlbumViewModelTests.swift in Sources */,
 				5D552FE12453A13900D67B17 /* AlbumViewModels.swift in Sources */,
 				5D5530972457AF3F00D67B17 /* AlbumsControllerTests.swift in Sources */,
@@ -517,7 +517,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D552FE52453A18900D67B17 /* TableViewDataSorce.swift in Sources */,
+				5D552FE52453A18900D67B17 /* TableViewDatasourceDelegate.swift in Sources */,
 				5D552FE72453A18900D67B17 /* AlbumViewModels.swift in Sources */,
 				5D552FEA2453A18900D67B17 /* Constants.swift in Sources */,
 				5DACB9C22411BC5800AA7AA2 /* CodeAssesUITests.swift in Sources */,

@@ -8,12 +8,12 @@
 
 import UIKit
 
-class AlbumTableViewController: UITableViewController {
+class AlbumTableViewController: UITableViewController,TableViewDelegateProtocol {
+    
     
     private var albumManager: AlbumManagerProtocol
     private var albumsListViewModel: [AlbumCellViewModel]
-    private var dataSource: TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel>
-//    private var tableDelegate: AlbumTableViewDelegate
+    private var dataSourceDelegate: TableViewDatasourceDelegate<AlbumTableViewCell, AlbumCellViewModel>
 
     private let updateObserver = Notification.Name(rawValue: Constants.observerKey)
     
@@ -32,11 +32,11 @@ class AlbumTableViewController: UITableViewController {
     //dependency injuction - intilizer
     init(albumManager: AlbumManagerProtocol,
          albumsListViewModel: [AlbumCellViewModel],
-         dataSource: TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel>) {
+         dataSource: TableViewDatasourceDelegate<AlbumTableViewCell, AlbumCellViewModel>) {
         
         self.albumManager = albumManager
         self.albumsListViewModel = albumsListViewModel
-        self.dataSource = dataSource
+        self.dataSourceDelegate = dataSource
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -47,7 +47,6 @@ class AlbumTableViewController: UITableViewController {
         NotificationCenter.default.removeObserver(self)
     }
 }
-
 
 // MARK: - table setup
 
@@ -82,27 +81,23 @@ extension AlbumTableViewController {
 extension AlbumTableViewController {
     
     func dataSouceSetup (){
-        self.tableView.dataSource = self.dataSource
+        dataSourceDelegate.tableViewDelegateProtocol = self
+        self.tableView.dataSource = self.dataSourceDelegate
+        self.tableView.delegate = self.dataSourceDelegate
     }
 }
 
-// MARK: - Table delegate methods
+// MARK: - Table delegate method
 
 extension AlbumTableViewController {
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-        return UITableView.automaticDimension
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+    func didSelectCell(indexPath: IndexPath) {
+        print("didSelectCell")
         //dependency injuction - intializer
         let albumModel = AlbumDetailsViewModel(album: self.albumsListViewModel[indexPath.row].album)
         let destCv = DetailsViewController(albumModel: albumModel)
         navigationController?.pushViewController(destCv, animated: true)
     }
-
 }
 
 // MARK: - Delegate methods for updating table after HTTP
@@ -139,7 +134,7 @@ extension AlbumTableViewController {
     }
     
     @objc func updateDataSource(){
-        self.dataSource.updateModel(newModel: self.albumsListViewModel)
+        self.dataSourceDelegate.updateModel(newModel: self.albumsListViewModel)
     }
 
     @objc func updateTableData(){

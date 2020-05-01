@@ -11,6 +11,7 @@ import Foundation
 // MARK: - protocol for api delegate methods
 
 protocol AlbumManagerDelegate {
+    //dependency injuction - method
     func didLoadAlbum(albums:[Album], completion: @escaping (()->Void))
     func didFailWithError(error: Error)
 }

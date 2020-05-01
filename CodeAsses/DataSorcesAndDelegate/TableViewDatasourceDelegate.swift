@@ -13,7 +13,13 @@ import UIKit
  ** works with a custom cell type and a view model type
  ****************************************/
 
-class TableViewDataSorce<CellType,ViewModelType>: NSObject, UITableViewDataSource where CellType : UITableViewCell{
+protocol TableViewDelegateProtocol {
+    func didSelectCell(indexPath: IndexPath)
+}
+
+class TableViewDatasourceDelegate<CellType,ViewModelType>: NSObject, UITableViewDataSource, UITableViewDelegate where CellType : UITableViewCell{
+    
+    var tableViewDelegateProtocol: TableViewDelegateProtocol?
     
     let cellId : String
     var models = [ViewModelType]()
@@ -29,6 +35,9 @@ class TableViewDataSorce<CellType,ViewModelType>: NSObject, UITableViewDataSourc
     func updateModel(newModel: [ViewModelType]){
         models = newModel
     }
+    
+    //MARK:- Datasource methods
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return models.count
     }
@@ -49,4 +58,17 @@ class TableViewDataSorce<CellType,ViewModelType>: NSObject, UITableViewDataSourc
         }
         return UITableViewCell()
     }
+    
+    //MARK:- Delegate methods
+
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+           return UITableView.automaticDimension
+       }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        tableViewDelegateProtocol?.didSelectCell(indexPath: indexPath)
+    }
+    
 }

@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             //2
             let albumsListViewModel = [AlbumCellViewModel]()
             //3 use genetic class for table dataSorce
-            let dataSource : TableViewDataSorce<AlbumTableViewCell, AlbumCellViewModel> = TableViewDataSorce(cellId:Constants.cellId){
+            let dataSource : TableViewDatasourceDelegate<AlbumTableViewCell, AlbumCellViewModel> = TableViewDatasourceDelegate(cellId:Constants.cellId){
                 cell, vm in
                 //dependency injuction - property
                 cell.albumViewModel = vm
