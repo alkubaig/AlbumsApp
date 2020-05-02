@@ -10,8 +10,6 @@ import UIKit
 
 class AlbumManagerReceiverMock: AlbumManagerDelegate {
 
-    
-    
     let expectedBehaviorForDidLoadAlbum: (([Album]) -> Void)
     let expectedBehaviorFordidFailWithError: ((Error) -> Void)
 

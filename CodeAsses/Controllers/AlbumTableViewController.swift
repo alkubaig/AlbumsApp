@@ -92,7 +92,7 @@ extension AlbumTableViewController {
 extension AlbumTableViewController {
     
     func didSelectCell(indexPath: IndexPath) {
-        print("didSelectCell")
+        print("didSelectCell \(indexPath.row)")
         //dependency injuction - intializer
         let albumModel = AlbumDetailsViewModel(album: self.albumsListViewModel[indexPath.row].album)
         let destCv = DetailsViewController(albumModel: albumModel)

@@ -11,7 +11,7 @@ class DetailsViewController: UIViewController {
 
     let albumModel : AlbumDetailsViewModel
 
-    private var detailsView : DetailsView?{
+     var detailsView : DetailsView?{
         
         didSet{
             if let detailsView = detailsView{
@@ -33,6 +33,7 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("I am here")
         detailsView = DetailsView(frame: self.view.frame)
     }
     

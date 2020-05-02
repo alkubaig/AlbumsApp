@@ -33,9 +33,8 @@ class TableDataSourceTests: XCTestCase {
         {
             (cell: AlbumTableViewCell, vm: AlbumCellViewModel) in cell.albumViewModel = vm
         }
-        let testDelegate : ((IndexPath)->Void) = {idxPath in ()}
 
-        testDataSource(albumsListViewModel, configFunc, testDelegate)
+        testDataSource(albumsListViewModel, configFunc)
         { (cell: AlbumTableViewCell, vm: AlbumCellViewModel) in
             XCTAssertEqual(cell.albumName.text, vm.albumName)
             XCTAssertEqual(cell.artistName.text, vm.artistName)
@@ -46,9 +45,7 @@ class TableDataSourceTests: XCTestCase {
      //2. test with an empty array of models
      func testWithEmptyArray(){
     
-        let testDelegate : ((IndexPath)->Void) = {idxPath in ()}
-
-        testDataSource([], {_, _ in }, testDelegate)
+        testDataSource([], {_, _ in })
         { (cell,_) in
             XCTFail("should not have any cells")
         }
@@ -60,9 +57,8 @@ class TableDataSourceTests: XCTestCase {
         let count = 5
         let word = "Hello"
         let models = Array(repeating: word, count: count)
-        let testDelegate : ((IndexPath)->Void) = {idxPath in ()}
 
-        testDataSource(models, {cell, model in cell.textLabel?.text = model}, testDelegate)
+        testDataSource(models, {cell, model in cell.textLabel?.text = model})
         {(cell,_) in
             XCTAssertEqual(word, cell.textLabel?.text)
         }
@@ -76,7 +72,6 @@ extension TableDataSourceTests {
     func testDataSource<CellType: UITableViewCell,MVType>(
         _ models: [MVType],
         _ configCell: @escaping(CellType, MVType)->(),
-        _ testDelegate: @escaping((IndexPath)->Void),
         _ testDatasource: @escaping(CellType, MVType)->()){
         
         //-------------- test set up ---------------//
@@ -89,7 +84,7 @@ extension TableDataSourceTests {
        let dataSourceDelegate:TableViewDatasourceDelegate<CellType, MVType> = TableViewDatasourceDelegate(cellId:Constants.cellId, configCell: configCell)
             
         //mock table delegate
-        let delegateMock = TableViewDelgateMock(testDelegate)
+        let delegateMock = TableViewDelgateMock()
       
        //set the table delegate to be the mock delegate
         dataSourceDelegate.tableViewDelegateProtocol = delegateMock

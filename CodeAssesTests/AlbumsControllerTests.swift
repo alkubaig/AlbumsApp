@@ -8,6 +8,7 @@
 
 import XCTest
 
+//integration test
 class AlbumsControllerTests: XCTestCase {
 
     func testExample() {
@@ -36,13 +37,18 @@ class AlbumsControllerTests: XCTestCase {
         for i in 0..<albums.count{
             imgCache.setObject(imgs[i], forKey: NSString(string: albums[i].imgUrl))
         }
-        
+    
         // dependency injuction (4) - intilizer
         let tvc = AlbumTableViewController(albumManager: albumManagerMock,
                                             albumsListViewModel: albumsListViewModel,
                                             dataSource: dataSourceDelegate)
-        let _ = tvc.tableView
-    
+                
+//        let _ = tvc.tableView
+
+        let navigation = UINavigationController(rootViewController: tvc)
+
+        UIApplication.shared.keyWindow?.rootViewController = navigation
+
         waitForExpectations(timeout: 1.0)
         let count = tvc.tableView.numberOfRows(inSection: 0)
         XCTAssertEqual(count, albums.count, "data did not load")
@@ -65,10 +71,18 @@ class AlbumsControllerTests: XCTestCase {
                 }else{
                    XCTFail("should have img")
                 }
+                dataSourceDelegate.tableView(tvc.tableView, didSelectRowAt: indexPath)
+        
+                guard let detailedView = navigation.topViewController as? DetailsViewController else {
+                    XCTFail("dv not there!")
+                    return
+                }
+//                XCTAssertEqual(tv.albumModel.albumName, albumViewModel.albumName )
+
+                navigation.popToRootViewController(animated: true)
+            
            }
         }
-        
-        
     }
     
     // empty cache
