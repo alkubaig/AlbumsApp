@@ -1,5 +1,5 @@
 //
-//  ImgReteriveProtocolMock.swift
+//  ImgReteriveMock.swift
 //  CodeAsses
 //
 //  Created by Ghadeer Alkubaish on 4/30/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ImgReteriveProtocolMock: ImgReteriveProtocol {
+struct ImgReteriveMock: ImgReteriveProtocol {
     
     var completion: (() -> Void)
     

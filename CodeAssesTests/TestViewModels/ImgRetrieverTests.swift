@@ -80,7 +80,7 @@ extension ImgRetrieverTests{
            let imgLoadExpectation = expectation(description: "Trying to retrieve new img")
 
            //use a mock protocol object that allows us to wait fot http call to finish
-           imgFromRetreiver.imgReteriveProtocol = ImgReteriveProtocolMock({ imgLoadExpectation.fulfill()})
+           imgFromRetreiver.imgReteriveProtocol = ImgReteriveMock({ imgLoadExpectation.fulfill()})
            
            //get img link -- from local file path
            let url = localFileURLs[i]
@@ -118,7 +118,7 @@ extension ImgRetrieverTests {
        let imgFromRetreiver = ImgRetriever()
     
        //use a mock protocol object that allows us to wait fot http call to finish
-       imgFromRetreiver.imgReteriveProtocol = ImgReteriveProtocolMock({ imgLoadExpectation.fulfill()})
+       imgFromRetreiver.imgReteriveProtocol = ImgReteriveMock({ imgLoadExpectation.fulfill()})
       
       //makeAnInvalidLinkName
       let url = "plapla"

@@ -13,7 +13,7 @@ import UIKit
  ** works with a custom cell type and a view model type
  ****************************************/
 
-protocol TableViewDelegateProtocol {
+protocol TableViewDelegateProtocol {    
     func didSelectCell(indexPath: IndexPath)
 }
 

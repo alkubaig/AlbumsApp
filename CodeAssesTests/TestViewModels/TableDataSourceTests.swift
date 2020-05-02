@@ -8,21 +8,34 @@
 
 import XCTest
 
+
 /****************************************
-** TableViewDataSorce testing
+ *** TableViewDataSorce testing
+ **
+ ** We use a generic function testDataSource to test TableViewDataSorce
+ ** it takes an array of models of any type and three closures
+ ** - configCell closure to configure cells
+ ** - testDatasource closure to test datasource
+ ** - testDelegate closure to test delegate (in our current examples, there is nothing to test)
 ****************************************/
 
+//MARK:- examples for testing
 class TableDataSourceTests: XCTestCase {
         
-    //test with an array of 3 AlbumCellViewModel albums and AlbumCellViewModel
+    //1. test with an array of 3 AlbumCellViewModel albums and AlbumCellViewModel
     func testWith3AlbumsAndAlbumCell(){
         
         //get testing albums
         let albums = TestingFiles.getTestingAlbums()
         let albumsListViewModel = albums.map({ AlbumCellViewModel(album: $0)})
-        let configFunc = {(cell: AlbumTableViewCell, vm: AlbumCellViewModel) in cell.albumViewModel = vm}
+        
+        let configFunc =
+        {
+            (cell: AlbumTableViewCell, vm: AlbumCellViewModel) in cell.albumViewModel = vm
+        }
+        let testDelegate : ((IndexPath)->Void) = {idxPath in ()}
 
-        testDataSource(albumsListViewModel, configFunc )
+        testDataSource(albumsListViewModel, configFunc, testDelegate)
         { (cell: AlbumTableViewCell, vm: AlbumCellViewModel) in
             XCTAssertEqual(cell.albumName.text, vm.albumName)
             XCTAssertEqual(cell.artistName.text, vm.artistName)
@@ -30,62 +43,88 @@ class TableDataSourceTests: XCTestCase {
         }
     }
     
-     //test with an empty array of models
+     //2. test with an empty array of models
      func testWithEmptyArray(){
-        
-        testDataSource([], {_, _ in })
+    
+        let testDelegate : ((IndexPath)->Void) = {idxPath in ()}
+
+        testDataSource([], {_, _ in }, testDelegate)
         { (cell,_) in
             XCTFail("should not have any cells")
         }
      }
     
-    //test with an array of strings and UITableViewCell
+    //3. test with an array of strings and UITableViewCell
     func testWith3StringsAndUICell(){
      
         let count = 5
         let word = "Hello"
         let models = Array(repeating: word, count: count)
-                    
-        testDataSource(models, {cell, model in cell.textLabel?.text = model})
+        let testDelegate : ((IndexPath)->Void) = {idxPath in ()}
+
+        testDataSource(models, {cell, model in cell.textLabel?.text = model}, testDelegate)
         {(cell,_) in
             XCTAssertEqual(word, cell.textLabel?.text)
         }
     }
 }
 
-/****************************************
-** a generic function to test TableViewDataSorce 
-** it takes a model of any type and two closures
-** one closure to configure cells and one closure to test cells
-****************************************/
+//MARK:- a generic function to test TableViewDataSorce
 
 extension TableDataSourceTests {
     
-    func testDataSource<CellType: UITableViewCell,MVType>(_ models: [MVType], _ configCell: @escaping(CellType, MVType)->(), _ testCell: ((CellType, MVType) -> Void)){
-           
-       //create dataSource
-       let dataSourceDelegate:TableViewDatasourceDelegate<CellType, MVType> = TableViewDatasourceDelegate(cellId:Constants.cellId, configCell: configCell)
-              
-       //setup table
+    func testDataSource<CellType: UITableViewCell,MVType>(
+        _ models: [MVType],
+        _ configCell: @escaping(CellType, MVType)->(),
+        _ testDelegate: @escaping((IndexPath)->Void),
+        _ testDatasource: @escaping(CellType, MVType)->()){
+        
+        //-------------- test set up ---------------//
+        
+        //setup table
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        dataSourceDelegate.updateModel(newModel: models)
-        tableView.dataSource = dataSourceDelegate
         tableView.register(CellType.self, forCellReuseIdentifier: Constants.cellId)
+
+       //create custom (dataSource and delegate) object
+       let dataSourceDelegate:TableViewDatasourceDelegate<CellType, MVType> = TableViewDatasourceDelegate(cellId:Constants.cellId, configCell: configCell)
+            
+        //mock table delegate
+        let delegateMock = TableViewDelgateMock(testDelegate)
+      
+       //set the table delegate to be the mock delegate
+        dataSourceDelegate.tableViewDelegateProtocol = delegateMock
+        
+        //set table delegate and datasource to custom (dataSource and delegate) object
+        tableView.dataSource = dataSourceDelegate
+        tableView.delegate = dataSourceDelegate
+
+        //update models for datasource
+        dataSourceDelegate.updateModel(newModel: models)
         tableView.reloadData()
                 
-       // test sections and number of rows
+        //-------------- test ---------------//
+        
+       // 1. test sections and number of rows
        XCTAssertEqual(tableView.numberOfSections, 1)
        XCTAssertEqual(tableView.numberOfRows(inSection: 0), models.count)
-       tableView.reloadData()
                 
-      //test cells
+      //test cell (2. delegate) and (3. datasource)
        for i in 0..<models.count{
            let indexPath = IndexPath(row: i, section: 0)
            if let cell = tableView.cellForRow(at: indexPath) as? CellType{
-               testCell(cell, models[i])
+            
+                //2.test delegate by selecting a cell
+                dataSourceDelegate.tableView(tableView, didSelectRowAt: indexPath)
+                XCTAssertEqual(delegateMock.selected, true)
+                delegateMock.selected = false
+            
+                //3. testdatasource
+                testDatasource(cell, models[i])
+            
            }else{
                XCTFail("cell \(i) is not generated ")
            }
        }
+        
    }
 }
