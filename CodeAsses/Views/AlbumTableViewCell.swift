@@ -32,6 +32,7 @@ class AlbumTableViewCell: UITableViewCell {
         let img = ImgRetriever()
         img.layer.cornerRadius = img.frame.size.width / 2;
         img.clipsToBounds = true;
+        img.accessibilityIdentifier = Constants.CellElementId.albumImgId
         return img
     }()
     var artistName: UILabel = {
@@ -39,6 +40,7 @@ class AlbumTableViewCell: UITableViewCell {
         l.font = UIFont.systemFont(ofSize: Constants.CellFonts.artistNameFont)
         l.numberOfLines = 0
         l.textColor = .darkGray
+        l.accessibilityIdentifier = Constants.CellElementId.artistNameId
         return l
     }()
     
@@ -46,6 +48,7 @@ class AlbumTableViewCell: UITableViewCell {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: Constants.CellFonts.albumNameFont)
         l.numberOfLines = 0
+        l.accessibilityIdentifier = Constants.CellElementId.albumNameId
         return l
     }()
     

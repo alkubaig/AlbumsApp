@@ -33,8 +33,12 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("I am here")
+        print("d viewDidLoad")
         detailsView = DetailsView(frame: self.view.frame)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print("d viewDidDisappear")
     }
     
     @objc func viewAlbum(sender: UIButton) {

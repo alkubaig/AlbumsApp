@@ -12,7 +12,7 @@ import Foundation
 
 protocol AlbumManagerDelegate {
     //dependency injuction - method
-    func didLoadAlbum(albums:[Album], completion: @escaping (()->Void))
+    func didLoadAlbum(albums:[Album])
     func didFailWithError(error: Error)
 }
 
@@ -61,7 +61,7 @@ struct AlbumManager: AlbumManagerProtocol {
         if let safeData = data {
             //if succeed, call delegate method didLoadAlbum after parsing response
             if let album = self.parseJSON(safeData) {
-                self.delegate?.didLoadAlbum(albums: album){}
+                self.delegate?.didLoadAlbum(albums: album)
             }
         }
     }

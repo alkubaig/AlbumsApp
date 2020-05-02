@@ -19,6 +19,29 @@ struct Constants{
     // url constructed with num of albums
     static let fullAlbumURL = "\(albumURL)&q=\(String(numAlbums))/explicit.json"
     
+    
+    struct CellElementId {
+         
+         private init(){}
+
+         static let artistNameId = "artistNameId"
+         static let albumNameId = "albumNameId"
+         static let albumImgId = "albumImgId"
+     }
+    
+    struct DetailsElementId {
+         
+         private init(){}
+
+         static let artistNameId = "artistNameIdD"
+         static let albumNameId = "albumNameIdD"
+         static let albumImgId = "albumImgIdD"
+         static let copyrightId = "copyrightId"
+         static let genreId = "genreId"
+         static let releaseDateId = "releaseDateId"
+
+     }
+    
     struct CellFonts {
         
         private init(){}

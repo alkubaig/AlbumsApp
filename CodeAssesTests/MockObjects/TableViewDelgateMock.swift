@@ -10,17 +10,10 @@ import Foundation
 
 class TableViewDelgateMock: TableViewDelegateProtocol {
     
-//    var completion: ((IndexPath) -> Void)
     var selected = false
-
-//    init(_ complition: @escaping ((IndexPath)->Void)){
-//
-//        self.completion = complition
-//    }
     
     func didSelectCell(indexPath: IndexPath) {
         selected = true
-//        completion(indexPath)
     }
     
 }

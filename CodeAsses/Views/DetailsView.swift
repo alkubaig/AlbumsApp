@@ -69,6 +69,7 @@ class DetailsView: UIView {
     
     var albumImg: ImgRetriever = {
         let img = ImgRetriever()
+        img.accessibilityIdentifier = Constants.DetailsElementId.albumImgId
         return img
     }()
     
@@ -79,6 +80,8 @@ class DetailsView: UIView {
         l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.artistNameFont)
         l.textAlignment = .center
         l.numberOfLines = 0
+        l.accessibilityIdentifier = Constants.DetailsElementId.artistNameId
+
         return l
     }()
 
@@ -87,6 +90,7 @@ class DetailsView: UIView {
         l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.albumNameFont)
         l.textAlignment = .center
         l.numberOfLines = 0
+        l.accessibilityIdentifier = Constants.DetailsElementId.albumNameId
         return l
     }()
 
@@ -96,6 +100,7 @@ class DetailsView: UIView {
         l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.releaseDateFont)
         l.textAlignment = .center
         l.numberOfLines = 0
+        l.accessibilityIdentifier = Constants.DetailsElementId.releaseDateId
         return l
       }()
 
@@ -105,6 +110,7 @@ class DetailsView: UIView {
         l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.copyrighteFont)
         l.textAlignment = .center
         l.numberOfLines = 0
+        l.accessibilityIdentifier = Constants.DetailsElementId.copyrightId
         return l
     }()
 
@@ -114,6 +120,7 @@ class DetailsView: UIView {
         l.font = UIFont.systemFont(ofSize: Constants.DetailsFonts.genreFont)
         l.textAlignment = .center
         l.numberOfLines = 0
+        l.accessibilityIdentifier = Constants.DetailsElementId.genreId
         return l
       }()
     //end labels ****//

@@ -33,12 +33,9 @@
 		5D55307F245776A100D67B17 /* TestingFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D553071245776A100D67B17 /* TestingFiles.swift */; };
 		5D55308A24577AF100D67B17 /* AlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DACB9D92411BD2400AA7AA2 /* AlbumTableViewController.swift */; };
 		5D55308C24577B4A00D67B17 /* AlbumManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D552FEB2453A1E200D67B17 /* AlbumManagerTests.swift */; };
-		5D5530972457AF3F00D67B17 /* AlbumsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530962457AF3F00D67B17 /* AlbumsControllerTests.swift */; };
 		5D55309A2457B0A600D67B17 /* AlbumManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530992457B0A600D67B17 /* AlbumManagerMock.swift */; };
 		5D5530A02458116100D67B17 /* AlbumViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D55309F2458116100D67B17 /* AlbumViewModelTests.swift */; };
 		5D5530A22458A51A00D67B17 /* TableDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530A12458A51A00D67B17 /* TableDataSourceTests.swift */; };
-		5D5530A624590D6200D67B17 /* AlbumsTableCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530A524590D6200D67B17 /* AlbumsTableCellTests.swift */; };
-		5D5530A82459113000D67B17 /* AlbumsDetailsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530A72459113000D67B17 /* AlbumsDetailsViewTests.swift */; };
 		5D5530AF245954DB00D67B17 /* album1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5530AC245954DB00D67B17 /* album1.png */; };
 		5D5530B0245954DB00D67B17 /* album0.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5530AD245954DB00D67B17 /* album0.png */; };
 		5D5530B1245954DB00D67B17 /* album2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5530AE245954DB00D67B17 /* album2.png */; };
@@ -103,7 +100,6 @@
 		5D55306E245776A100D67B17 /* Albums.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Albums.plist; sourceTree = "<group>"; };
 		5D55306F245776A100D67B17 /* ApiNoAlbums.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ApiNoAlbums.json; sourceTree = "<group>"; };
 		5D553071245776A100D67B17 /* TestingFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingFiles.swift; sourceTree = "<group>"; };
-		5D5530962457AF3F00D67B17 /* AlbumsControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsControllerTests.swift; sourceTree = "<group>"; };
 		5D5530992457B0A600D67B17 /* AlbumManagerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlbumManagerMock.swift; path = CodeAssesUITests/MockObjects/AlbumManagerMock.swift; sourceTree = SOURCE_ROOT; };
 		5D55309F2458116100D67B17 /* AlbumViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewModelTests.swift; sourceTree = "<group>"; };
 		5D5530A12458A51A00D67B17 /* TableDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataSourceTests.swift; sourceTree = "<group>"; };
@@ -199,17 +195,6 @@
 			path = TestViews;
 			sourceTree = "<group>";
 		};
-		5D5530AA2459115C00D67B17 /* TestViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				5D55309F2458116100D67B17 /* AlbumViewModelTests.swift */,
-				5D552FEB2453A1E200D67B17 /* AlbumManagerTests.swift */,
-				5D5530B4245A42B700D67B17 /* ImgRetrieverTests.swift */,
-				5D5530A12458A51A00D67B17 /* TableDataSourceTests.swift */,
-			);
-			path = TestViewModels;
-			sourceTree = "<group>";
-		};
 		5D5530AB245954DB00D67B17 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,11 +249,13 @@
 			children = (
 				5D55306C245776A100D67B17 /* TestData */,
 				5D552FFE245654F900D67B17 /* MockObjects */,
-				5D5530AA2459115C00D67B17 /* TestViewModels */,
+				5D55309F2458116100D67B17 /* AlbumViewModelTests.swift */,
+				5D552FEB2453A1E200D67B17 /* AlbumManagerTests.swift */,
+				5D5530B4245A42B700D67B17 /* ImgRetrieverTests.swift */,
+				5D5530A12458A51A00D67B17 /* TableDataSourceTests.swift */,
 				5D5530A92459113700D67B17 /* TestViews */,
 				5DACB9B82411BC5800AA7AA2 /* Info.plist */,
 				5D553071245776A100D67B17 /* TestingFiles.swift */,
-				5D5530962457AF3F00D67B17 /* AlbumsControllerTests.swift */,
 			);
 			path = CodeAssesTests;
 			sourceTree = "<group>";
@@ -495,7 +482,6 @@
 				5D552FDF2453A13900D67B17 /* TableViewDatasourceDelegate.swift in Sources */,
 				5D5530A02458116100D67B17 /* AlbumViewModelTests.swift in Sources */,
 				5D552FE12453A13900D67B17 /* AlbumViewModels.swift in Sources */,
-				5D5530972457AF3F00D67B17 /* AlbumsControllerTests.swift in Sources */,
 				5D552FE42453A13900D67B17 /* Constants.swift in Sources */,
 				5DACB9F32411BD2400AA7AA2 /* AlbumManager.swift in Sources */,
 				5D5530CD245AD79C00D67B17 /* ImgReteriveMock.swift in Sources */,
@@ -504,11 +490,9 @@
 				5D55309A2457B0A600D67B17 /* AlbumManagerMock.swift in Sources */,
 				5D55307F245776A100D67B17 /* TestingFiles.swift in Sources */,
 				5D5530A22458A51A00D67B17 /* TableDataSourceTests.swift in Sources */,
-				5D5530A624590D6200D67B17 /* AlbumsTableCellTests.swift in Sources */,
 				5DACB9E12411BD2400AA7AA2 /* AlbumTableViewCell.swift in Sources */,
 				5DBDD5D224185271006B4B24 /* DetailsView.swift in Sources */,
 				5D5530B5245A42B700D67B17 /* ImgRetrieverTests.swift in Sources */,
-				5D5530A82459113000D67B17 /* AlbumsDetailsViewTests.swift in Sources */,
 				5D552FD02446C45800D67B17 /* ImgRetriever.swift in Sources */,
 				5D5530D6245CEDA000D67B17 /* TableViewDelgateMock.swift in Sources */,
 				5DACB9E72411BD2400AA7AA2 /* View+Constraint.swift in Sources */,

@@ -18,9 +18,8 @@ class AlbumManagerReceiverMock: AlbumManagerDelegate {
         self.expectedBehaviorForDidLoadAlbum = expectedBehaviorForDidLoadAlbum
         self.expectedBehaviorFordidFailWithError = expectedBehaviorFordidFailWithError
     }
-    func didLoadAlbum(albums: [Album], completion: @escaping (() -> Void)) {
+    func didLoadAlbum(albums: [Album]) {
         expectedBehaviorForDidLoadAlbum(albums)
-        completion()
     }
      
      func didFailWithError(error: Error) {

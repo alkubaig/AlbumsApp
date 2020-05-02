@@ -96,7 +96,7 @@ extension AlbumTableViewController {
         //dependency injuction - intializer
         let albumModel = AlbumDetailsViewModel(album: self.albumsListViewModel[indexPath.row].album)
         let destCv = DetailsViewController(albumModel: albumModel)
-        navigationController?.pushViewController(destCv, animated: true)
+        self.navigationController?.pushViewController(destCv, animated: true)
     }
 }
 
@@ -104,12 +104,11 @@ extension AlbumTableViewController {
 // use notofications center to update UI and data after the albums have been uploaded (observer)
 
 extension AlbumTableViewController: AlbumManagerDelegate {
-    func didLoadAlbum(albums: [Album], completion: @escaping (()->Void)) {
+    func didLoadAlbum(albums: [Album]) {
         DispatchQueue.main.async {
                         
             self.albumsListViewModel = albums.map({return AlbumCellViewModel(album: $0)})
             NotificationCenter.default.post(name: self.updateObserver, object: nil)
-            completion()
         }
 
     }

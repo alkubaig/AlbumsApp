@@ -16,17 +16,14 @@ enum NetworkErr: Error {
 struct AlbumManagerMock: AlbumManagerProtocol {
     
     var delegate: AlbumManagerDelegate?
-    let albums: [Album]
-    var completion: (() -> Void)
+    let albums: [Album]    
     
-    
-    init(albums: [Album], complition: @escaping (()->Void)) {
+    init(albums: [Album]) {
         self.albums = albums
-        self.completion = complition
     }
     
     func fetchAlbum(numAlbums: Int){
-        delegate?.didLoadAlbum(albums: albums,completion: completion)
+        delegate?.didLoadAlbum(albums: albums)
     }
 }
 
