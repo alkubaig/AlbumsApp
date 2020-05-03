@@ -13,7 +13,6 @@ class AlbumTableViewController: UITableViewController,TableViewDelegateProtocol 
     private var albumManager = AlbumManager()
     private var albumsListViewModel = [AlbumCellViewModel]()
     private var dataSourceDelegate: TableViewDatasourceDelegate<AlbumTableViewCell, AlbumCellViewModel>?
-
     private let updateObserver = Notification.Name(rawValue: Constants.observerKey)
     
     override func viewDidLoad() {
@@ -67,14 +66,17 @@ extension AlbumTableViewController {
     
     func dataSouceSetup (){
      
-      //3 use genetic class for table dataSorce
+        //use genetic class for table dataSorce and delegates
         dataSourceDelegate = TableViewDatasourceDelegate(cellId:Constants.cellId){
           cell, vm in
           //dependency injuction - property
           cell.albumViewModel = vm
          }
         
+        //use this protocol for selecting rows deleagte
         dataSourceDelegate?.tableViewDelegateProtocol = self
+        
+        //set datasource and delegates to
         self.tableView.dataSource = self.dataSourceDelegate
         self.tableView.delegate = self.dataSourceDelegate
     }
@@ -85,7 +87,7 @@ extension AlbumTableViewController {
 extension AlbumTableViewController {
     
     func didSelectCell(indexPath: IndexPath) {
-        print("didSelectCell \(indexPath.row)")
+
         //dependency injuction - intializer
         let albumModel = AlbumDetailsViewModel(album: self.albumsListViewModel[indexPath.row].album)
         let destCv = DetailsViewController(albumModel: albumModel)
@@ -130,7 +132,6 @@ extension AlbumTableViewController {
     }
 
     @objc func updateTableData(){
-        print("relaoded")
         self.tableView.reloadData()
     }
 }
