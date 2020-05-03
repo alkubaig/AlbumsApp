@@ -14,9 +14,11 @@ class DetailsViewController: UIViewController {
      var detailsView : DetailsView?{
         
         didSet{
+            //update UI after viwModel is set
             if let detailsView = detailsView{
                 self.view.addSubview(detailsView)
                 detailsView.albumViewModel = self.albumModel
+                //attach action method to button
                 detailsView.showButton.addTarget(self, action: #selector(viewAlbum), for: UIControl.Event.touchUpInside)
             }
         }
@@ -33,17 +35,13 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("d viewDidLoad")
         detailsView = DetailsView(frame: self.view.frame)
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        print("d viewDidDisappear")
-    }
-    
+    // action for clicking the button
     @objc func viewAlbum(sender: UIButton) {
         
         let url = albumModel.url
+        //open web application
         if let valid_url = URL(string: url),
             UIApplication.shared.canOpenURL(valid_url) {
                 UIApplication.shared.open(valid_url)
