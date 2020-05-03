@@ -22,7 +22,6 @@ class TestingAlbums{
     let getAlbumCellViewModels: [AlbumCellViewModel]
     let getAlbumDetailsViewModel: [AlbumDetailsViewModel]
 
-
     // calculates getTestingAlbums property in private init
     private init(){
      
@@ -42,4 +41,5 @@ class TestingAlbums{
         getAlbumCellViewModels = albums.map({ AlbumCellViewModel(album: $0)})
         getAlbumDetailsViewModel = albums.map({ AlbumDetailsViewModel(album: $0)})
     }
+    
 }

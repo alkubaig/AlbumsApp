@@ -8,11 +8,18 @@
 
 import Foundation
 
+/****************************************
+ ** Mock object for testing TableViewDelgate
+****************************************/
+
+//MARK:- a mock object confirming to TableViewDelegateProtocol
+
 class TableViewDelgateMock: TableViewDelegateProtocol {
     
     var selected = false
     
     func didSelectCell(indexPath: IndexPath) {
+        //chnage propery selected to true when delegate method is triggred
         selected = true
     }
     
