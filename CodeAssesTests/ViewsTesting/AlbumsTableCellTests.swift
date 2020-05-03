@@ -16,14 +16,13 @@ class AlbumsTableCellTests: XCTestCase {
 
     func testCells(){
 
-        //get testing albums
-        let albums = TestingAlbums.testingAlbums.getTestingAlbums
         //get testing imges
         let imgs = TestingImgs.testingImgs.getTestingImgs
-        // generte view models of albums
-        let albumsListViewModel = albums.map({ AlbumCellViewModel(album: $0)})
+        
+        // get testing view models
+        let albumsListViewModel = TestingAlbums.testingAlbums.getAlbumCellViewModels
 
-        for i in 0..<albums.count{
+        for i in 0..<TestingAlbums.testingAlbumsCount{
 
             let vm = albumsListViewModel[i]
             //place img in chche

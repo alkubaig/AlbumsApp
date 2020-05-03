@@ -23,11 +23,8 @@ class TableDataSourceTests: XCTestCase {
     //1. test with an array of 3 AlbumCellViewModel albums and AlbumTableViewCell
     func testWith3AlbumsAndAlbumCellType(){
         
-        //get testing albums
-        let albums = TestingAlbums.testingAlbums.getTestingAlbums
-
-        //caculate view models
-        let albumsListViewModel = albums.map({ AlbumCellViewModel(album: $0)})
+        //get view models
+        let albumsListViewModel = TestingAlbums.testingAlbums.getAlbumCellViewModels
     
          //configure cell
         let configFunc = {

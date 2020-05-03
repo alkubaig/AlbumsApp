@@ -17,15 +17,13 @@ class AlbumsDetailsViewTests: XCTestCase {
 
     func testDetailedView(){
         
-        //get testing albums
-        let albums = TestingAlbums.testingAlbums.getTestingAlbums
+        //get testing viewModels
+        let albumsListViewModel = TestingAlbums.testingAlbums.getAlbumDetailsViewModel
+
         //get testing imges
         let imgs = TestingImgs.testingImgs.getTestingImgs
-
-        // generte view models of albums
-        let albumsListViewModel = albums.map({ AlbumDetailsViewModel(album: $0)})
         
-        for i in 0..<albums.count{
+        for i in 0..<TestingAlbums.testingAlbumsCount{
             
             let vm = albumsListViewModel[i]
             //put image in cache
@@ -34,7 +32,7 @@ class AlbumsDetailsViewTests: XCTestCase {
             let dView = DetailsView()
             dView.albumViewModel = vm
             
-            //test test view
+            // test detailed view
             XCTAssertEqual(dView.albumName.text, vm.albumName)
             XCTAssertEqual(dView.artistName.text, vm.artistName)
             XCTAssertEqual(dView.copyright.text, vm.copyright)
