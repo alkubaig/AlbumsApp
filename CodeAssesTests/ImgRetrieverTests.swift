@@ -66,7 +66,8 @@ extension ImgRetrieverTests{
    func testValidImgRetriever(){
 
        //setup up the testing data
-        imgs = TestingFiles.getTestImgesFromBundle()
+    
+        imgs = TestingImgs.testingImgs.getTestingImgs
         setupTestImgesInLocalPaths()
 
         for i in 0..<imgs.count{
@@ -143,7 +144,8 @@ extension ImgRetrieverTests{
 
     func testImgRetrieverCache(){
         
-        imgs = TestingFiles.getTestImgesFromBundle()
+        
+        imgs = TestingImgs.testingImgs.getTestingImgs
 
         for i in 0..<imgs.count{
 

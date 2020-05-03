@@ -12,6 +12,8 @@ import UIKit
 ** static methods for testing with files
 ****************************************/
 
+//constants for files' names
+
 struct TestFileNames {
     private init(){}
     static let apiAlbumsFileName = "ApiAlbums.json"
@@ -20,15 +22,11 @@ struct TestFileNames {
     static func imgAlbumFileName (_ i: Int)->String {
         return "album\(i).png"
     }
-    static let testingAlbumsCount = 3
-    static let testingImgsCount = 3
-
-
 }
 
+//MARK:- static method for getting the content of a file
 struct TestingFiles{
 
-    //make this a singleton of static methods for testing
     private init(){}
     static func getContentFromFile(_ name: String, _ type: String?, complition: (_ data: Data)->Void){
 
@@ -50,9 +48,10 @@ struct TestingFiles{
     }
 }
 
+//MARK:- generic funciton to decode the content of a plist
+
 extension TestingFiles {
     
-    // generic funciton to decode the content of a plist
     static func decodePropertyList<T: Decodable>(type: T.Type, data:Data, completion: (T)->Void){
         do {
           let decoder = PropertyListDecoder()
@@ -64,41 +63,5 @@ extension TestingFiles {
           fatalError("decoder fail")
         }
     }
-    
-    // get example albums from plist
-    static func getTestingAlbums()->[Album]{
-            
-        var albums = [Album]()
-
-        getContentFromFile(TestFileNames.plistAlbumsFileName,nil){ data in
-            decodePropertyList(type: [Album].self, data: data){
-                res in albums = res
-            }
-        }
-        return albums
-    }
 }
 
-extension TestingFiles{
-    
-    static func getTestImgesFromBundle()->[UIImage]{
-        
-        var images = [UIImage]()
-
-         for i in 0..<TestFileNames.testingImgsCount{
-             //get img file name
-             let imgName = TestFileNames.imgAlbumFileName(i)
-
-             //get img from project
-             guard let img = UIImage(named: imgName) else {
-
-                 fatalError("no image \(imgName)")
-             }
-             images.append(img)
-         }
-        return images
-
-     }
-    
-    
-}

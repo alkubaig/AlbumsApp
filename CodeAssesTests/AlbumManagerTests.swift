@@ -28,13 +28,13 @@ extension AlbumManagerTests{
     func testParseJSON_ApiAlbumsArray(){
         
         // get testing albums from "Albums.plist"
-        let matchingAlbum = TestingFiles.getTestingAlbums()
+        let matchingAlbum = TestingAlbums.testingAlbums.getTestingAlbums
 
         //get valid api response from json file with valid albums
         // pass it to parseJSON
         parseJsonFileWithParseJSON(fileName: TestFileNames.apiAlbumsFileName){ result in
             
-            XCTAssertEqual(result.count, TestFileNames.testingAlbumsCount, "Missing some Albums!")
+            XCTAssertEqual(result.count, TestingAlbums.testingAlbumsCount, "Missing some Albums!")
             
             for i in 0..<result.count{
                 //comapre results from parseJSON with result from "Albums.plist"

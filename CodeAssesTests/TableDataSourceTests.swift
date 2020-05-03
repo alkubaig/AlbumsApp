@@ -26,7 +26,8 @@ class TableDataSourceTests: XCTestCase {
     func testWith3AlbumsAndAlbumCell(){
         
         //get testing albums
-        let albums = TestingFiles.getTestingAlbums()
+        let albums = TestingAlbums.testingAlbums.getTestingAlbums
+
         let albumsListViewModel = albums.map({ AlbumCellViewModel(album: $0)})
         
         let configFunc =

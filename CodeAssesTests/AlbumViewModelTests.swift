@@ -19,7 +19,7 @@ class AlbumViewModelTests: XCTestCase {
     func testAlbumViewModel(){
                         
         // get testing albums from "Albums.plist"
-        let matchingAlbum = TestingFiles.getTestingAlbums()
+        let matchingAlbum = TestingAlbums.testingAlbums.getTestingAlbums
         if matchingAlbum.count == 0 {fatalError()}
         for i in 0..<matchingAlbum.count{
             

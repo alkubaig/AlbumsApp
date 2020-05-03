@@ -46,6 +46,8 @@
 		5D5530D3245B92DC00D67B17 /* album0.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5530AD245954DB00D67B17 /* album0.png */; };
 		5D5530D4245B92DD00D67B17 /* album2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5530AE245954DB00D67B17 /* album2.png */; };
 		5D5530D6245CEDA000D67B17 /* TableViewDelgateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530D5245CEDA000D67B17 /* TableViewDelgateMock.swift */; };
+		5D5530D8245EC25300D67B17 /* TestingImgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530D7245EC25300D67B17 /* TestingImgs.swift */; };
+		5D5530DA245EC5B800D67B17 /* TestingAlbums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5530D9245EC5B800D67B17 /* TestingAlbums.swift */; };
 		5DACB9A02411BC5700AA7AA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DACB99F2411BC5700AA7AA2 /* AppDelegate.swift */; };
 		5DACB9A22411BC5700AA7AA2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DACB9A12411BC5700AA7AA2 /* SceneDelegate.swift */; };
 		5DACB9A92411BC5800AA7AA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DACB9A82411BC5800AA7AA2 /* Assets.xcassets */; };
@@ -103,14 +105,14 @@
 		5D5530992457B0A600D67B17 /* AlbumManagerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlbumManagerMock.swift; path = CodeAssesUITests/MockObjects/AlbumManagerMock.swift; sourceTree = SOURCE_ROOT; };
 		5D55309F2458116100D67B17 /* AlbumViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewModelTests.swift; sourceTree = "<group>"; };
 		5D5530A12458A51A00D67B17 /* TableDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataSourceTests.swift; sourceTree = "<group>"; };
-		5D5530A524590D6200D67B17 /* AlbumsTableCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsTableCellTests.swift; sourceTree = "<group>"; };
-		5D5530A72459113000D67B17 /* AlbumsDetailsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsDetailsViewTests.swift; sourceTree = "<group>"; };
 		5D5530AC245954DB00D67B17 /* album1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = album1.png; sourceTree = "<group>"; };
 		5D5530AD245954DB00D67B17 /* album0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = album0.png; sourceTree = "<group>"; };
 		5D5530AE245954DB00D67B17 /* album2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = album2.png; sourceTree = "<group>"; };
 		5D5530B4245A42B700D67B17 /* ImgRetrieverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgRetrieverTests.swift; sourceTree = "<group>"; };
 		5D5530CB245AD79C00D67B17 /* ImgReteriveMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgReteriveMock.swift; sourceTree = "<group>"; };
 		5D5530D5245CEDA000D67B17 /* TableViewDelgateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelgateMock.swift; sourceTree = "<group>"; };
+		5D5530D7245EC25300D67B17 /* TestingImgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingImgs.swift; sourceTree = "<group>"; };
+		5D5530D9245EC5B800D67B17 /* TestingAlbums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAlbums.swift; sourceTree = "<group>"; };
 		5DACB99C2411BC5700AA7AA2 /* CodeAsses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeAsses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DACB99F2411BC5700AA7AA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DACB9A12411BC5700AA7AA2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -186,15 +188,6 @@
 			path = TestData;
 			sourceTree = "<group>";
 		};
-		5D5530A92459113700D67B17 /* TestViews */ = {
-			isa = PBXGroup;
-			children = (
-				5D5530A524590D6200D67B17 /* AlbumsTableCellTests.swift */,
-				5D5530A72459113000D67B17 /* AlbumsDetailsViewTests.swift */,
-			);
-			path = TestViews;
-			sourceTree = "<group>";
-		};
 		5D5530AB245954DB00D67B17 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,13 +242,14 @@
 			children = (
 				5D55306C245776A100D67B17 /* TestData */,
 				5D552FFE245654F900D67B17 /* MockObjects */,
+				5D553071245776A100D67B17 /* TestingFiles.swift */,
+				5D5530D9245EC5B800D67B17 /* TestingAlbums.swift */,
+				5D5530D7245EC25300D67B17 /* TestingImgs.swift */,
 				5D55309F2458116100D67B17 /* AlbumViewModelTests.swift */,
 				5D552FEB2453A1E200D67B17 /* AlbumManagerTests.swift */,
 				5D5530B4245A42B700D67B17 /* ImgRetrieverTests.swift */,
 				5D5530A12458A51A00D67B17 /* TableDataSourceTests.swift */,
-				5D5530A92459113700D67B17 /* TestViews */,
 				5DACB9B82411BC5800AA7AA2 /* Info.plist */,
-				5D553071245776A100D67B17 /* TestingFiles.swift */,
 			);
 			path = CodeAssesTests;
 			sourceTree = "<group>";
@@ -484,8 +478,10 @@
 				5D552FE12453A13900D67B17 /* AlbumViewModels.swift in Sources */,
 				5D552FE42453A13900D67B17 /* Constants.swift in Sources */,
 				5DACB9F32411BD2400AA7AA2 /* AlbumManager.swift in Sources */,
+				5D5530DA245EC5B800D67B17 /* TestingAlbums.swift in Sources */,
 				5D5530CD245AD79C00D67B17 /* ImgReteriveMock.swift in Sources */,
 				5DACB9E42411BD2400AA7AA2 /* AlbumTableViewController.swift in Sources */,
+				5D5530D8245EC25300D67B17 /* TestingImgs.swift in Sources */,
 				5D5530002456550F00D67B17 /* AlbumManagerReceiverMock.swift in Sources */,
 				5D55309A2457B0A600D67B17 /* AlbumManagerMock.swift in Sources */,
 				5D55307F245776A100D67B17 /* TestingFiles.swift in Sources */,
