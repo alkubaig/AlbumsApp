@@ -12,6 +12,8 @@ struct Constants{
         
     private init(){}
 
+    //MARK:- constants
+    
     static let cellId =  "id"
     static let numAlbums = 100
     static let albumURL = "https://rss.itunes.apple.com/api/v1/us/apple-music/coming-soon/all/"
@@ -19,7 +21,7 @@ struct Constants{
     // url constructed with num of albums
     static let fullAlbumURL = "\(albumURL)&q=\(String(numAlbums))/explicit.json"
     
-    
+    //MARK:- cell elements' IDs
     struct CellElementId {
          
          private init(){}
@@ -29,6 +31,7 @@ struct Constants{
          static let albumImgId = "albumImgId"
      }
     
+    //MARK:- Detailed view elements' IDs
     struct DetailsElementId {
          
          private init(){}
@@ -42,6 +45,8 @@ struct Constants{
 
      }
     
+    //MARK:- cell elements' Font sizes
+
     struct CellFonts {
         
         private init(){}
@@ -49,6 +54,8 @@ struct Constants{
         static let artistNameFont : CGFloat = 16
         static let albumNameFont : CGFloat = 18
     }
+    
+    //MARK:- Detailed view elements' Font sizes
     
     struct DetailsFonts {
          
@@ -60,6 +67,8 @@ struct Constants{
         static let copyrighteFont : CGFloat = 12
         static let genreFont : CGFloat = 16
      }
+    
+    //MARK:- cell fixed constraints
     
     struct CellConstraints {
         
@@ -76,6 +85,8 @@ struct Constants{
         static let leftRightLabelPadding : CGFloat = 15
     }
     
+    //MARK:- Detailed view  fixed constraints
+
     struct DetailsConstraints {
         
         private init(){}
@@ -88,5 +99,3 @@ struct Constants{
         static let leftRightButtonPadding : CGFloat = 20
     }
 }
-
-

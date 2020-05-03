@@ -16,9 +16,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          if let windowScene = scene as? UIWindowScene {
 
             let my_window = UIWindow(windowScene: windowScene)
-                        
+                    
+            //intiate album view controller
             let tvc = AlbumTableViewController()
             
+            //make album view controller the root of navigation controller
             let navigation = UINavigationController(rootViewController: tvc)
             my_window.rootViewController = navigation
 
