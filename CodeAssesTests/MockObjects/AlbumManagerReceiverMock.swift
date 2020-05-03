@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum NetworkErr : Error {
+    case noData
+    case codeStatus(Int)
+}
+
 class AlbumManagerReceiverMock: AlbumManagerDelegate {
 
     let expectedBehaviorForDidLoadAlbum: (([Album]) -> Void)

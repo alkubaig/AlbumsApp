@@ -114,12 +114,10 @@ extension ImgRetrieverTests {
     //test img retreival with an invalid link
     func testInvalidImgRetriever(){
            
-       let imgLoadExpectation = expectation(description: "Trying to retrieve new img")
-
        let imgFromRetreiver = ImgRetriever()
     
        //use a mock protocol object that allows us to wait fot http call to finish
-       imgFromRetreiver.imgReteriveProtocol = ImgReteriveMock({ imgLoadExpectation.fulfill()})
+        imgFromRetreiver.imgReteriveProtocol = ImgReteriveMock({})
       
       //makeAnInvalidLinkName
       let url = "plapla"
@@ -127,8 +125,6 @@ extension ImgRetrieverTests {
       //attempt to retreive img
       imgFromRetreiver.getImg(url: url)
                    
-       waitForExpectations(timeout: 1.0)
-
        //this should fail, otherwise it is an error
       guard let _ = imgFromRetreiver.image else {
            return

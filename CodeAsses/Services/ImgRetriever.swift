@@ -57,8 +57,6 @@ extension ImgRetriever{
     //asynch img loading
     func loadImgeURL(url: String){
         guard let img_url = URL(string: url) else{
-            // run completion block from protocol
-            self.imgReteriveProtocol?.completion()
             return
         }
         //use threads to load image to avoid blocking UI
@@ -81,7 +79,6 @@ extension ImgRetriever{
 
             } catch{
                 print("can not load img")
-                self?.imgReteriveProtocol?.completion()
             }
         }
     }

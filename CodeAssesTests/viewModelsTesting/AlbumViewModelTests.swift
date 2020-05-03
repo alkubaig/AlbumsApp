@@ -37,13 +37,11 @@ class AlbumViewModelTests: XCTestCase {
 }
 extension AlbumViewModelTests{
     
-    
     func testCellViewModel(album: Album, albumViewModel: AlbumCellViewModel){
         
         XCTAssertEqual(album.artistName, albumViewModel.artistName, "artistName not set!")
         XCTAssertEqual(album.albumName, albumViewModel.albumName, "albumName not set!")
         XCTAssertEqual(album.imgUrl, albumViewModel.imgUrl, "imgUrl not set!")
-    
     }
     
     func testDetailsViewModel(album: Album, albumViewModel: AlbumDetailsViewModel){

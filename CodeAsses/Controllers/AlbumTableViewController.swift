@@ -10,10 +10,9 @@ import UIKit
 
 class AlbumTableViewController: UITableViewController,TableViewDelegateProtocol {
     
-    
-    private var albumManager: AlbumManagerProtocol
-    private var albumsListViewModel: [AlbumCellViewModel]
-    private var dataSourceDelegate: TableViewDatasourceDelegate<AlbumTableViewCell, AlbumCellViewModel>
+    private var albumManager = AlbumManager()
+    private var albumsListViewModel = [AlbumCellViewModel]()
+    private var dataSourceDelegate: TableViewDatasourceDelegate<AlbumTableViewCell, AlbumCellViewModel>?
 
     private let updateObserver = Notification.Name(rawValue: Constants.observerKey)
     
@@ -29,20 +28,6 @@ class AlbumTableViewController: UITableViewController,TableViewDelegateProtocol 
         dataSouceSetup()
     }
     
-    //dependency injuction - intilizer
-    init(albumManager: AlbumManagerProtocol,
-         albumsListViewModel: [AlbumCellViewModel],
-         dataSource: TableViewDatasourceDelegate<AlbumTableViewCell, AlbumCellViewModel>) {
-        
-        self.albumManager = albumManager
-        self.albumsListViewModel = albumsListViewModel
-        self.dataSourceDelegate = dataSource
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init?(coder:) can not be implemented")
-    }
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -81,7 +66,15 @@ extension AlbumTableViewController {
 extension AlbumTableViewController {
     
     func dataSouceSetup (){
-        dataSourceDelegate.tableViewDelegateProtocol = self
+     
+      //3 use genetic class for table dataSorce
+        dataSourceDelegate = TableViewDatasourceDelegate(cellId:Constants.cellId){
+          cell, vm in
+          //dependency injuction - property
+          cell.albumViewModel = vm
+         }
+        
+        dataSourceDelegate?.tableViewDelegateProtocol = self
         self.tableView.dataSource = self.dataSourceDelegate
         self.tableView.delegate = self.dataSourceDelegate
     }
@@ -133,7 +126,7 @@ extension AlbumTableViewController {
     }
     
     @objc func updateDataSource(){
-        self.dataSourceDelegate.updateModel(newModel: self.albumsListViewModel)
+        self.dataSourceDelegate?.updateModel(newModel: self.albumsListViewModel)
     }
 
     @objc func updateTableData(){

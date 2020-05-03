@@ -16,23 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          if let windowScene = scene as? UIWindowScene {
 
             let my_window = UIWindow(windowScene: windowScene)
-            
-            //intilize the objects that AlbumTableViewController depends on.
-            
-            //1
-            let albumManager = AlbumManager()
-            //2
-            let albumsListViewModel = [AlbumCellViewModel]()
-            //3 use genetic class for table dataSorce
-            let dataSource : TableViewDatasourceDelegate<AlbumTableViewCell, AlbumCellViewModel> = TableViewDatasourceDelegate(cellId:Constants.cellId){
-                cell, vm in
-                //dependency injuction - property
-                cell.albumViewModel = vm
-               }
-            // dependency injuction (3) - intilizer
-            let tvc = AlbumTableViewController(albumManager: albumManager,
-                                               albumsListViewModel:  albumsListViewModel,
-                                               dataSource: dataSource)
+                        
+            let tvc = AlbumTableViewController()
             
             let navigation = UINavigationController(rootViewController: tvc)
             my_window.rootViewController = navigation
