@@ -9,10 +9,11 @@
 import UIKit
 
 /****************************************
-** static methods for testing with files
+ ** static methods for testing with files
+ ** constants for testing files' names
 ****************************************/
 
-//constants for files' names
+//MARK:- constants for testing files' names
 
 struct TestFileNames {
     private init(){}
@@ -24,19 +25,29 @@ struct TestFileNames {
     }
 }
 
-//MARK:- static method for getting the content of a file
+//MARK:- a class of methods to test with files
+
 struct TestingFiles{
-
+    
     private init(){}
-    static func getContentFromFile(_ name: String, _ type: String?, complition: (_ data: Data)->Void){
+}
 
+//MARK:- static method for getting the content of a file
+
+extension TestingFiles{
+
+    static func getContentFromFile(_ name: String, _ type: String?, completion: (_ data: Data)->Void){
+
+        //get the path
         if let path = Bundle.main.path(forResource: name, ofType: type) {
-
+            //make the url
             let url = URL(fileURLWithPath: path)
             do {
-                
+                //get the data from the file
                 let data = try Data(contentsOf: url)
-                complition(data)
+                
+                //run completion block
+                completion(data)
 
             }catch{
                 fatalError("no data")
@@ -48,15 +59,18 @@ struct TestingFiles{
     }
 }
 
-//MARK:- generic funciton to decode the content of a plist
+//MARK:- generic funciton to decode a plist
 
 extension TestingFiles {
     
     static func decodePropertyList<T: Decodable>(type: T.Type, data:Data, completion: (T)->Void){
+        
         do {
-          let decoder = PropertyListDecoder()
-            
+            //intialize decoder
+            let decoder = PropertyListDecoder()
+            //decode data with type T
             let res =  try decoder.decode(T.self, from: data)
+            //run completion block
             completion(res)
             
         }catch{

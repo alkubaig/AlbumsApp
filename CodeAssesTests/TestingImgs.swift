@@ -8,24 +8,29 @@
 
 import UIKit
 
-//singleton to retreive imges from bundle
+/****************************************
+ ** singleton to retreive imges from bundle
+****************************************/
 
 class TestingImgs{
     
+    //singelton instance
     static let testingImgs = TestingImgs()
+    
     static let testingImgsCount = 3
-
     let getTestingImgs: [UIImage]
 
+    // calculates getTestingImgs property in private init
     private init(){
      
         var images = [UIImage]()
-
+        
         for i in 0..<TestingImgs.testingImgsCount{
-             //get img file name
+             
+            //get img file name
              let imgName = TestFileNames.imgAlbumFileName(i)
 
-             //get img from project
+             //get img from bundle
              guard let img = UIImage(named: imgName) else {
 
                  fatalError("no image \(imgName)")

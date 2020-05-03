@@ -11,32 +11,34 @@ import XCTest
 
 /****************************************
  *** TableViewDataSorce testing
- **
- ** We use a generic function testDataSource to test TableViewDataSorce
- ** it takes an array of models of any type and three closures
+ ** We use a generic function testDataSource to test TableViewDatasourceDelegate
+ ** it takes an array of models of any type and two closures
  ** - configCell closure to configure cells
  ** - testDatasource closure to test datasource
- ** - testDelegate closure to test delegate (in our current examples, there is nothing to test)
 ****************************************/
 
 //MARK:- examples for testing
 class TableDataSourceTests: XCTestCase {
         
-    //1. test with an array of 3 AlbumCellViewModel albums and AlbumCellViewModel
-    func testWith3AlbumsAndAlbumCell(){
+    //1. test with an array of 3 AlbumCellViewModel albums and AlbumTableViewCell
+    func testWith3AlbumsAndAlbumCellType(){
         
         //get testing albums
         let albums = TestingAlbums.testingAlbums.getTestingAlbums
 
+        //caculate view models
         let albumsListViewModel = albums.map({ AlbumCellViewModel(album: $0)})
-        
-        let configFunc =
-        {
-            (cell: AlbumTableViewCell, vm: AlbumCellViewModel) in cell.albumViewModel = vm
+    
+         //configure cell
+        let configFunc = {
+            
+            (cell: AlbumTableViewCell, vm: AlbumCellViewModel) in
+            cell.albumViewModel = vm
         }
 
         testDataSource(albumsListViewModel, configFunc)
-        { (cell: AlbumTableViewCell, vm: AlbumCellViewModel) in
+        { //testing closure
+            (cell: AlbumTableViewCell, vm: AlbumCellViewModel) in
             XCTAssertEqual(cell.albumName.text, vm.albumName)
             XCTAssertEqual(cell.artistName.text, vm.artistName)
             //testing imges in a seperate class
@@ -47,21 +49,39 @@ class TableDataSourceTests: XCTestCase {
      func testWithEmptyArray(){
     
         testDataSource([], {_, _ in })
-        { (cell,_) in
+        { //testing closure
+            (cell,_) in
             XCTFail("should not have any cells")
         }
      }
     
     //3. test with an array of strings and UITableViewCell
-    func testWith3StringsAndUICell(){
+    func testWith3StringsAndUICellType(){
      
         let count = 5
         let word = "Hello"
+        //generate models
         let models = Array(repeating: word, count: count)
 
-        testDataSource(models, {cell, model in cell.textLabel?.text = model})
-        {(cell,_) in
-            XCTAssertEqual(word, cell.textLabel?.text)
+         //configure cell
+        let configFunc = {
+            (cell: UITableViewCell, model:String) in
+            
+            guard let albel = cell.textLabel else{
+                XCTFail("no label")
+                return
+            }
+            albel.text = model
+        }
+        
+        testDataSource(models,configFunc)
+        { //testing closure
+            (cell, _) in
+            guard let text = cell.textLabel?.text else{
+                XCTFail("no text")
+                return
+            }
+            XCTAssertEqual(word, text)
         }
     }
 }
