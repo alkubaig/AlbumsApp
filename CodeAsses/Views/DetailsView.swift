@@ -57,7 +57,6 @@ class DetailsView: UIView {
       }()
     
     //Stack View and its content
-    
     var stackView : UIStackView = {
         let stackView   = UIStackView()
         stackView.axis  = NSLayoutConstraint.Axis.vertical
@@ -65,7 +64,6 @@ class DetailsView: UIView {
         stackView.spacing   = Constants.DetailsConstraints.inBetweenLabelPadding
         return stackView
     }()
-
     
     var albumImg: ImgRetriever = {
         let img = ImgRetriever()
@@ -144,7 +142,7 @@ class DetailsView: UIView {
         
         view.addSubview(stackView)
         
-        //stack view content views
+        //stack view's content views
         stackView.addArrangedSubview(albumImg)
         stackView.addArrangedSubview(albumName)
         stackView.addArrangedSubview(artistName)
@@ -157,13 +155,16 @@ class DetailsView: UIView {
     }
 
     private func viewLayout(){
+        
         let viewSize = self.frame.size                
 
+        //fix button in bottom
         showButton.anchor(bottom: bottomAnchor, paddingBottom: dConstraints.topBottomButtonPadding, enableInsets: true)
         showButton.anchor(left: leftAnchor, right: rightAnchor, paddingLeft: dConstraints.leftRightButtonPadding, paddingRight: dConstraints.leftRightButtonPadding)
         
         scrollView.anchor(top: topAnchor, left: leftAnchor, bottom: showButton.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, enableInsets: true)
 
+        //set the height of img to the width of the view
         albumImg.anchor(height: viewSize.width)
         
         view.anchor(top: scrollView.topAnchor, bottom: scrollView.bottomAnchor, paddingTop: 0, paddingBottom: 0, enableInsets: true)
@@ -173,5 +174,3 @@ class DetailsView: UIView {
     }
     
 }
-
-

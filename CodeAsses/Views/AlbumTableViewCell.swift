@@ -65,14 +65,14 @@ class AlbumTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        //add views
         self.contentView.addSubview(albumImg)
         self.contentView.addSubview(stackView)
-//        self.contentView.addSubview(artistName)
-//        self.contentView.addSubview(albumName)
 
         stackView.addArrangedSubview(artistName)
         stackView.addArrangedSubview(albumName)
         
+        //set constraints
         viewLayout()
     }
 
@@ -84,7 +84,6 @@ class AlbumTableViewCell: UITableViewCell {
                 
         let cConstraints = Constants.CellConstraints.self
         let marginGuide = contentView.layoutMarginsGuide
-
         
         albumImg.anchor(top: self.topAnchor, paddingTop: cConstraints.topImgPadding, enableInsets: false)
         albumImg.anchor(left: self.leftAnchor, paddingLeft: cConstraints.leftImgPadding)
@@ -92,10 +91,6 @@ class AlbumTableViewCell: UITableViewCell {
 
         stackView.anchor(left: albumImg.rightAnchor, right: self.rightAnchor, paddingLeft: cConstraints.leftRightLabelPadding, paddingRight: cConstraints.leftRightLabelPadding)
         
-        stackView.anchor(top: marginGuide.topAnchor, paddingTop: 0, enableInsets: false)
-    
-        stackView.anchor(bottom: marginGuide.bottomAnchor, paddingBottom: 0, enableInsets: false)
-
-        
+        stackView.anchor(top: marginGuide.topAnchor, bottom: marginGuide.bottomAnchor, paddingTop: 0, paddingBottom: 0, enableInsets: false)
     }
 }
