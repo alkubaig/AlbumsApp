@@ -25,6 +25,8 @@ class TableViewDatasourceDelegate<CellType,ViewModelType>: NSObject, UITableView
     var models = [ViewModelType]()
     let configCell : (CellType, ViewModelType) -> ()
     
+    //MARK:- intialization
+
     // dependecy injection - intializer
     init(cellId: String, configCell: @escaping(CellType, ViewModelType)->()) {
         self.cellId = cellId
@@ -46,14 +48,15 @@ class TableViewDatasourceDelegate<CellType,ViewModelType>: NSObject, UITableView
         return 1
     }
     
-   // use configCell closure to configure the cell
-    // we pass the corresponding cell and model view to configCell to configure the cell 
+    // use configCell closure to configure the cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? CellType {
-        
         let vm = models[indexPath.row]
+        
+        // we pass the corresponding cell and modelview to configCell to configure the cell
         configCell(cell,vm)
+        
         return cell
         }
         return UITableViewCell()
@@ -68,6 +71,7 @@ class TableViewDatasourceDelegate<CellType,ViewModelType>: NSObject, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+        //calll protocol method
         tableViewDelegateProtocol?.didSelectCell(indexPath: indexPath)
     }
     
