@@ -26,6 +26,7 @@ protocol ImgReteriveProtocol{
 }
 
 // MARK:- custom UIImageView with a protocol used to injuct a testing block
+
 class ImgRetriever: UIImageView{
     
     //dependency injuction - property
@@ -42,6 +43,7 @@ class ImgRetriever: UIImageView{
 }
 
 // MARK:- ImgRetriever extended with loading img method
+
 extension ImgRetriever{
     
     //check if image is in cache, otherwise, load and store in cache.
@@ -54,12 +56,13 @@ extension ImgRetriever{
               loadImgeURL(url: url)
           }
       }
+    
     //asynch img loading
     func loadImgeURL(url: String){
         guard let img_url = URL(string: url) else{
             return
         }
-        //use threads to load image to avoid blocking UI
+        //use background threads to load image to avoid blocking UI
         DispatchQueue.global().async { [weak self] in
             do{
                 
@@ -71,6 +74,7 @@ extension ImgRetriever{
                 }
                 //update image in main thread
                 DispatchQueue.main.async {
+                    //put img in cache
                     imgCache.setObject(imgToCache, forKey: NSString(string: url))
                     self?.image = imgToCache
                     // run completion block from protocol

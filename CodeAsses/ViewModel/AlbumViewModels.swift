@@ -28,20 +28,17 @@ protocol AlbumEssentials {
     var imgUrl: String {get}
 }
 
-// MARK: - default methods for AlbumEssentials protocol
+// MARK: - shared methods for AlbumEssentials protocol
 
 extension AlbumEssentials {
     
     var artistName: String {
-//        return "\(self.album.artistName) \(self.album.artistName)"
         return self.album.artistName
-
     }
     var imgUrl: String{
         return self.album.imgUrl
     }
     var albumName: String{
-//        return "\(self.album.albumName) \(self.album.albumName)"
         return self.album.albumName
     }
 }
