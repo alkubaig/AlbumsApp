@@ -8,9 +8,7 @@
 
 import Foundation
 
-
-
-// MARK: - api resuls with custom decodable
+// MARK: - api resuls with custom decoder
 
 struct AlbumsData {
    
@@ -35,7 +33,7 @@ extension AlbumsData: Decodable {
     
 }
 
-// MARK: - Album model with custom decodable
+// MARK: - Album model with custom decoder
 
 struct Genres : Codable {
     let name: String
@@ -53,17 +51,18 @@ struct Album {
 
     
     enum AlbumInfoKeys: String, CodingKey {
-        case imgUrl = "artworkUrl100"
+        case imgUrl = "artworkUrl100" //custom name is imgUrl
         case artistName
-        case albumName = "name"
+        case albumName = "name"  //custom name albumName
         case genres
         case releaseDate
         case copyright
         case url
     }
 }
-
+//cusom decoder initilizer
 extension Album: Decodable {
+    //this initilizer throws in case decoding fails
     init(from decoder: Decoder) throws {
        let values = try decoder.container(keyedBy: AlbumInfoKeys.self)
         artistName = try values.decode(String.self, forKey: .artistName)

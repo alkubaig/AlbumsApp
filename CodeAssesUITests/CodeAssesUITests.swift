@@ -9,16 +9,17 @@
 
 import XCTest
 
-
 class CodeAssesUITests: XCTestCase {
-    
-    let app = XCUIApplication()
+     
+    var app : XCUIApplication = XCUIApplication()
 
     override func setUp() {
+        
+        app = XCUIApplication()
         app.launch()
         continueAfterFailure = true
     }
-
+    
     func testCellElements(){
         
         let tablesQuery = app.tables
