@@ -8,49 +8,12 @@
 
 import XCTest
 
+/****************************************
+** ImgRetreiver testing
+****************************************/
+
 class ImgRetrieverTests: XCTestCase {
-
-    //link to local working directory
-    var documentsUrl: URL? {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-    }
-    //generate a UIImageView object that retreives images
-    let imgFromRetreiver = ImgRetriever()
-    
-    var imgs = [UIImage]()
-    var localFileURLs = [String]()
-}
-
-//MARK:- setup for some tests
-
-extension ImgRetrieverTests{
-    
-//setup up testing data for testValidImgRetriever
-
-    func setupTestImgesInLocalPaths(){
-        for i in 0..<imgs.count{
-                       
-            //get img file name
-            let imgName = TestFileNames.imgAlbumFileName(i)
-                
-            //generate a local path to img
-            guard let fileURL = documentsUrl?.appendingPathComponent(imgName) else {
-                fatalError("link invalid")
-            }
-            // convert img to data
-            guard let imageData = imgs[i].pngData() else {
-                fatalError("img not generated")
-            }
-            //write img to local fil path
-            do {
-                try imageData.write(to: fileURL, options: .atomic)
-            }catch{
-                fatalError()
-            }
-            localFileURLs.append(fileURL.absoluteURL.absoluteString)
-        }
-   }
-    
+        
     //empty cache after each test
     override func tearDown() {
         imgCache.removeAllObjects()
@@ -64,15 +27,14 @@ extension ImgRetrieverTests{
     //2. test that img is stored in cache
     
    func testValidImgRetriever(){
-
-       //setup up the testing data
     
-        imgs = TestingImgs.testingImgs.getTestingImgs
-        setupTestImgesInLocalPaths()
+        let imgs = TestingImgs.testingImgs.getTestingImgs
+        let localFileURLs = TestingImgs.testingImgs.getLocalFileURLs
 
+        //repeat test for each img
         for i in 0..<imgs.count{
 
-           //get img -- from project bundle
+           //get img -- from bundle
            let img = imgs[i]
            
            //generate a UIImageView object that retreives images
@@ -140,9 +102,8 @@ extension ImgRetrieverTests{
 
     func testImgRetrieverCache(){
         
-        
-        imgs = TestingImgs.testingImgs.getTestingImgs
-
+        let imgs = TestingImgs.testingImgs.getTestingImgs
+        //repeat test for each img
         for i in 0..<imgs.count{
 
             //get img -- from project bundle
@@ -154,6 +115,9 @@ extension ImgRetrieverTests{
             //place img in chche
             imgCache.setObject(img, forKey: NSString(string: url))
           
+            //generate a UIImageView object that retreives images
+            let imgFromRetreiver = ImgRetriever()
+            
             //retreive img with no wait time
             imgFromRetreiver.getImg(url: url)
             

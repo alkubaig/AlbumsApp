@@ -19,12 +19,13 @@ class AlbumManagerTests: XCTestCase {
 //MARK: -  test set 1
 
 /****************************************
- ** test if parseJSON parses api result correctly (test custom decoder)
+ ** test if parseJSON parses api result correctly
+ ** (test custom decoder)
 ****************************************/
 
 extension AlbumManagerTests{
     
-    // "ApiAlbums.json" simulates an example api json response with 3 albumns
+    // (1.1) "ApiAlbums.json" simulates an example api json response with 3 albumns
     func testParseJSON_ApiAlbumsArray(){
         
         // get testing albums from "Albums.plist"
@@ -43,7 +44,7 @@ extension AlbumManagerTests{
         }
     }
     
-    // "ApiNoAlbums.json" file simulates an example api json response with no albums
+    // (1.2) "ApiNoAlbums.json" file simulates an example api json response with no albums
     func testParseJSON_ApiEmptyAlbumsArray(){
         
         //get valid api response from json file with no albums
