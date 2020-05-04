@@ -9,6 +9,6 @@ An iOS application that displays a list of Albums and provides a link to each of
 * Programmatic UI and AutoLayout.
 * Safe unwrapping and Error handling.
 * Modularity.
-* Unit testing (Mock objects).
+* Unit testing (Mock objects) and UI automated testing.
 * Caching for memory.
 
