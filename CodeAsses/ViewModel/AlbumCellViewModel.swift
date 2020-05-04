@@ -1,5 +1,5 @@
 //
-//  AlbumViewModels.swift
+//  AlbumCellViewModel.swift
 //  CodeAsses
 //
 //  Created by Ghadeer Alkubaish on 4/15/20.
@@ -9,15 +9,6 @@
 import UIKit
 
 // MARK: - protocol for Album properties.
-
-//extra album properties needed for album detailed page
-protocol AlbumDetails {
-    
-    var releaseDate: String {get}
-    var copyright: String {get}
-    var url: String {get}
-    var genres: String {get}
-}
 
 //album properties needed for album cells
 protocol AlbumEssentials {
@@ -50,23 +41,3 @@ struct AlbumCellViewModel: AlbumEssentials {
     var album : Album
 }
 
-// MARK: - view model for album detailed page
-
-struct AlbumDetailsViewModel: AlbumEssentials, AlbumDetails{
-    
-    var album : Album
-
-    var releaseDate: String{
-        return self.album.releaseDate
-    }
-    var copyright: String{
-        return self.album.copyright
-    }
-    var url: String{
-        return self.album.url
-    }
-    var genres: String{
-        return self.album.genres.map({$0.name}).joined(separator:"\n")
-    }
-
-}

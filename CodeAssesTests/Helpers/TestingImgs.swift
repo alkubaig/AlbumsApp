@@ -26,6 +26,7 @@ class TestingImgs{
     private init(){
      
         //MARK:- retreive imges from bundle
+        
         var images = [UIImage]()
         
         for i in 0..<TestingImgs.testingImgsCount{
@@ -42,7 +43,7 @@ class TestingImgs{
          }
         self.getTestingImgs = images
         
-        //MARK:- generate local paths to imges
+        //MARK:- generate local paths to imges and write imges into them
      
         var localFileURLs = [String]()
         //link to local working directory

@@ -19,13 +19,11 @@ class ImgRetrieverTests: XCTestCase {
         imgCache.removeAllObjects()
     }
 }
-//MARK:- test img retreival with valid local paths and cache
+//MARK:- test img retreival with valid local paths
 
 extension ImgRetrieverTests{
     
-    //1. test img retreival with valid local paths
-    //2. test that img is stored in cache
-    
+    //test img retreival with valid local paths
    func testValidImgRetriever(){
     
         let imgs = TestingImgs.testingImgs.getTestingImgs
@@ -34,8 +32,7 @@ extension ImgRetrieverTests{
         //repeat test for each img
         for i in 0..<imgs.count{
 
-           //get img -- from bundle
-           let img = imgs[i]
+            //-------- set up ------------//
            
            //generate a UIImageView object that retreives images
            let imgFromRetreiver = ImgRetriever()
@@ -45,26 +42,21 @@ extension ImgRetrieverTests{
            //use a mock protocol object that allows us to wait fot http call to finish
            imgFromRetreiver.imgReteriveProtocol = ImgReteriveMock({ imgLoadExpectation.fulfill()})
            
-           //get img link -- from local file path
-           let url = localFileURLs[i]
-           
            //retreive img from local fila path
-           imgFromRetreiver.getImg(url: url)
+           imgFromRetreiver.getImg(url: localFileURLs[i])
            
            waitForExpectations(timeout: 1.0)
+            
+            //-------- test ------------//
 
+            //get img -- from bundle
+            let img = imgs[i]
+            
            guard let imgRetreived = imgFromRetreiver.image else {
                fatalError("no img\(i)")
            }
-            //1 img from file should be the same as the one in UIImgView
+            // img from file should be the same as the one in UIImgView
             XCTAssertEqual(img.pngData(), imgRetreived.pngData())
-        
-            //2 check that img is stored in cache
-            if let chachedImg = imgCache.object(forKey:NSString(string: url)){
-                XCTAssertEqual(chachedImg.pngData(), img.pngData())
-            }else{
-                XCTFail("img should be stored in cache")
-            }
        }
    }
 }
@@ -99,7 +91,49 @@ extension ImgRetrieverTests {
 //MARK:- test caching
 
 extension ImgRetrieverTests{
+    
+    //test that img is in cache after retreiving
+    func testValidImgRetrieverCache(){
+     
+         let imgs = TestingImgs.testingImgs.getTestingImgs
+         let localFileURLs = TestingImgs.testingImgs.getLocalFileURLs
 
+         //repeat test for each img
+         for i in 0..<imgs.count{
+
+             //-------- set up ------------//
+            
+            //generate a UIImageView object that retreives images
+            let imgFromRetreiver = ImgRetriever()
+            
+            let imgLoadExpectation = expectation(description: "Trying to retrieve new img")
+
+            //use a mock protocol object that allows us to wait fot http call to finish
+            imgFromRetreiver.imgReteriveProtocol = ImgReteriveMock({ imgLoadExpectation.fulfill()})
+            
+            //get img link -- from local file path
+            let url = localFileURLs[i]
+            
+            //retreive img from local fila path
+            imgFromRetreiver.getImg(url: url)
+            
+            waitForExpectations(timeout: 1.0)
+             
+             //-------- test ------------//
+
+             //get img -- from bundle
+             let img = imgs[i]
+         
+             // check that img is stored in cache
+             if let chachedImg = imgCache.object(forKey:NSString(string: url)){
+                 XCTAssertEqual(chachedImg.pngData(), img.pngData())
+             }else{
+                 XCTFail("img should be stored in cache")
+             }
+        }
+    }
+    
+    //test that img is retreived immediately if place in cache in advanced
     func testImgRetrieverCache(){
         
         let imgs = TestingImgs.testingImgs.getTestingImgs

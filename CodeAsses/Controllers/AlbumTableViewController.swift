@@ -10,25 +10,49 @@ import UIKit
 
 class AlbumTableViewController: UITableViewController{
     
-    private var albumManager = AlbumManager()
-    private var albumsListViewModel = [AlbumCellViewModel]()
     private var dataSourceDelegate: TableViewDatasourceDelegate<AlbumTableViewCell, AlbumCellViewModel>?
-    private let updateObserver = Notification.Name(rawValue: Constants.observerKey)
-        
+    var observation: NSKeyValueObservation?
+    @objc private var albumsViewModel = AlbumManegerViewModel() //make this object observable
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         view.backgroundColor = .white
         self.title = "Albums"
-                
-        albumManegerSetup()
-        notificationsSetup()
+        //fetch albums
+        self.albumsViewModel.fetchAlbum(numAlbums: Constants.numAlbums)
+        
+        setupObserver()
         tableViewSetup()
         dataSouceSetup()
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+}
+
+// MARK: - set up an observer for albums
+
+extension AlbumTableViewController{
+    
+    func setupObserver(){
+        
+        observation = observe(\.albumsViewModel.albums, options: [.new])
+        { object, change in
+                
+            //if the albums got updated
+            if let newAlbums = change.newValue{
+                //reload data
+                let albumsListViewModel = newAlbums.map({return AlbumCellViewModel(album: $0)})
+    
+                //reload data
+                 self.dataSourceDelegate?.updateModel(newModel: albumsListViewModel)
+                 self.tableView.reloadData()
+                 self.title = "\(albumsListViewModel.count) Albums"
+
+            }
+        }
     }
 }
 
@@ -45,18 +69,6 @@ extension AlbumTableViewController {
         self.tableView.estimatedRowHeight = 100
         self.tableView.rowHeight = UITableView.automaticDimension
         
-    }
-}
-
-// MARK: - albumManager
-
-extension AlbumTableViewController {
-    
-    func albumManegerSetup(){
-      
-        albumManager.delegate = self
-        //fetch all albums
-        albumManager.fetchAlbum(numAlbums: Constants.numAlbums)
     }
 }
 
@@ -89,57 +101,12 @@ extension AlbumTableViewController {
     //method confirming to TableViewDelegateProtocol
     func didSelectCell(indexPath: IndexPath) {
 
-        //dependency injuction - intializer
-        let albumModel = AlbumDetailsViewModel(album: self.albumsListViewModel[indexPath.row].album)
+//        dependency injuction - intializer
+        
+        let album = albumsViewModel.albums[indexPath.row]
+        let albumModel = AlbumDetailsViewModel(album: album)
+        
         let destCv = DetailsViewController(albumModel: albumModel)
         self.navigationController?.pushViewController(destCv, animated: true)
-    }
-}
-
-// MARK: - Delegate methods for updating table after HTTP
-
-//methods confirming to TableViewDelegateProtocol AlbumManagerDelegate
-
-extension AlbumTableViewController: AlbumManagerDelegate {
-    
-    // delegate method called with success
-    func didLoadAlbum(albums: [Album]) {
-        
-        DispatchQueue.main.async {
-            self.albumsListViewModel = albums.map({return AlbumCellViewModel(album: $0)})
-            // use notofications center to update UI and data after the albums have been uploaded (observer)
-            NotificationCenter.default.post(name: self.updateObserver, object: nil)
-        }
-    }
-    
-    // delegate method called with failing
-    func didFailWithError(error: Error) {
-        print(error)
-    }
-}
-
-// MARK: - notofication center setup and notification methods
-
-// observer design pattern
-extension AlbumTableViewController {
-    
-    //add observers
-    func notificationsSetup(){
-        NotificationCenter.default.addObserver(self, selector: #selector(updateAlbumCount), name: updateObserver, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateDataSource), name: updateObserver, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTableData), name: updateObserver, object: nil)
-    }
-    
-    //observing methods
-    @objc func updateAlbumCount(){
-        self.title = "\(albumsListViewModel.count) Albums"
-    }
-    
-    @objc func updateDataSource(){
-        self.dataSourceDelegate?.updateModel(newModel: self.albumsListViewModel)
-    }
-
-    @objc func updateTableData(){
-        self.tableView.reloadData()
     }
 }

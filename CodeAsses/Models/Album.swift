@@ -39,7 +39,8 @@ struct Genres : Codable {
     let name: String
 }
 
-struct Album {
+//make album NSObject to observe it
+class Album: NSObject,Decodable{
 
     let artistName: String
     let albumName: String
@@ -49,7 +50,6 @@ struct Album {
     let url: String
     let genres: [Genres]
 
-    
     enum AlbumInfoKeys: String, CodingKey {
         case imgUrl = "artworkUrl100" //custom name is imgUrl
         case artistName
@@ -59,18 +59,33 @@ struct Album {
         case copyright
         case url
     }
-}
-//cusom decoder initilizer
-extension Album: Decodable {
-    //this initilizer throws in case decoding fails
-    init(from decoder: Decoder) throws {
-       let values = try decoder.container(keyedBy: AlbumInfoKeys.self)
-        artistName = try values.decode(String.self, forKey: .artistName)
-        albumName = try values.decode(String.self, forKey: .albumName)
-        imgUrl = try values.decode(String.self, forKey: .imgUrl)
-        releaseDate = try values.decode(String.self, forKey: .releaseDate)
-        copyright = try values.decode(String.self, forKey: .copyright)
-        url = try values.decode(String.self, forKey: .url)
-        genres = try values.decode([Genres].self, forKey: .genres)
+    
+    //intializer because this is a class
+    init(artistName: String, albumName: String,imgUrl: String,
+         releaseDate: String, copyright: String, url: String, genres: [Genres] ) {
+        self.artistName = artistName
+        self.albumName = albumName
+        self.imgUrl = imgUrl
+        self.releaseDate = releaseDate
+        self.copyright = copyright
+        self.url = url
+        self.genres = genres
     }
+    
+    //decoder for NS object
+    required convenience init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: AlbumInfoKeys.self)
+        let artistName = try values.decode(String.self, forKey: .artistName)
+        let albumName = try values.decode(String.self, forKey: .albumName)
+        let imgUrl = try values.decode(String.self, forKey: .imgUrl)
+        let releaseDate = try values.decode(String.self, forKey: .releaseDate)
+        let copyright = try values.decode(String.self, forKey: .copyright)
+        let url = try values.decode(String.self, forKey: .url)
+        let genres = try values.decode([Genres].self, forKey: .genres)
+         
+        //calls intializer after decoding
+        self.init(artistName:artistName,albumName:albumName,imgUrl:imgUrl,
+                   releaseDate:releaseDate, copyright:copyright, url:url, genres:genres)
+    }
+
 }

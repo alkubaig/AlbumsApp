@@ -16,26 +16,11 @@ protocol AlbumManagerDelegate {
     func didFailWithError(error: Error)
 }
 
-// MARK: - methods and properties reqiuired in AlbumManager (useful for mock objects)
-
-protocol AlbumManagerProtocol{
-    
-    var delegate: AlbumManagerDelegate? { get set }
-    func fetchAlbum(numAlbums: Int)
-}
-
 // MARK: - AlbumManager
 
-struct AlbumManager: AlbumManagerProtocol {
+struct AlbumManager{
     
     var delegate: AlbumManagerDelegate?
-        
-    //fetch albums by calling api
-    func fetchAlbum(numAlbums: Int){
-        
-        //perfom api call
-        performRequest(with: Constants.fullAlbumURL)
-    }
     
     //perfom HTTP call with url
     func performRequest(with urlString: String) {

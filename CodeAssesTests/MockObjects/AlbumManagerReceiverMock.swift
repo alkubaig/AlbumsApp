@@ -23,6 +23,8 @@ enum NetworkErr : Error {
 
 class AlbumManagerReceiverMock: AlbumManagerDelegate {
 
+    var albumMng = AlbumManager()
+
     let expectedBehaviorForDidLoadAlbum: (([Album]) -> Void)
     let expectedBehaviorFordidFailWithError: ((Error) -> Void)
 
@@ -32,6 +34,9 @@ class AlbumManagerReceiverMock: AlbumManagerDelegate {
         //we take testing closures and pass them to delegate methods
         self.expectedBehaviorForDidLoadAlbum = expectedBehaviorForDidLoadAlbum
         self.expectedBehaviorFordidFailWithError = expectedBehaviorFordidFailWithError
+        
+        albumMng.delegate = self
+        
     }
     //test didLoadAlbum
     func didLoadAlbum(albums: [Album]) {
