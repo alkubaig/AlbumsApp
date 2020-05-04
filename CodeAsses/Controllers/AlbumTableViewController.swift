@@ -14,7 +14,7 @@ class AlbumTableViewController: UITableViewController{
     private var albumsListViewModel = [AlbumCellViewModel]()
     private var dataSourceDelegate: TableViewDatasourceDelegate<AlbumTableViewCell, AlbumCellViewModel>?
     private let updateObserver = Notification.Name(rawValue: Constants.observerKey)
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
     

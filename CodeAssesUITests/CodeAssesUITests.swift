@@ -118,7 +118,7 @@ class CodeAssesUITests: XCTestCase {
         let cells = tablesQuery.cells
         
         for _ in 0..<3{
-            let randCellNum = Int.random(in: 0 ..< count)
+            let randCellNum = Int.random(in: 0..<count)
             let cell = cells.element(boundBy: randCellNum)
       
             // cell elements

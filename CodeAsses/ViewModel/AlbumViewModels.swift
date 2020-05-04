@@ -52,7 +52,7 @@ struct AlbumCellViewModel: AlbumEssentials {
 
 // MARK: - view model for album detailed page
 
-struct AlbumDetailsViewModel : AlbumEssentials, AlbumDetails{
+struct AlbumDetailsViewModel: AlbumEssentials, AlbumDetails{
     
     var album : Album
 
@@ -68,4 +68,5 @@ struct AlbumDetailsViewModel : AlbumEssentials, AlbumDetails{
     var genres: String{
         return self.album.genres.map({$0.name}).joined(separator:"\n")
     }
+
 }

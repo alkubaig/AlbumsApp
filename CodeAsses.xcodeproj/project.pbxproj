@@ -199,14 +199,14 @@
 			path = images;
 			sourceTree = "<group>";
 		};
-		5D5530DB245F4E3A00D67B17 /* viewModelsTesting */ = {
+		5D5530DB245F4E3A00D67B17 /* ViewModelsTesting */ = {
 			isa = PBXGroup;
 			children = (
 				5D55309F2458116100D67B17 /* AlbumViewModelTests.swift */,
 				5D552FEB2453A1E200D67B17 /* AlbumManagerTests.swift */,
 				5D5530B4245A42B700D67B17 /* ImgRetrieverTests.swift */,
 			);
-			path = viewModelsTesting;
+			path = ViewModelsTesting;
 			sourceTree = "<group>";
 		};
 		5D5530E0245F4E9B00D67B17 /* ViewsTesting */ = {
@@ -263,7 +263,7 @@
 			children = (
 				5D55306C245776A100D67B17 /* TestingData */,
 				5D552FFE245654F900D67B17 /* MockObjects */,
-				5D5530DB245F4E3A00D67B17 /* viewModelsTesting */,
+				5D5530DB245F4E3A00D67B17 /* ViewModelsTesting */,
 				5D5530E0245F4E9B00D67B17 /* ViewsTesting */,
 				5D553071245776A100D67B17 /* TestingFiles.swift */,
 				5D5530D9245EC5B800D67B17 /* TestingAlbums.swift */,
