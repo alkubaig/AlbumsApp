@@ -24,7 +24,7 @@ class TableDataSourceTests: XCTestCase {
     func testWith3AlbumsAndAlbumCellType(){
         
         //get view models
-        let albumsListViewModel = TestingAlbums.testingAlbums.getAlbumCellViewModels
+        let albumsListViewModel = TestingAlbums.testingAlbums.albumCellViewModels
     
          //configure cell
         let configFunc = {

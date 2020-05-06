@@ -20,14 +20,14 @@ class AlbumManegerViewModel: NSObject, AlbumManagerDelegate {
     override init(){
         super.init()
         
-        //set albumManager delegate to self
         albumManager.delegate = self
     }
     
     //fetch albums by calling api
     func fetchAlbum(numAlbums: Int){
-        //perfom api call
+        
         albumManager.performRequest(with: Constants.fullAlbumURL)
+        
     }
             
     // delegate method called with success

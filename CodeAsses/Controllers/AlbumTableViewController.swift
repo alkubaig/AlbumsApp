@@ -88,7 +88,7 @@ extension AlbumTableViewController: TableViewDelegateProtocol {
         //use this protocol for selecting rows deleagte
         dataSourceDelegate?.tableViewDelegateProtocol = self
         
-        //set datasource and delegates to
+        //set table datasource and delegates
         self.tableView.dataSource = self.dataSourceDelegate
         self.tableView.delegate = self.dataSourceDelegate
     }
@@ -101,7 +101,7 @@ extension AlbumTableViewController {
     //method confirming to TableViewDelegateProtocol
     func didSelectCell(indexPath: IndexPath) {
 
-//        dependency injuction - intializer
+        // dependency injuction - intializer
         
         let album = albumsViewModel.albums[indexPath.row]
         let albumModel = AlbumDetailsViewModel(album: album)

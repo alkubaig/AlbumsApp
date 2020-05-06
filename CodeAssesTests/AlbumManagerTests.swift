@@ -20,7 +20,7 @@ class AlbumManagerTests: XCTestCase {
     func testParseJSON_ApiAlbumsArray(){
         
         // get testing albums from "Albums.plist"
-        let matchingAlbum = TestingAlbums.testingAlbums.getTestingAlbums
+        let matchingAlbum = TestingAlbums.testingAlbums.testingAlbums
 
         //get valid api response from json file with valid albums
         // pass it to parseJSON

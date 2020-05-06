@@ -38,12 +38,9 @@ extension TestingFiles{
 
     static func getContentFromFile(_ name: String, _ type: String?, completion: (_ data: Data)->Void){
 
-        //get the path
         if let path = Bundle.main.path(forResource: name, ofType: type) {
-            //make the url
             let url = URL(fileURLWithPath: path)
             do {
-                //get the data from the file
                 let data = try Data(contentsOf: url)
                 
                 //run completion block

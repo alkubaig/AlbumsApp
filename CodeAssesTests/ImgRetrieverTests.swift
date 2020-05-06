@@ -26,8 +26,8 @@ extension ImgRetrieverTests{
     //test img retreival with valid local paths
    func testValidImgRetriever(){
     
-        let imgs = TestingImgs.testingImgs.getTestingImgs
-        let localFileURLs = TestingImgs.testingImgs.getLocalFileURLs
+        let imgs = TestingImgs.testingImgs.testingImgs
+        let localFileURLs = TestingImgs.testingImgs.imgsLocalURLs
 
         //repeat test for each img
         for i in 0..<imgs.count{
@@ -55,6 +55,7 @@ extension ImgRetrieverTests{
            guard let imgRetreived = imgFromRetreiver.image else {
                fatalError("no img\(i)")
            }
+            
             // img from file should be the same as the one in UIImgView
             XCTAssertEqual(img.pngData(), imgRetreived.pngData())
        }
@@ -95,8 +96,8 @@ extension ImgRetrieverTests{
     //test that img is in cache after retreiving
     func testValidImgRetrieverCache(){
      
-         let imgs = TestingImgs.testingImgs.getTestingImgs
-         let localFileURLs = TestingImgs.testingImgs.getLocalFileURLs
+         let imgs = TestingImgs.testingImgs.testingImgs
+         let localFileURLs = TestingImgs.testingImgs.imgsLocalURLs
 
          //repeat test for each img
          for i in 0..<imgs.count{
@@ -136,9 +137,11 @@ extension ImgRetrieverTests{
     //test that img is retreived immediately if place in cache in advanced
     func testImgRetrieverCache(){
         
-        let imgs = TestingImgs.testingImgs.getTestingImgs
+        let imgs = TestingImgs.testingImgs.testingImgs
         //repeat test for each img
         for i in 0..<imgs.count{
+
+            //-------- set up ------------//
 
             //get img -- from project bundle
             let img = imgs[i]
@@ -152,6 +155,8 @@ extension ImgRetrieverTests{
             //generate a UIImageView object that retreives images
             let imgFromRetreiver = ImgRetriever()
             
+            //-------- test ------------//
+
             //retreive img with no wait time
             imgFromRetreiver.getImg(url: url)
             

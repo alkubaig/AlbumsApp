@@ -20,7 +20,7 @@ class AlbumDetailsViewModelTests: XCTestCase {
     func testAlbumDetailedViewModel(){
                         
         // get testing albums from "Albums.plist"
-        let matchingAlbum = TestingAlbums.testingAlbums.getTestingAlbums
+        let matchingAlbum = TestingAlbums.testingAlbums.testingAlbums
         if matchingAlbum.count == 0 {fatalError()}
         for i in 0..<matchingAlbum.count{
             
