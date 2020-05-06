@@ -11,17 +11,15 @@ import XCTest
 
 /****************************************
  *** TableViewDataSorce testing
- ** We use a generic function testDataSource to test TableViewDatasourceDelegate
- ** it takes an array of models of any type and two closures
- ** - configCell closure to configure cells
- ** - testDatasource closure to test datasource
+ ** We use a generic functions testDataSource to test dataSource
+ ** and testDelegate for testing delegate
 ****************************************/
 
-//MARK:- examples for testing
+//MARK:- examples for testing datasource
 class TableDataSourceTests: XCTestCase {
         
     //1. test with an array of 3 AlbumCellViewModel albums and AlbumTableViewCell
-    func testWith3AlbumsAndAlbumCellType(){
+    func testDataSourceAlbumCell(){
         
         //get view models
         let albumsListViewModel = TestingAlbums.testingAlbums.albumCellViewModels
@@ -43,7 +41,7 @@ class TableDataSourceTests: XCTestCase {
     }
     
      //2. test with an empty array of models
-     func testWithEmptyArray(){
+     func testDataSourceWithEmptyArray(){
     
         testDataSource([], {_, _ in })
         { //testing closure
@@ -53,7 +51,7 @@ class TableDataSourceTests: XCTestCase {
      }
     
     //3. test with an array of strings and UITableViewCell
-    func testWith3StringsAndUICellType(){
+    func testDataSourceUICell(){
      
         let count = 5
         let word = "Hello"
@@ -83,61 +81,139 @@ class TableDataSourceTests: XCTestCase {
     }
 }
 
+//MARK:- examples for testing delegate
+
+extension TableDataSourceTests{
+    
+    //1. test with an array of 3 AlbumCellViewModel albums and AlbumTableViewCell
+    func testDelegateWithAlbumCell(){
+        //get view models
+        let albumsListViewModel = TestingAlbums.testingAlbums.albumCellViewModels
+        testDelegate(albumsListViewModel)
+    }
+
+    //2. test with an array of strings and UITableViewCell
+    func testDelegateWithUICell(){
+
+       let count = 5
+       let word = "Hello"
+       //generate models
+       let models = Array(repeating: word, count: count)
+       testDelegate(models)
+    }
+
+}
+
 //MARK:- a generic function to test TableViewDataSorce
+
+extension TableDataSourceTests{
+
+/****************************************
+ ** testDataSource takes an array of models of any type and two closures
+ ** - configCell closure to configure cells
+ ** - testDatasource closure to test datasource
+****************************************/
+
+    func testDataSource<CellType: UITableViewCell,MVType>(
+           _ models: [MVType],
+           _ configCell: @escaping(CellType, MVType)->(),
+           _ testDatasource: @escaping(CellType, MVType)->()){
+           
+           //-------------- test set up ---------------//
+           
+          //create custom (dataSource and delegate) object
+          let dataSource = getDataSource(models, configCell)
+          let tableView = getTableWithDataSouce(dataSource: dataSource)
+                            
+           //-------------- test ---------------//
+           
+         // 1. test sections and number of rows
+         XCTAssertEqual(tableView.numberOfSections, 1)
+         XCTAssertEqual(tableView.numberOfRows(inSection: 0), models.count)
+                   
+         //2. test cell datasource
+         for i in 0..<models.count{
+            let indexPath = IndexPath(row: i, section: 0)
+            if let cell = tableView.cellForRow(at: indexPath) as? CellType{
+
+                 testDatasource(cell, models[i])
+
+            }else{
+                XCTFail("cell \(i) is not generated ")
+            }
+        }
+    }
+}
+
+//MARK:- a generic function to test TableViewDelegate
+
+/****************************************
+ ** testDataSource takes an array of models of any type
+ ** we only care about the count of models for this test
+****************************************/
 
 extension TableDataSourceTests {
     
-    func testDataSource<CellType: UITableViewCell,MVType>(
-        _ models: [MVType],
-        _ configCell: @escaping(CellType, MVType)->(),
-        _ testDatasource: @escaping(CellType, MVType)->()){
+    func testDelegate<MVType>(_ models: [MVType]){
+           
+           //-------------- test set up ---------------//
+           
+        //create custom (dataSource and delegate) object
+        let dataSource = getDataSource(models, {_, _ in })
+        let tableView = getTableWithDataSouce(dataSource: dataSource)
         
-        //-------------- test set up ---------------//
-        
-        //setup table
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        tableView.register(CellType.self, forCellReuseIdentifier: Constants.cellId)
-
-       //create custom (dataSource and delegate) object
-       let dataSourceDelegate:TableViewDatasourceDelegate<CellType, MVType> = TableViewDatasourceDelegate(cellId:Constants.cellId, configCell: configCell)
-            
         //mock table delegate
         let delegateMock = TableViewDelgateMock()
-      
-       //set the table delegate to be the mock delegate
-        dataSourceDelegate.tableViewDelegateProtocol = delegateMock
-        
-        //set table delegate and datasource to custom (dataSource and delegate) object
-        tableView.dataSource = dataSourceDelegate
-        tableView.delegate = dataSourceDelegate
 
-        //update models for datasource
-        dataSourceDelegate.updateModel(newModel: models)
-        tableView.reloadData()
-                
-        //-------------- test ---------------//
+        //set the table delegate to be the mock delegate
+        dataSource.tableViewDelegateProtocol = delegateMock
+        tableView.delegate = dataSource
+                            
+           //-------------- test ---------------//
+                              
+         //test cell delegate
+         for i in 0..<models.count{
+            let indexPath = IndexPath(row: i, section: 0)
+            
+            //test delegate by selecting a cell
+            dataSource.tableView(tableView, didSelectRowAt: indexPath)
+            //if cell has been selected, .selected should be true
+            XCTAssertEqual(delegateMock.selected, true)
+            delegateMock.selected = false
+        }
+    }
+}
+
+//MARK:- test setup required for both delegate and datasource
+
+extension TableDataSourceTests {
+    
+    //set up generic dataSource
+    func getDataSource<CellType: UITableViewCell,MVType>(
+           _ models: [MVType],
+           _ configCell: @escaping(CellType, MVType)->())-> TableViewDatasourceDelegate<CellType, MVType>{
         
-       // 1. test sections and number of rows
-       XCTAssertEqual(tableView.numberOfSections, 1)
-       XCTAssertEqual(tableView.numberOfRows(inSection: 0), models.count)
-                
-      //test cell (2. delegate) and (3. datasource)
-       for i in 0..<models.count{
-           let indexPath = IndexPath(row: i, section: 0)
-           if let cell = tableView.cellForRow(at: indexPath) as? CellType{
-            
-                //2.test delegate by selecting a cell
-                dataSourceDelegate.tableView(tableView, didSelectRowAt: indexPath)
-                XCTAssertEqual(delegateMock.selected, true)
-                delegateMock.selected = false
-            
-                //3. testdatasource
-                testDatasource(cell, models[i])
-            
-           }else{
-               XCTFail("cell \(i) is not generated ")
-           }
-       }
+        //create custom (dataSource and delegate) object
+        let dataSource:TableViewDatasourceDelegate<CellType, MVType> = TableViewDatasourceDelegate(cellId:Constants.cellId, configCell: configCell)
         
-   }
+        dataSource.updateModel(newModel: models)
+    
+        return dataSource
+    }
+    
+    //set up a table for testing
+    func getTableWithDataSouce<CellType, MVType>(
+        dataSource: TableViewDatasourceDelegate<CellType, MVType>)-> UITableView{
+        
+         //setup table
+         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+         tableView.register(CellType.self, forCellReuseIdentifier: Constants.cellId)
+          
+         //set table delegate and datasource to custom (dataSource and delegate) object
+         tableView.dataSource = dataSource
+         tableView.reloadData()
+
+        return tableView
+    }
+  
 }
